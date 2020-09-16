@@ -1,4 +1,4 @@
-##JavaScript
+## JavaScript
 ### 1. 基础
 #### 1.1 介绍
 互联网上最流行的脚本语言，这门语言可用于Web和HTML，<br>
@@ -52,14 +52,14 @@ JavaScript同样对大小写很敏感
 多行注释：/**/
 ### 3. 变量和数据类型
 #### 3.1 变量
-#####3.1.1 变量是用来储存信息的"容器"
+##### 3.1.1 变量是用来储存信息的"容器"
 例如：
 ```
 var x = 10；
 var y = 10.2；
 var z = "Hello"；
 ```
-#####3.1.2 局部变量和全局变量
+##### 3.1.2 局部变量和全局变量
 1. 局部变量：只能在当前函数中使用 <br>
 2. 全局变量：在任何地方都可以使用 <br>
 例子：
@@ -76,17 +76,16 @@ var z = "Hello"；
  </script>
 ```
 ```
-执行结果：
-无显示
+执行结果：无显示
 ```
 #### 3.2 数据类型
-#####3.2.1 String：字符串
+##### 3.2.1 String：字符串
 `var string = "Hello";`
-#####3.2.2 Number：数字
+##### 3.2.2 Number：数字
 `var i1 = 10;`
-#####3.2.3 Boolean：布尔
+##### 3.2.3 Boolean：布尔
 `var flag = true;`
-#####3.2.4 Array：数组
+##### 3.2.4 Array：数组
 ```
 var arr = ["apple","orange","banana"];
 var arr2 = new Array("apple","orange","banana");
@@ -95,12 +94,12 @@ var arr3 = new Array();
     arr3[1] = "orange";
     arr3[2] = "banana";
 ```
-#####3.2.5 Object：对象
-#####3.2.6 null：空 <br>
+##### 3.2.5 Object：对象
+##### 3.2.6 null：空 <br>
 `var n = null;`
-#####3.2.7 未定义
+##### 3.2.7 未定义
 `var r;`
-#####3.2.8 可以通过赋值为null的方式清除变量
+##### 3.2.8 可以通过赋值为null的方式清除变量
 ```
 var i1 = 10;
 i1 = null;
@@ -123,9 +122,9 @@ i1 = null;
    }
 </script>
 ```
-#####4.1.2 赋值运算符
+##### 4.1.2 赋值运算符
 `=, +=, -=, *=, /=, %=`
-#####4.1.3 字符串操作
+##### 4.1.3 字符串操作
 例子：
 ```
 <script>
@@ -137,17 +136,17 @@ i1 = null;
     }
 </script>
 ```
-#####4.1.4 比较运算符 
+##### 4.1.4 比较运算符 
 `==, ===`（必须满足类型一样）<br>
 `!=, !==`（必须满足类型一样）<br>
 `>, <, >=, <=`
-#####4.1.5 逻辑运算符
+##### 4.1.5 逻辑运算符
 `&&，||， ！`
-#####4.1.6 条件运算符
+##### 4.1.6 条件运算符
 例：<br>
 `x<10?"x比10小"："x比10大"` 
-####4.2 条件语句
-#####4.2.1 if~else
+#### 4.2 条件语句
+##### 4.2.1 if~else
 例子：<br>
 ```
 <script>
@@ -159,7 +158,7 @@ i1 = null;
    }
 </script>
 ```
-#####4.2.2 switch
+##### 4.2.2 switch
 例子：<br>
 ```
 <script>
@@ -181,7 +180,7 @@ i1 = null;
 </script>
 ```
 #### 4.3 循环语句
-#####4.3.1 for循环，for/in
+##### 4.3.1 for循环，for/in
 例子：<br>
 ```
 <script>
@@ -201,7 +200,7 @@ i1 = null;
    }
 </script>
 ```
-#####4.3.2 while循环，do～while
+##### 4.3.2 while循环，do～while
 例子：<br>
 ```
 <script>
@@ -224,7 +223,7 @@ i1 = null;
 </script>
 ```
 #### 4.4 跳转语句
-#####4.4.1 break：跳出当前循环，不再进行下一次循环
+##### 4.4.1 break：跳出当前循环，不再进行下一次循环
 例子：<br>
 ```
 <script>
@@ -244,7 +243,7 @@ i1 = null;
   i=3
   i=4
 ```
-#####4.4.2 continue:结束本次循环，进入下一次循环
+##### 4.4.2 continue:结束本次循环，进入下一次循环
 例子：<br>
 ```
 <script>
@@ -284,20 +283,20 @@ i1 = null;
 </script>
 ```
 #### 5.2 定义
-#####5.2.1 定义函数
+##### 5.2.1 定义函数
 ```
 function 函数名(){
     函数体；//代码块
 }
 ```
-#####5.2.2 注意
+##### 5.2.2 注意
 JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br>
 在函数调用时，也必须按照函数的相同名称来调用函数。<br>
 函数名头字母一般小写，如果出现两个单词，第二个单词首字母大写。<br>
 #### 5.3 函数调用
-#####5.3.1 函数调用
+##### 5.3.1 函数调用
 函数在定义好之后，不能自动执行，需要进行调用
-#####5.3.2 调用方式
+##### 5.3.2 调用方式
 - 在`<script>`标签内调用 <br>
 例子：<br>
 ```
@@ -325,7 +324,7 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 <button onclick="demo()">提交</button>
 ```
 #### 5.4 带参数的函数
-#####5.4.1 函数参数
+##### 5.4.1 函数参数
 在函数的调用中，也可以传递值，这些值被称为参数 <br>
 例：`demo(arg1,arg2)`<br>
 例子1:<br>
@@ -347,13 +346,13 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 </script>
 <button onclick="demo('Chen',30)">提交</button>
 ```
-#####5.4.2 注意
+##### 5.4.2 注意
   参数的个数可以为任意多，每个参数通过`"，"`隔开 <br>
   参数在传递时，其顺序必须一致
-#####5.4.3 意义
+##### 5.4.3 意义
   通过传递参数的个数及参数的类型不同完成不同的功能 
 #### 5.5 带返回值的函数
-#####5.5.1 返回值
+##### 5.5.1 返回值
 有时需要将函数的值返回给调用它的地方 <br>
 例子1：<br>
 ```
@@ -383,7 +382,7 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
    document.getElementById("pid").innerHTML=demo(20,30);
 </script>
 ```
-#####5.5.2 注意
+##### 5.5.2 注意
 在使用return语句时，函数会停止执行，同时返回值
 ### 6. JavaScript异常捕获
 #### 6.1 异常
@@ -440,11 +439,11 @@ try{
   }
 </script>
 ```
-###7. JavaScript事件
+### 7. JavaScript事件
 #### 7.1 定义
 事件是可以被JavaScript侦测到的行为
 #### 7.2 主要事件
-#####7.2.1 onClick:点击事件
+##### 7.2.1 onClick:点击事件
 例子：<br>
 ```
 <button onclick="demo()">提交</button>
@@ -454,8 +453,8 @@ try{
     }
 </script>
 ```
-#####7.2.2 onMouseOver:鼠标经过事件
-#####7.2.3 onMouseOut:鼠标移出事件
+##### 7.2.2 onMouseOver:鼠标经过事件
+##### 7.2.3 onMouseOut:鼠标移出事件
 例子：<br>
 ```
 <div class="div" onmouseover="onOver(this)" onmouseout="onPut(this)"> </div>
@@ -468,7 +467,7 @@ try{
     }
 </script>
 ```
-#####7.2.4 onChange:文本内容改变事件
+##### 7.2.4 onChange:文本内容改变事件
 例子1：<br>
 ```
 <form>
@@ -486,8 +485,8 @@ try{
     <input type="text" onchange="alert('内容改变了')">
 </form>
 ```
-#####7.2.5 onSelect:文本框选中事件
-#####7.2.6 onFocus:光标聚集事件
+##### 7.2.5 onSelect:文本框选中事件
+##### 7.2.6 onFocus:光标聚集事件
 例子：<br>
 ```
 <form>
@@ -503,7 +502,7 @@ try{
     }
 </script>
 ```
-#####7.2.7 onBlur:移开光标事件
+##### 7.2.7 onBlur:移开光标事件
 例子：<br>
 ```
 <form>
@@ -515,7 +514,7 @@ try{
     }
 </script>
 ```
-#####7.2.8 onLoad:网页加载事件
+##### 7.2.8 onLoad:网页加载事件
 例子：<br>
 ```
 <body onload="msg()">
@@ -529,15 +528,15 @@ try{
 ### 8. JavaScriptDOM对象
 #### 8.1 DOM简介
  当网页被加载时，浏览器会创建页面的文档对象模型(Document Object Model)<br>
-#####8.1.1 DOM操作HTML
+##### 8.1.1 DOM操作HTML
 - JavaScript能改变页面中的所有HTML元素
 - JavaScript能改变页面中的所有HTML属性
 - JavaScript能改变页面中的所有CSS样式
 - JavaScript能对页面中的所有事件作出反应
 #### 8.2 DOM操作HTML
-#####8.2.1 改变HTML输出流
+##### 8.2.1 改变HTML输出流
   注意：绝对不要在文档加载完成之后使用document.write()。这会覆盖该文档
-#####8.2.2 寻找元素
+##### 8.2.2 寻找元素
 - 通过id找到HTML元素<br>
 - 通过标签名找到HTML元素 <br>
 例子：<br>
@@ -550,7 +549,7 @@ try{
     }
 </script>
 ```
-#####8.2.3 改变HTML内容
+##### 8.2.3 改变HTML内容
 `innerHTML` <br>
 例子：<br>
 ```
@@ -562,7 +561,7 @@ try{
     }
 </script>
 ``` 
-#####8.2.4 改变HTML属性
+##### 8.2.4 改变HTML属性
 `attribute` <br> 
 例子1：<br>
 ```
@@ -585,7 +584,7 @@ try{
 </script>
 ```
 #### 8.3 DOM操作CSS
-#####8.3.1 通过DOM对象改变CSS
+##### 8.3.1 通过DOM对象改变CSS
 语法：<br>
 `document.getElementById(id).style.property=new style` <br>
 例子：<br>
@@ -607,7 +606,7 @@ function  demo(){
 }
 ```
 #### 8.4 DOM EventListener
-#####8.4.1 方法：`addEventListener()`:用于向指定元素添加事件句柄
+##### 8.4.1 方法：`addEventListener()`:用于向指定元素添加事件句柄
 例子：<br>
 ```
 <button id="buttonID">提交</button>
@@ -617,7 +616,7 @@ function  demo(){
     })
 </script>
 ``` 
-#####8.4.2 方法：`removeEventListener()`：移除方法添加的事件句柄
+##### 8.4.2 方法：`removeEventListener()`：移除方法添加的事件句柄 <br>
 例子：<br>
 ```
 <button id="buttonID">提交</button>
@@ -636,15 +635,15 @@ function  demo(){
 ```
 ### 9. 事件详解
 #### 9.1 事件流
-#####9.1.1 事件流
+##### 9.1.1 事件流
 描述的是在页面中接受事件的顺序
-#####9.1.2 事件冒泡
+##### 9.1.2 事件冒泡
 由最具体的元素接收，然后逐级向上传播至最不具体的元素的节点（文档）
-#####9.1.3 事件捕获
+##### 9.1.3 事件捕获
 最不具体的节点先接收事件，而最具体的节点应该是最后接收事件
 #### 9.2 事件处理
-#####9.2.1 HTML事件处理
-直接添加到HTML结构中<br>
+##### 9.2.1 HTML事件处理
+直接添加到HTML结构中 <br>
 例子：<br>
 ```
 <div id="divID">
@@ -656,7 +655,7 @@ function  demo(){
     }
 </script>
 ```
-#####9.2.2 DOM0级事件处理
+##### 9.2.2 DOM0级事件处理
 把一个函数赋值给一个事件处理程序属性 <br>
 例子：<br>
 ```
@@ -673,7 +672,7 @@ function  demo(){
         }
 </script>
 ```
-#####9.2.3 DOM2级事件处理
+##### 9.2.3 DOM2级事件处理
 `addEventListener("事件名"，"事件处理函数"，"布尔值"）;`<br>
 true:事件捕获 <br>
 false:事件冒泡 <br>
@@ -696,7 +695,7 @@ false:事件冒泡 <br>
         btn1.removeEventListener("click",demo2);//点击移除demo2
 </script>
 ```
-#####9.2.4 IE事件处理程序
+##### 9.2.4 IE事件处理程序
 - `attachEvent`：添加一个事件 <br>
 - `detachEvent`：移除一个事件 <br>
 例子：<br>
@@ -719,9 +718,9 @@ false:事件冒泡 <br>
 </script>
 ```
 #### 9.3 事件对象
-#####9.3.1 事件对象
+##### 9.3.1 事件对象
 在触发DOM事件的时候都会产生一个对象
-#####9.3.2 事件对象event
+##### 9.3.2 事件对象event
 - `type`:获取事件类型 <br>
 例子：<br>
 ```
@@ -773,8 +772,7 @@ false:事件冒泡 <br>
 </script>
 ```    
 ```
-执行结果：
-[object HTMLButtonElement] div
+执行结果：[object HTMLButtonElement] div
 ```   
     出现事件冒泡现象，为了阻止此现象，将以上代码改成：
 ```
@@ -784,8 +782,7 @@ function showTarget(event) {
 }
 ```
 ```
-执行结果：
-[object HTMLButtonElement]
+执行结果：[object HTMLButtonElement]
 ```  
 - `preventDefault()`:阻止事件默认行为 <br>
 例子：<br>
@@ -813,9 +810,9 @@ function showTarget(event) {
 ```
 ### 10. 内置对象
 #### 10.1 对象的解释
-#####10.1.1 JavaScript中的所有事物都是对象：字符串，数值，数组，函数...
+##### 10.1.1 JavaScript中的所有事物都是对象：字符串，数值，数组，函数...
 每个对象带有属性和方法
-#####10.1.2 JavaScript允许自定义对象
+##### 10.1.2 JavaScript允许自定义对象
 - 定义并创建对象实例 <br>
 例子：<br>
 ```     
@@ -847,7 +844,7 @@ function showTarget(event) {
 String对象用于处理已有的字符串 <br>
 字符串可以使用双引号或单引号 <br>
   
-- 在字符串中查找字符串：`indexOf()` <br>
+- `indexOf()`: 在字符串中查找字符串 <br>
 例子：<br>
 ```
 <script>
@@ -855,16 +852,16 @@ String对象用于处理已有的字符串 <br>
     document.write(str.indexOf("world"));
 </script>
 ``` 
-- 内容匹配：`match()` <br>
+- `match()`: 内容匹配 <br>
 `document.write(str.match("world"));`
-- 替换内容：`replace()` <br>
+- `replace()`: 替换内容 <br>
 `document.write(str.replace("world","JavaScript"));`
-- 字符串大小写转换：`toUpperCase()和toLowerCase()` <br>
+- `toUpperCase()和toLowerCase()`: 字符串大小写转换 <br>
 ```
   document.write(str.toUpperCase());
   document.write(str.toLowerCase());
 ``` 
-- 字符串转为数组：`strong>split()` <br>
+- `strong>split()`: 字符串转为数组 <br>
 ```
   var str = "Hello,My,JavaScript";
   var s = str.split(",");//以逗号作为分割基准
@@ -888,7 +885,7 @@ String对象用于处理已有的字符串 <br>
    - `substr()`
    - `valueOf()`
 #### 10.3 Date日期对象
-#####10.3.1 Date对象
+##### 10.3.1 Date对象
 例子：<br>
 ```
 <script>
@@ -897,19 +894,18 @@ String对象用于处理已有的字符串 <br>
 </script>
 ```   
 ```
-执行结果：
-Mon Sep 14 2020 10:40:42 GMT+0900 (日本标准时间) 
+执行结果：Mon Sep 14 2020 10:40:42 GMT+0900 (日本标准时间) 
 ``` 
-#####10.3.2 获得当日的日期
-#####10.3.3 常用方法
+##### 10.3.2 获得当日的日期
+##### 10.3.3 常用方法
 - `getFullYear()`: 获取年份 <br>
 ```
 var date = new Date();
 document.write(date.getFullYear());
 ``` 
-- `getTime()`:获取毫秒 <br>
-- `setFullYear()`:设置具体的日期 <br>
-- `getDay()`:获取星期 <br>
+- `getTime()`: 获取毫秒 <br>
+- `setFullYear()`: 设置具体的日期 <br>
+- `getDay()`: 获取星期 <br>
 例子：<br>
 ```
 <body onload="startTime()">
@@ -929,14 +925,14 @@ document.write(date.getFullYear());
 </body>
 ```
 #### 10.4 Array数组对象
-#####10.4.1 Array对象
+##### 10.4.1 Array对象
 使用单独的变量名来存储一系列的值
-#####10.4.2 数组的创建
+##### 10.4.2 数组的创建
 例：`var myArray=["apple","orange","banana"];`
-#####10.4.3 数组的访问
+##### 10.4.3 数组的访问
 通过指定数组名以及索引号码，可以访问某个特定的元素 <br>
 注意：[0]是数组的第一个元素。
-#####10.4.4 数组常用方法
+##### 10.4.4 数组常用方法
 - `concat()`:合并数组 <br>
 例子：<br>
 ```
@@ -971,9 +967,9 @@ var m = ["b","a","c","d"]
 document.write(m.reverse());
 ```
 #### 10.5 Math对象
-#####10.5.1 Math对象
+##### 10.5.1 Math对象
 执行常见的算数任务
-#####10.5.2 常用方法
+##### 10.5.2 常用方法
 - `round()`: 四舍五入 <br>
   `document.write(Math.round(3.4));`
 - `random()`: 返回0～1之间的随机数 <br>
@@ -989,7 +985,7 @@ document.write(m.reverse());
   `document.write(Math.abs(-10));`
 ### 11. DOM对象控制HTML
 #### 11.1 DOM对象控制HTML
-#####11.1.1 方法
+##### 11.1.1 方法
 - `getElementsByName()`: 获取名字 <br>
 例子：<br>
 ```
@@ -1008,9 +1004,9 @@ document.write(m.reverse());
 ```
 ```
 执行结果：
-Hi 
-Hello
-Hello
+ Hi 
+ Hello
+ Hello
 ```
 - `getElementsByTagName()`: 获取元素 <br>
 例子：<br>
@@ -1030,9 +1026,9 @@ Hello
 ```
 ```   
 执行结果：
-Hi 
-Hello
-Hello
+ Hi 
+ Hello
+ Hello
 ```
 - `getAttribute()`: 获取元素属性 <br>
 例子：<br>
@@ -1093,8 +1089,7 @@ Hello
 </script>
 ```
 ```   
-执行结果：
-DIV
+执行结果：DIV
 ```  
 - `createElement()`: 创建元素节点 <br>
 例子：<br>
@@ -1160,13 +1155,13 @@ DIV
 - `scrollHeight()`: 网页尺寸(包含滚动条) <br>
 ### 12. JS浏览对象
 #### 12.1 Window对象  
-#####12.1.1 window对象
+##### 12.1.1 window对象
 window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 所有JavaScript全局对象，函数以及变量均自动成为window对象的成员 <br>
 全局变量是window对象的属性 <br>
 全局函数是window对象的方法 <br>
 甚至HTML DOM的document也是window对象的属性之一 <br>
-#####12.1.2 window尺寸
+##### 12.1.2 window尺寸
 `window.innerHeight`: 浏览器窗口的内部高度（不包括工具栏和滚动条）<br>
 `window.innerWidth`: 浏览器窗口的内部宽度 <br>
 例子：<br>
@@ -1175,7 +1170,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
    document.write("宽度："+window.innerWidth+", 高度："+ window.innerHeight);
 </script>
 ```
-#####12.1.3 window方法
+##### 12.1.3 window方法
 - `window.open()`: 打开新窗口 <br>
 例子：<br>
 ```
@@ -1197,9 +1192,9 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 #### 12.2 计时器
-#####12.2.1 计时事件
+##### 12.2.1 计时事件
 通过使用JavaScript，可以做到在一个设定的时间间隔之后来执行代码，而不是在函数被调用之后立即执行，我们称之为计时事件
-#####12.2.2 计时方法
+##### 12.2.2 计时方法
 - `setInterval()`: 间隔指定的毫秒数不停地执行指定的代码,即让函数不停的执行 <br>
 例子：<br>
 ```
@@ -1267,9 +1262,9 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </body>
 ```
 #### 12.3 History对象
-#####12.3.1. History对象
+##### 12.3.1. History对象
 `window.histor`：对象包含浏览器的历史(url)的集合
-#####12.3.2 History方法
+##### 12.3.2 History方法
 - `history.back()`: 与在浏览器中点击后退按钮相同 <br>
 例子：<br>
 ```
@@ -1335,9 +1330,9 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 #### 12.4 Location对象
-#####12.4.1 Location对象
+##### 12.4.1 Location对象
 `window.location`对象用于获得当前页面的地址(URL),并把浏览器重定向到新的页面
-#####12.4.2 Location对象的属性
+##### 12.4.2 Location对象的属性
 - `location.hostname`: 返回web主机的域名
 例子：<br>
 ```
@@ -1405,21 +1400,21 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>  
 ```
 #### 12.5 Screen对象 
-#####12.5.1 Screen对象
+##### 12.5.1 Screen对象
 window.screen对象包含有关用户屏幕的信息
-#####12.5.2 属性
+##### 12.5.2 属性
 - `screen.availWidth`: 可用的屏幕宽度 
 - `screen.availHeight`: 可用的屏幕高度
 - `screen.Height`: 屏幕高度
 - `screen.Width`: 屏幕宽度
-#####12.5.3 例子
+##### 12.5.3 例子
 ```
 <script>
     document.write("可用高度："+screen.availHeight+", 可用宽度"+screen.availWidth);
     document.write("高度："+screen.height+", 宽度"+screen.width);
 </script>
 ```
-### 13. JS瀑布流效果
+
 
 
 
