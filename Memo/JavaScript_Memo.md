@@ -53,7 +53,6 @@ JavaScript同样对大小写很敏感
 ### 3. 变量和数据类型
 #### 3.1 变量
 ##### 3.1.1 变量是用来储存信息的"容器"
-例如：
 ```
 var x = 10；
 var y = 10.2；
@@ -62,7 +61,6 @@ var z = "Hello"；
 ##### 3.1.2 局部变量和全局变量
 1. 局部变量：只能在当前函数中使用 <br>
 2. 全局变量：在任何地方都可以使用 <br>
-例子：
 ```
 <script>
     var n = 10; //全局变量
@@ -108,7 +106,6 @@ i1 = null;
 #### 4.1 运算符
 ##### 4.1.1 算数运算符
 `+, -, *, %, /, ++, --` <br>
-例子：
 ```
 <p>i=10,j=10;i+j=?</p>
 <p id="sumid"></p>
@@ -125,7 +122,6 @@ i1 = null;
 ##### 4.1.2 赋值运算符
 `=, +=, -=, *=, /=, %=`
 ##### 4.1.3 字符串操作
-例子：
 ```
 <script>
     function mySum(){
@@ -137,9 +133,7 @@ i1 = null;
 </script>
 ```
 ##### 4.1.4 比较运算符 
-`==, ===`（必须满足类型一样）<br>
-`!=, !==`（必须满足类型一样）<br>
-`>, <, >=, <=`
+`==, ===（必须满足类型一样） !=, !==（必须满足类型一样），>, <, >=, <=`
 ##### 4.1.5 逻辑运算符
 `&&，||， ！`
 ##### 4.1.6 条件运算符
@@ -147,7 +141,6 @@ i1 = null;
 `x<10?"x比10小"："x比10大"` 
 #### 4.2 条件语句
 ##### 4.2.1 if~else
-例子：<br>
 ```
 <script>
     var i = 6;
@@ -159,7 +152,6 @@ i1 = null;
 </script>
 ```
 ##### 4.2.2 switch
-例子：<br>
 ```
 <script>
     var i=10;
@@ -181,7 +173,6 @@ i1 = null;
 ```
 #### 4.3 循环语句
 ##### 4.3.1 for循环，for/in
-例子：<br>
 ```
 <script>
     var i=[1,2,3,4,5,6];
@@ -190,7 +181,6 @@ i1 = null;
     }
 </script>
 ```
-例子：<br>
 ```
 <script>
     var i=[1,2,3,4,5,6];
@@ -201,7 +191,6 @@ i1 = null;
 </script>
 ```
 ##### 4.3.2 while循环，do～while
-例子：<br>
 ```
 <script>
     var i = 1;
@@ -211,7 +200,6 @@ i1 = null;
     }
 </script>
 ```
-例子：<br>
 ```
 <script>
     var i = 1;
@@ -224,7 +212,6 @@ i1 = null;
 ```
 #### 4.4 跳转语句
 ##### 4.4.1 break：跳出当前循环，不再进行下一次循环
-例子：<br>
 ```
 <script>
     for(var i=0;i<10;i++){
@@ -244,7 +231,6 @@ i1 = null;
   i=4
 ```
 ##### 4.4.2 continue:结束本次循环，进入下一次循环
-例子：<br>
 ```
 <script>
     for(var i=0;i<10;i++){
@@ -271,7 +257,6 @@ i1 = null;
 #### 5.1 概要
 函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。<br>
 如：实现10组数字的和<br>
-例子：<br>
 ```
 <script>
     function demo(a,b){
@@ -298,7 +283,6 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 函数在定义好之后，不能自动执行，需要进行调用
 ##### 5.3.2 调用方式
 - 在`<script>`标签内调用 <br>
-例子：<br>
 ```
 <script>
     function demo(){
@@ -311,7 +295,6 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 </script>
 ```  
 - 在HTML文件中调用 <br>
-例子：<br>
 ```
 <script>
     function demo(){
@@ -327,7 +310,6 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 ##### 5.4.1 函数参数
 在函数的调用中，也可以传递值，这些值被称为参数 <br>
 例：`demo(arg1,arg2)`<br>
-例子1:<br>
 ```
 <script>
     function demo(a,b){
@@ -337,7 +319,6 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
    demo(10,10);
 </script>
 ```
-例子2:<br>
 ```
 <script>
     function demo(name,age){
@@ -347,14 +328,13 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 <button onclick="demo('Chen',30)">提交</button>
 ```
 ##### 5.4.2 注意
-  参数的个数可以为任意多，每个参数通过`"，"`隔开 <br>
-  参数在传递时，其顺序必须一致
+参数的个数可以为任意多，每个参数通过`"，"`隔开 <br>
+参数在传递时，其顺序必须一致
 ##### 5.4.3 意义
-  通过传递参数的个数及参数的类型不同完成不同的功能 
+通过传递参数的个数及参数的类型不同完成不同的功能 
 #### 5.5 带返回值的函数
 ##### 5.5.1 返回值
 有时需要将函数的值返回给调用它的地方 <br>
-例子1：<br>
 ```
 <script>
     function demo(){
@@ -366,7 +346,6 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
    alert(vl2);
 </script>
 ```  
-例子2:<br>
 ```
 <p id="pid"></p>
 <script>
@@ -397,7 +376,6 @@ try{
     错误信息处理
 }
 ```
-例子：<br>
 ```
 <script>
     function demo(){
@@ -412,7 +390,6 @@ try{
 ```
 #### 6.4 Throw语句
 通过throw语句创建一个自定义错误<br>
-例子：<br>
 ```
 <form>
     用户名：
@@ -444,7 +421,6 @@ try{
 事件是可以被JavaScript侦测到的行为
 #### 7.2 主要事件
 ##### 7.2.1 onClick:点击事件
-例子：<br>
 ```
 <button onclick="demo()">提交</button>
 <script>
@@ -455,7 +431,6 @@ try{
 ```
 ##### 7.2.2 onMouseOver:鼠标经过事件
 ##### 7.2.3 onMouseOut:鼠标移出事件
-例子：<br>
 ```
 <div class="div" onmouseover="onOver(this)" onmouseout="onPut(this)"> </div>
 <script>
@@ -468,7 +443,6 @@ try{
 </script>
 ```
 ##### 7.2.4 onChange:文本内容改变事件
-例子1：<br>
 ```
 <form>
     <input type= "text" onchange="changeDemo(this)">
@@ -479,7 +453,6 @@ try{
     }
 </script>
 ```   
-例子2:<br>
 ```
 <form>
     <input type="text" onchange="alert('内容改变了')">
@@ -487,7 +460,6 @@ try{
 ```
 ##### 7.2.5 onSelect:文本框选中事件
 ##### 7.2.6 onFocus:光标聚集事件
-例子：<br>
 ```
 <form>
     <input type="text" onselect="changeDemo(this)" onfocus="changeDemo2(this)">
@@ -503,7 +475,6 @@ try{
 </script>
 ```
 ##### 7.2.7 onBlur:移开光标事件
-例子：<br>
 ```
 <form>
     <input type="text" onblur="onBlurDemo(this)">
@@ -515,7 +486,6 @@ try{
 </script>
 ```
 ##### 7.2.8 onLoad:网页加载事件
-例子：<br>
 ```
 <body onload="msg()">
 <script>
@@ -539,7 +509,6 @@ try{
 ##### 8.2.2 寻找元素
 - 通过id找到HTML元素<br>
 - 通过标签名找到HTML元素 <br>
-例子：<br>
 ```
 <p id="pid">Hello</p>
 <button onclick="demo()">提交</button>
@@ -551,7 +520,7 @@ try{
 ```
 ##### 8.2.3 改变HTML内容
 `innerHTML` <br>
-例子：<br>
+
 ```
 <p id="pid">Hello</p>
 <button onclick="demo()">提交</button>
@@ -563,7 +532,6 @@ try{
 ``` 
 ##### 8.2.4 改变HTML属性
 `attribute` <br> 
-例子1：<br>
 ```
 <a id="aid" href="http://www.baidu.com">百度</a>
 <button onclick="demo()">变换</button>
@@ -573,7 +541,6 @@ try{
     }
 </script>
 ```   
-例子2:<br>
 ```
 <img id="imgid" src="../../pic/cat.jpg">
 <button onclick="demo()">转换</button>
@@ -587,7 +554,7 @@ try{
 ##### 8.3.1 通过DOM对象改变CSS
 语法：<br>
 `document.getElementById(id).style.property=new style` <br>
-例子：<br>
+
 ``` 
 <!--html-->
 <div id="div" class="div">Hello</div>
@@ -607,7 +574,6 @@ function  demo(){
 ```
 #### 8.4 DOM EventListener
 ##### 8.4.1 方法：`addEventListener()`:用于向指定元素添加事件句柄
-例子：<br>
 ```
 <button id="buttonID">提交</button>
 <script>
@@ -617,7 +583,6 @@ function  demo(){
 </script>
 ``` 
 ##### 8.4.2 方法：`removeEventListener()`：移除方法添加的事件句柄 <br>
-例子：<br>
 ```
 <button id="buttonID">提交</button>
 <script>
@@ -644,7 +609,6 @@ function  demo(){
 #### 9.2 事件处理
 ##### 9.2.1 HTML事件处理
 直接添加到HTML结构中 <br>
-例子：<br>
 ```
 <div id="divID">
     <button id="button1" onclick="demo()">提交</button>
@@ -657,7 +621,6 @@ function  demo(){
 ```
 ##### 9.2.2 DOM0级事件处理
 把一个函数赋值给一个事件处理程序属性 <br>
-例子：<br>
 ```
 <div id="div">
     <button id="button1">提交</button>
@@ -677,7 +640,6 @@ function  demo(){
 true:事件捕获 <br>
 false:事件冒泡 <br>
 `removeEventListener();` <br>
-例子：<br>
 ```
 <div id="divID">
     <button id="button1">提交</button>
@@ -698,7 +660,6 @@ false:事件冒泡 <br>
 ##### 9.2.4 IE事件处理程序
 - `attachEvent`：添加一个事件 <br>
 - `detachEvent`：移除一个事件 <br>
-例子：<br>
 ```  
 <div id="divID">
     <button id="button1">提交</button>
@@ -722,7 +683,6 @@ false:事件冒泡 <br>
 在触发DOM事件的时候都会产生一个对象
 ##### 9.3.2 事件对象event
 - `type`:获取事件类型 <br>
-例子：<br>
 ```
 <div id="divID">
     <button id="button1">提交</button>
@@ -738,7 +698,6 @@ false:事件冒泡 <br>
 执行结果：click
 ```  
 - `target`:获取事件目标 <br>
- 例子：<br>
  ```
 <div id="divID">
     <button id="button1">提交</button>
@@ -755,7 +714,6 @@ false:事件冒泡 <br>
 [object HTMLButtonElement]
 ```  
 - `stopPropagation()`:阻止事件冒泡 <br>
-例子：<br>
 ```
 <div id="divID">
     <button id="button1">提交</button>
@@ -785,7 +743,7 @@ function showTarget(event) {
 执行结果：[object HTMLButtonElement]
 ```  
 - `preventDefault()`:阻止事件默认行为 <br>
-例子：<br>
+
 ```
 <div id="divID">
     <button id="button1">提交</button>
@@ -814,7 +772,6 @@ function showTarget(event) {
 每个对象带有属性和方法
 ##### 10.1.2 JavaScript允许自定义对象
 - 定义并创建对象实例 <br>
-例子：<br>
 ```     
 <script>
     //第一种定义方法
@@ -828,7 +785,6 @@ function showTarget(event) {
 </script>
 ```   
 - 使用函数来定义对象，然后创建新的对象实例 <br>
-例子：<br>
 ```
 <script>
     function people(name,age){
@@ -845,7 +801,6 @@ String对象用于处理已有的字符串 <br>
 字符串可以使用双引号或单引号 <br>
   
 - `indexOf()`: 在字符串中查找字符串 <br>
-例子：<br>
 ```
 <script>
     var str = "Hello world";
@@ -886,7 +841,6 @@ String对象用于处理已有的字符串 <br>
    - `valueOf()`
 #### 10.3 Date日期对象
 ##### 10.3.1 Date对象
-例子：<br>
 ```
 <script>
     var date = new Date();
@@ -906,7 +860,7 @@ document.write(date.getFullYear());
 - `getTime()`: 获取毫秒 <br>
 - `setFullYear()`: 设置具体的日期 <br>
 - `getDay()`: 获取星期 <br>
-例子：<br>
+
 ```
 <body onload="startTime()">
     div id="timetxt"></div>
@@ -934,19 +888,18 @@ document.write(date.getFullYear());
 注意：[0]是数组的第一个元素。
 ##### 10.4.4 数组常用方法
 - `concat()`:合并数组 <br>
-例子：<br>
 ```
 var a = ["apple","orange"];
 var b = ["banana","mango"];
 var c = a.concat(b);
 ```  
 - `sort()`:排序
-例子1(升序)：<br>
+升序：<br>
 ```
 var a = ["3","2","4","1","5","9"];
 document.write(a.sort()); 
 ```
-例子2(降序)：<br>
+降序：<br>
 ```
 var a = ["3","2","4","1","5","9"];
 document.write(a.sort(function (a,b) {
@@ -954,14 +907,13 @@ document.write(a.sort(function (a,b) {
 }));
 ``` 
 - `push()`:末尾追加元素 <br>
-例子：<br>
 ```
 var m = ["a","b"];
 m.push("c")
 document.write(m);
 ```
 - `reverse()`:数组元素翻转 <br>
-例子：<br>
+
 ```
 var m = ["b","a","c","d"]
 document.write(m.reverse());
@@ -987,7 +939,6 @@ document.write(m.reverse());
 #### 11.1 DOM对象控制HTML
 ##### 11.1.1 方法
 - `getElementsByName()`: 获取名字 <br>
-例子：<br>
 ```
 <p name="pName">Hello</p>
 <p name="pName">Hello</p>
@@ -1009,7 +960,6 @@ document.write(m.reverse());
  Hello
 ```
 - `getElementsByTagName()`: 获取元素 <br>
-例子：<br>
 ```
 <p name="pName">Hello</p>
 <p name="pName">Hello</p>
@@ -1031,7 +981,6 @@ document.write(m.reverse());
  Hello
 ```
 - `getAttribute()`: 获取元素属性 <br>
-例子：<br>
 ```
 <a id="aID" title="这是a标签的title属性"></a>
 <script>
@@ -1044,7 +993,6 @@ document.write(m.reverse());
 </script>
 ```
 - `setAttribute()`: 设置元素属性 <br>
-例子：<br>
 ```
 <a id="aID"></a>
 <script>
@@ -1058,7 +1006,6 @@ document.write(m.reverse());
 </script>
 ```
 - `childNodes()`: 访问子节点 <br>
-例子：<br>
 ```
 <ul>
     <li>apple</li>
@@ -1075,7 +1022,6 @@ document.write(m.reverse());
 </script>
 ```  
 - `parentNode()`: 访问父节点 <br>
-例子：<br>
 ```
 <div>
     <p id="pID"></p>
@@ -1092,7 +1038,7 @@ document.write(m.reverse());
 执行结果：DIV
 ```  
 - `createElement()`: 创建元素节点 <br>
-例子：<br>
+
 ```
 <body>
 <script>
@@ -1109,7 +1055,6 @@ document.write(m.reverse());
 ```  
 - `createTextNode()`: 创建文本节点 <br>
 - `insertBefore()`: 插入节点 <br>
-例子： <br>
 ```
 <div id="divID">
     <p id="pID">这是div元素的p元素</p>
@@ -1126,7 +1071,6 @@ document.write(m.reverse());
 </script>
 ``` 
 - `removeChild()`: 删除节点 <br>
-例如：<br>
 ```
 <div id="divID">
     <p id="pID">这是div元素的p元素</p>
@@ -1139,7 +1083,6 @@ document.write(m.reverse());
     removeNode();
 ```
 - `offsetHeight()`: 网页尺寸(不包含滚动条) <br>
-例子：<br>
 ```
 <body>
 <script>    
@@ -1164,7 +1107,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 ##### 12.1.2 window尺寸
 `window.innerHeight`: 浏览器窗口的内部高度（不包括工具栏和滚动条）<br>
 `window.innerWidth`: 浏览器窗口的内部宽度 <br>
-例子：<br>
 ```
 <script>
    document.write("宽度："+window.innerWidth+", 高度："+ window.innerHeight);
@@ -1172,7 +1114,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 ```
 ##### 12.1.3 window方法
 - `window.open()`: 打开新窗口 <br>
-例子：<br>
 ```
 <button id="btn" onclick="btnClick()">提交</button>
 <script>
@@ -1182,7 +1123,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 - `window.close()`: 关闭当前窗口 <br>
-例子：<br>
 ```
 <button id="btn" onclick="btnClick()">提交</button>
 <script>
@@ -1196,7 +1136,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 通过使用JavaScript，可以做到在一个设定的时间间隔之后来执行代码，而不是在函数被调用之后立即执行，我们称之为计时事件
 ##### 12.2.2 计时方法
 - `setInterval()`: 间隔指定的毫秒数不停地执行指定的代码,即让函数不停的执行 <br>
-例子：<br>
 ```
 <p id="ptime"></p>
 <script>
@@ -1212,7 +1151,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 - `clearInterval()`: 用于停止setInterval()方法执行的函数代码 <br>
-例子：<br>
 ```   
 <p id="ptime"></p>
 <button id="btnID" onclick="stopInterval()">clear</button>
@@ -1232,7 +1170,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 - `setTimeout()`: 暂停指定的毫秒数后执行指定的代码 <br>
-例子：<br>
 ```
 <button id="btn" onclick="myTimeout()">延时执行</button>
 <script>    
@@ -1244,7 +1181,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ``` 
 - `clearTimeout()`: 用于停止执行setTimeout()方法的函数代码 <br>
-例子：<br>
 ```
 <body onload="myTimeout()">
 <button id="btn" onclick="stopTimeout()">停止执行</button>
@@ -1266,7 +1202,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 `window.histor`：对象包含浏览器的历史(url)的集合
 ##### 12.3.2 History方法
 - `history.back()`: 与在浏览器中点击后退按钮相同 <br>
-例子：<br>
+
 ```
 <!--html1-->
 <body>
@@ -1283,7 +1219,6 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </body>
 ```
 - `history.forward()`: 与在浏览器中点击按钮向前相同 <br>
-例子：<br>
 ```
 <!--html1-->
 <body>
@@ -1294,7 +1229,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
         history.forward();
     }
 </script>
-      
+   
 <!--html2-->
 <body>
 <button id="btn" onclick="goTest()">按钮</button>
@@ -1306,7 +1241,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </body>
 ```
 - `history.go()`: 进入历史中的某个页面 <br>
-例子：<br>
+
 ```
 <!--html1-->
 <body>
@@ -1334,7 +1269,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 `window.location`对象用于获得当前页面的地址(URL),并把浏览器重定向到新的页面
 ##### 12.4.2 Location对象的属性
 - `location.hostname`: 返回web主机的域名
-例子：<br>
+
 ```
 <button id="btn" onclick="getLocate()">提交</button>
 <p id="pID"></p>
@@ -1345,7 +1280,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```  
 - `location.pathname`: 返回当夜页面的路径和文件名 <br>
-例子：<br>
+
 ```
 <button id="btn" onclick="getLocate()">提交</button>
 <p id="pID"></p>
@@ -1356,7 +1291,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 - `location.port`: 返回web主机的端口 <br>
-例子：<br>
+
 ```
 <button id="btn" onclick="getLocate()">提交</button>
 <p id="pID"></p>
@@ -1367,7 +1302,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```  
 - `location.protocol`: 返回所使用的web协议(`http://`或`https://`) <br>
-例子：<br>
+
 ```
 <button id="btn" onclick="getLocate()">提交</button>
 <p id="pID"></p>
@@ -1378,7 +1313,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 - `location.href`: 返回当前页面的url <br>
-例子：<br>
+
 ```
 <button id="btn" onclick="getLocate()">提交</button>
 <p id="pID"></p>
@@ -1389,7 +1324,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 ```
 - `location.assign()`:加载新的文档 <br>   
-例子：<br>
+
 ```
 <button id="btn" onclick="getLocate()">提交</button>
 <p id="pID"></p>

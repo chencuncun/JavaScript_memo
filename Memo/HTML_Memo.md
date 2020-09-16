@@ -15,8 +15,8 @@
 `<h1 align="right">`标题1`</h1>`
 - `target`：网页打开方式
 ```
-<a href="www.google.co.jp" target="_blank">`另开网页`</a>
-<a href="www.google.co.jo" target="_self">`本网页`</a>
+<a href="www.google.co.jp" target="_blank">另开网页</a>
+<a href="www.google.co.jo" target="_self">本网页</a>
 ```
 - `href`：指向另一个文档的链接
 - `name`：创建文档内的链接 
@@ -124,7 +124,7 @@ p{
 #### 7.3 有序列表
 - 标签：`<ol>`，`<li>`
 - 属性：`A`，`a`，`I`，`i`，`start`
-####7.4 嵌套列表
+#### 7.4 嵌套列表
 - 标签：`<ul>`，`<ol>`，`<li>`
 #### 7.5 自定义列表
 - 标签：`<dl>`，`<dt>`，`<dd>`
@@ -152,7 +152,7 @@ p{
 </ul>
 </ul>
 ```
-###8. 块
+### 8. 块
 #### 8.1 HTML块元素
 块元素在显示时，通常会以新行开始 <br>
 如：`<h1>`,`<p>`,`<ul>`
@@ -406,7 +406,7 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
 当用户正在选取文字时，该属性值为"forward"，<br>
 当用户反向选取文字时，该属性值为"backward"。<br>
 当用户没有选取任何文字时，该属性值为"forward"。<br>
-- ?`indete``rminate`:对复选框checkbox元素来说过去只是选取与非选取这两种状态。<br>
+- ?`indete` `rminate`:对复选框checkbox元素来说过去只是选取与非选取这两种状态。<br>
 在HTML5中，可以在JavaScript脚本代码中对该元素使用该属性，<br>
 以说明复选框出去"尚未明确是否选取"状态。<br>
 - `image`:提交按钮的`height`属性和`width`属性 <br>

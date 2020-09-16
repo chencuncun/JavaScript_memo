@@ -738,11 +738,13 @@ div{
 - `column-gap`: 每一列中间所间隔的距离
 - `column-rule`: 每一列之间间隔的一条线及其颜色
 ##### 13.4.3 例子
+```
 .div1{
     column-count: 4;
     column-gap: 50px;
     column-rule: 2px outset red;
 }
+```
 
 
   
