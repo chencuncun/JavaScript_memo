@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript_Memo.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>##JavaScript
+###1. 基础
+####1.1 介绍
+互联网上最流行的脚本语言，这门语言可用于Web和HTML，
+更可广泛用于服务器，pc端，移动端。
+####1.2 脚本语言
+是一种轻量级的编程语言
+是可以插入HTML页面的编程代码
+插入HTML页面后，可由所有的浏览器执行
+####1.3 用法
+HTML中的脚本必须位于<script></script>标签之间
+脚本可被放置在HTML页面的<body>和<head>部分中
+####1.4 标签
+在HTML中插入JavaScript，使用<script>标签
+在<script></script>之间书写代码
+####1.5 使用权限
+在HTML中，不限制脚本数量
+通常会把脚本放置于<head>标签中，以不干扰页面内容
+####1.6 输出
+JavaScript通常用来操作HTML
+文档输出
+document.write(&quot;<p>JavaScript</p>&quot;);
+更换内容:将pID变更为www.google.co.jp
+<p id="pID">Hello</P>
+<script>
+document.getElementById(&quot;pID&quot;).innerHTML=&quot;www.google.co.jp&quot;;
+</script>
+###2. 语句
+####2.1 定义
+JavaScript语句向浏览器发出的命令。
+语句的作用是告诉浏览器该做什么。
+####2.2 分号
+语句之间的分割是分号（；）
+注意：分号是可选项，有时候看到不以分号隔开的。
+####2.3 代码
+按照编写顺序依次执行
+####2.4 标识符
+JavaScript标识符必须以字母，下划线或美元符号开始
+JavaScript关键字
+####2.5 大小写
+JavaScript同样对大小写很敏感
+####2.6 空格
+忽略多余的空格
+####2.7 注释
+单行注释：//
+多行注释：/**/
+###3. 变量和数据类型
+####3.1 变量
+3.1.1 变量是用来储存信息的&quot;容器&quot;
+例如：
+var x = 10；
+var y = 10.2；
+var z = &quot;Hello&quot;；
+3.1.2 局部变量和全局变量
+1. 局部变量：只能在当前函数中使用
+2. 全局变量：在任何地方都可以使用
+例子：
+<script>
+var n = 10; //全局变量
+m = 20; //全局变量
+function demo(){
+var i = 30; //局部变量
+j = 40; //全局变量
+}
+demo();
+alert(i);
+</script>
+执行结果：无显示
+####3.2 数据类型
+1. String：字符串
+var string = &quot;Hello&quot;;
+2. Number：数字
+var i1 = 10;
+3. Boolean：布尔
+var flag = true;
+4. Array：数组
+var arr = [&quot;apple&quot;,&quot;orange&quot;,&quot;banana&quot;];
+var arr2 = new Array(&quot;apple&quot;,&quot;orange&quot;,&quot;banana&quot;);
+var arr3 = new Array();
+arr3[0] = &quot;apple&quot;;
+arr3[1] = &quot;orange&quot;;
+arr3[2] = &quot;banana&quot;;
+5. Object：对象
+6. null：空
+var n = null;
+7. 未定义
+var r;
+8. 可以通过赋值为null的方式清除变量
+var i1 = 10;
+i1 = null;
+###4. 语法
+####4.1 运算符
+4.1.1 算数运算符
++, -, *, %, /, ++, --
+例子：
+<p>i=10,j=10;i+j=?</p>
+<p id="sumid"></p>
+<button onclick="mySum()">result</button>
+<script>
+function mySum() {
+var i = 10;
+var j = 10;
+var m = i + j;
+document.getElementById(&quot;sumid&quot;).innerHTML=m;
+}
+</script>
+4.1.2 赋值运算符
+=, +=, -=, *=, /=, %=
+4.1.3 字符串操作
+例子：
+<script>
+function mySum(){
+var i = &quot;www.&quot;;
+var j = &quot;google.co.jp&quot;;
+var m = i + j;
+document.getElementById(&quot;sumid&quot;).innerHTML=m;
+}
+</script>
+4.1.4 比较运算符
+==, ===（必须满足类型一样）, !=, !==（必须满足类型一样）, &gt;, &lt;, &gt;=, &lt;=
+4.1.5 逻辑运算符
+&amp;&amp;，||， ！
+4.1.6 条件运算符
+例：x&lt;10?&quot;x比10小&quot;：&quot;x比10大&quot;<br>
+####4.2 条件语句
+4.2.1 if~else
+例子：
+<script>
+var i = 6;
+if(i&gt;=10){
+document.write(&quot;i&gt;=10&quot;);
+}else{
+document.write(&quot;i&lt;10&quot;);
+}
+</script>
+4.2.2 switch
+例子：
+<script>
+var i=10;
+switch (i){
+case 1:
+document.write(&quot;i=1&quot;);
+break;
+case 2:
+document.write(&quot;i=2&quot;);
+break;
+case 10:
+document.write(&quot;i=10&quot;)；
+break;
+default:
+document.write(&quot;条件不满足case&quot;);
+break；<br>
+}
+</script>
+####4.3 循环语句
+4.3.1 for循环，for/in
+例子：
+<script>
+var i=[1,2,3,4,5,6];
+for(var j=0;j&lt;6;j++) {
+document.write(i[j]+&quot;,&quot;);
+}
+</script>
+例子：
+<script>
+var i=[1,2,3,4,5,6];
+var j;
+for(j in i){
+document.write(i[j]+&quot;<br/>&quot;);
+}
+</script>
+4.3.2 while循环，do～while
+例子：
+<script>
+var i = 1;
+while(i&lt;10){
+document.write(&quot;i=&quot;+i+&quot;<br/>&quot;);
+i++;
+}
+</script>
+例子：
+<script>
+var i = 1;
+do{
+document.write(&quot;i=&quot;+i+&quot;<br/>&quot;);
+i++;
+}while(i&lt;10){
+}
+</script>
+####4.4 跳转语句
+4.4.1 break：跳出当前循环，不再进行下一次循环
+例子：
+<script>
+for(var i=0;i&lt;10;i++){
+if(i==5){
+break;
+}
+document.write(&quot;i=&quot;+i+&quot;<br/>&quot;);
+}
+</script>
+执行结果：
+i=0
+i=1
+i=2
+i=3
+i=4
+4.4.2 continue:结束本次循环，进入下一次循环
+例子：
+<script>
+for(var i=0;i&lt;10;i++){
+if(i==5){
+continue;
+}
+document.write(&quot;i=&quot;+i+&quot;<br/>&quot;);
+}
+</script>
+执行结果：
+i=0
+i=1
+i=2
+i=3
+i=4
+i=6
+i=7
+i=8
+i=9
+###5. 函数
+####5.1 概要
+函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。
+例：实现10组数字的和
+例子：
+<script>
+function demo(a,b){
+var sum = a+b;
+return sum;
+}
+var v1 = demo(20,30);
+alert(v1);
+</script>
+####5.2 定义
+5.2.1 定义函数
+function 函数名(){
+函数体；//代码块
+}
+5.2.2 注意
+JavaScript对大小写十分敏感，所以这里的function必须小写。
+在函数调用时，也必须按照函数的相同名称来调用函数。
+函数名头字母一般小写，如果出现两个单词，第二个单词首字母大写。
+####5.3 函数调用
+5.3.1 函数调用
+函数在定义好之后，不能自动执行，需要进行调用
+5.3.2 调用方式
+1. 在<script>标签内调用
+例子：
+<script>
+function demo(){
+var a = 10;
+var b = 10;
+var sum = a+b;
+alert(sum);
+}
+demo();
+</script>
+2. 在HTML文件中调用
+例子：
+<script>
+function demo(){
+var a = 10;
+var b = 10;
+var sum = a+b;
+alert(sum);
+}
+</script>
+<button onclick="demo()">提交</button>
+####5.4 带参数的函数
+5.4.1 函数参数
+在函数的调用中，也可以传递值，这些值被称为参数
+例：demo(arg1,arg2)
+例子1:
+<script>
+function demo(a,b){
+var sum = a+b;
+alert(sum);
+}
+demo(10,10);
+</script>
+例子2:
+<script>
+function demo(name,age){
+alert(&quot;名字是：&quot;+name+&quot;， 年龄是：&quot;+age);
+}
+</script>
+<button onclick="demo('Chen',30)">提交</button>
+5.4.2 注意
+参数的个数可以为任意多，每个参数通过&quot;，&quot;隔开
+参数在传递时，其顺序必须一致
+5.4.3 意义
+通过传递参数的个数及参数的类型不同完成不同的功能<br>
+####5.5 带返回值的函数
+5.5.1 返回值
+有时需要将函数的值返回给调用它的地方
+例子1：
+<script>
+function demo(){
+return &quot;Hello&quot;;
+}
+var vl1 = demo()+&quot;:Chen&quot;
+var vl2 = demo()+&quot;:Wang&quot;
+alert(vl1);
+alert(vl2);
+</script>
+例子2:
+<p id="pid"></p>
+<script>
+function demo(a,b) {
+if(a&gt;b){
+return &quot;a大于b&quot;;
+}else if(a&lt;b){
+return &quot;a小于b&quot;;
+}else{
+return &quot;a等于b&quot;;
+}
+}
+document.getElementById(&quot;pid&quot;).innerHTML=demo(20,30);
+</script>
+5.5.2 注意
+在使用return语句时，函数会停止执行，同时返回值
+###6. JavaScript异常捕获
+####6.1 异常
+当JavaScript引擎执行JavaScript代码时，发生了错误，导致程序停止运行
+####6.2 异常抛出
+当异常产生，并且将这个异常生产一个错误信息
+####6.3 异常捕获
+try{
+发生异常的代码块；
+}catch(err){
+错误信息处理
+}
+例子：
+<script>
+function demo(){
+try{
+alert(str);
+}catch(err){
+alert(err);
+}
+}
+demo();
+</script>
+####6.4 Throw语句
+通过throw语句创建一个自定义错误
+例子：
+<form>
+用户名：
+<input id="txt" type="text">
+<br/>
+密码：
+<input id="password" type="password">
+<br/>
+<input id="button" type="button" onclick="demo()" value="提交">
+</form>
+<script>
+function demo(){
+try{
+var e = document.getElementById(&quot;txt&quot;).value;
+var f = document.getElementById(&quot;password&quot;).value;
+if(e==&quot;&quot;){
+throw &quot;请输入用户名&quot;;
+}if(f==&quot;&quot;){
+throw &quot;请输入密码&quot;;
+}
+}catch(err){
+alert(err);
+}
+}
+</script>
+###7. JavaScript事件
+####7.1 定义
+事件是可以被JavaScript侦测到的行为
+####7.2 主要事件
+1. onClick:点击事件
+例子：
+<button onclick="demo()">提交</button>
+<script>
+function demo() {
+alert(&quot;Hello&quot;);
+}
+</script>
+2. onMouseOver:鼠标经过事件
+3. onMouseOut:鼠标移出事件
+例子：
+<div class="div" onmouseover="onOver(this)" onmouseout="onPut(this)"> </div>
+<script>
+function onOver(ooj) { //鼠标经过事件
+ooj.innerHTML = &quot;Hello&quot;;
+}
+function onPut(ooj) {  //鼠标移出事件
+ooj.innerHTML = &quot;World&quot;;
+}
+</script>
+4. onChange:文本内容改变事件
+例子1：
+<form>
+<input type= "text" onchange="changeDemo(this)">
+</form>
+<script>
+function changeDemo(){
+alert(&quot;文本内容改变了&quot;);
+}
+</script>
+例子2:
+<form>
+<input type="text" onchange="alert('内容改变了')">
+</form>
+5. onSelect:文本框选中事件
+6. onFocus:光标聚集事件
+例子：
+<form>
+<input type="text" onselect="changeDemo(this)" onfocus="changeDemo2(this)">
+//onSelect:文本框选中事件 AND onFocus:光标聚集事件
+</form>
+<script>
+function changeDemo(bg) {
+bg.style.backgroundColor=&quot;green&quot;;
+}
+function changeDemo2(bg) {
+bg.style.backgroundColor=&quot;blue&quot;;
+}
+</script>
+7. onBlur:移开光标事件
+例子：
+<form>
+<input type="text" onblur="onBlurDemo(this)">
+</form>
+<script>
+function onBlurDemo(bg) {
+bg.style.backgroundColor=&quot;yellow&quot;;
+}
+</script>
+8. onLoad:网页加载事件
+例子：
+<body onload="msg()">
+<script>
+function msg() {
+alert(&quot;网页加载成功&quot;);
+}
+</script>
+9. onUnload:关闭网页事件
+###8. JavaScriptDOM对象
+####8.1 DOM简介
+当网页被加载时，浏览器会创建页面的文档对象模型(Document Object Model)
+8.1.1 DOM操作HTML
+- JavaScript能改变页面中的所有HTML元素
+- JavaScript能改变页面中的所有HTML属性
+- JavaScript能改变页面中的所有CSS样式
+- JavaScript能对页面中的所有事件作出反应
+####8.2 DOM操作HTML
+8.2.1 改变HTML输出流
+注意：绝对不要在文档加载完成之后使用document.write()。这会覆盖该文档
+8.2.2 寻找元素
+1. 通过id找到HTML元素
+2. 通过标签名找到HTML元素
+例子：
+<p id="pid">Hello</p>
+<button onclick="demo()">提交</button>
+<script>
+function demo() {
+document.getElementsByTagName(&quot;p&quot;);
+}
+</script>
+8.2.3 改变HTML内容:
+- innerHTML
+例子：
+<p id="pid">Hello</p>
+<button onclick="demo()">提交</button>
+<script>
+function demo() {
+document.getElementById(&quot;pid&quot;).innerHTML=&quot;Hi&quot;;
+}
+</script>
+8.2.4 改变HTML属性
+- attribute
+例子1：
+<a id="aid" href="http://www.baidu.com">百度</a>
+<button onclick="demo()">变换</button>
+<script>
+function demo() {
+document.getElementById(&quot;aid&quot;).href=&quot;http://www.google.co.jp&quot;;
+}
+</script>
+例子2:
+<img id="imgid" src="../../pic/cat.jpg">
+<button onclick="demo()">转换</button>
+<script>
+function demo() {
+document.getElementById(&quot;imgid&quot;).src=&quot;../../pic/dog.jpg&quot;;
+}
+</script>
+####8.3 DOM操作CSS
+8.3.1 通过DOM对象改变CSS
+语法：
+document.getElementById(id).style.property=new style
+例子：
+<!--html-->
+<div id="div" class="div">Hello</div>
+<button onclick="demo()">转换</button></p>
+<pre><code>//CSS
+.div{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+//javaScript
+function  demo(){
+    document.getElementById(&quot;div&quot;).style.backgroundColor=&quot;blue&quot;;
+}
+</code></pre>
+<p>####8.4 DOM EventListener
+8.4.1 方法：addEventListener():用于向指定元素添加事件句柄
+例子：
+<button id="buttonID">提交</button>
+<script>
+document.getElementById(&quot;buttonID&quot;).addEventListener(&quot;click&quot;,function () {
+alert(&quot;hello&quot;);
+})
+</script>
+8.4.2 方法：removeEventListener()：移除方法添加的事件句柄
+例子：
+<button id="buttonID">提交</button>
+<script>
+var x = document.getElementById(&quot;buttonID&quot;);
+x.addEventListener(&quot;click&quot;,hello);
+x.addEventListener(&quot;click&quot;,world);
+x.removeEventListener(&quot;click&quot;,hello);
+function hello() {
+alert(&quot;Hello&quot;);
+}
+function world() {
+alert(&quot;World&quot;);
+}
+</script>
+###9. 事件详解
+####9.1 事件流
+9.1.1 事件流
+描述的是在页面中接受事件的顺序
+9.1.2 事件冒泡
+由最具体的元素接收，然后逐级向上传播至最不具体的元素的节点（文档）
+9.1.3 事件捕获
+最不具体的节点先接收事件，而最具体的节点应该是最后接收事件
+####9.2 事件处理
+9.2.1 HTML事件处理
+直接添加到HTML结构中
+例子：
+<div id="divID">
+<button id="button1" onclick="demo()">提交</button>
+</div>
+<script>
+function demo() {
+alert(&quot;事件详细&quot;);
+}
+</script>
+9.2.2 DOM0级事件处理
+把一个函数赋值给一个事件处理程序属性
+例子：
+<div id="div">
+<button id="button1">提交</button>
+</div>
+<script>
+var button1 = document.getElementById(&quot;button1&quot;);
+button1.onclick = function () {
+alert(&quot;DOM0级事件处理程序1&quot;);//被覆盖掉
+}
+button1.onclick = function () {
+alert(&quot;DOM0级事件处理程序2&quot;);
+}
+</script>
+9.2.3 DOM2级事件处理
+1. addEventListener(&quot;事件名&quot;，&quot;事件处理函数&quot;，&quot;布尔值&quot;）;
+true:事件捕获
+false:事件冒泡
+2. removeEventListener();
+例子：
+<div id="divID">
+<button id="button1">提交</button>
+</div>
+<script>
+var btn1 = document.getElementById(&quot;button1&quot;);
+btn1.addEventListener(&quot;click&quot;,demo1);
+btn1.addEventListener(&quot;click&quot;,demo2);
+function demo1() {
+alert(&quot;DOM2级事件处理程序1&quot;);
+}
+function demo2() {
+alert(&quot;DOM2级事件处理程序2&quot;);
+}
+btn1.removeEventListener(&quot;click&quot;,demo2);//点击移除demo2
+</script>
+9.2.4 IE事件处理程序
+1. attachEvent：添加一个事件
+2. detachEvent：移除一个事件
+例子：
+<div id="divID">
+<button id="button1">提交</button>
+</div>
+<script>
+var btn1 = document.getElementById(&quot;button1&quot;);
+if(btn1.addEventListener){
+btn1.addEventListener(&quot;click&quot;,demo);
+}else if(btn1.attachEvent){
+btn1.attachEvent(&quot;onclick&quot;,demo);
+}else{
+btn1.onclick = demo();
+}
+function demo() {
+alert(&quot;Hello&quot;);
+}
+</script>
+####9.3 事件对象
+9.3.1 事件对象
+在触发DOM事件的时候都会产生一个对象
+9.3.2 事件对象event
+1. type:获取事件类型
+例子：
+<div id="divID">
+<button id="button1">提交</button>
+</div>
+<script>
+document.getElementById(&quot;button1&quot;).addEventListener(&quot;click&quot;,showType);
+function showType(event) {
+alert(event.type);
+}
+</script>
+执行结果：click
+2. target:获取事件目标
+例子：
+<div id="divID">
+<button id="button1">提交</button>
+</div>
+<script>
+document.getElementById(&quot;button1&quot;).addEventListener(&quot;click&quot;,showType);
+function showType(event) {
+alert(event.target);
+}
+</script>
+执行结果：[object HTMLButtonElement]
+3. stopPropagation():阻止事件冒泡
+例子：
+<div id="divID">
+<button id="button1">提交</button>
+</div>
+<script>
+document.getElementById(&quot;button1&quot;).addEventListener(&quot;click&quot;,showTarget);
+document.getElementById(&quot;divID&quot;).addEventListener(&quot;click&quot;,showDiv);
+function showTarget(event) {
+alert(event.target);
+}
+function showDiv() {
+alert(&quot;div&quot;);
+}
+</script>
+执行结果：[object HTMLButtonElement] div
+出现事件冒泡现象，为了阻止此现象，将以上代码改成：
+function showTarget(event) {
+alert(event.target);
+event.stopPropagation();//阻止事件冒泡
+}
+执行结果：[object HTMLButtonElement]
+4. preventDefault():阻止事件默认行为
+例子：
+<div id="divID">
+<button id="button1">提交</button>
+<a id="aID" href="http://www.google.co.jp">google</a>
+</div>
+<script>
+document.getElementById(&quot;button1&quot;).addEventListener(&quot;click&quot;,showTarget);
+document.getElementById(&quot;divID&quot;).addEventListener(&quot;click&quot;,showDiv);
+document.getElementById(&quot;aID&quot;).addEventListener(&quot;click&quot;,showA);
+function showTarget(event) {
+alert(event.target);
+event.stopPropagation();//阻止事件冒泡
+}
+function showDiv() {
+alert(&quot;div&quot;);
+}
+function showA(event){
+event.stopPropagation();//阻止事件冒泡
+event.preventDefault();//网页不会跳转
+}
+</script>
+###10. 内置对象
+####10.1 对象的解释
+10.1.1 JavaScript中的所有事物都是对象：字符串，数值，数组，函数...
+每个对象带有属性和方法
+10.1.2 JavaScript允许自定义对象
+1. 定义并创建对象实例
+例子：
+<script>
+//第一种定义方法
+people = new Object();
+people.name = &quot;Chen&quot;;
+people.age = &quot;31&quot;;
+document.write(&quot;name: &quot;+people.name+&quot;, age: &quot;+people.age);
+//第二种定义方法
+people = {name:&quot;Wang&quot;, age:&quot;33&quot;};
+document.write(&quot;name: &quot;+people.name+&quot;, age: &quot;+people.age);
+</script>
+2. 使用函数来定义对象，然后创建新的对象实例
+例子：
+<script>
+function people(name,age){
+this.name = name;
+this.age = age;
+}
+son = new people(&quot;Wang&quot;,1);
+document.write(&quot;name:&quot;+son.name+&quot;, age:&quot;+son.age);
+</script>
+####10.2 String字符串对象
+1. String对象
+String对象用于处理已有的字符串
+字符串可以使用双引号或单引号
+2. 在字符串中查找字符串：indexOf()
+例子：
+<script>
+var str = &quot;Hello world&quot;;
+document.write(str.indexOf(&quot;world&quot;));
+</script>
+3. 内容匹配：match()
+document.write(str.match(&quot;world&quot;));
+4. 替换内容：replace()
+document.write(str.replace(&quot;world&quot;,&quot;JavaScript&quot;));<br>
+5. 字符串大小写转换：toUpperCase()和toLowerCase()
+document.write(str.toUpperCase());
+document.write(str.toLowerCase());
+6. 字符串转为数组：strong&gt;split()
+var str = &quot;Hello,My,JavaScript&quot;;
+var s = str.split(&quot;,&quot;);//以逗号作为分割基准
+document.write(s[2]);
+7. 其他属性和方法
+7.1 属性
+- length
+- prototype
+- constructor
+7.2 方法
+- charAt()
+- charCodeAt()
+- concat()
+- fromCharCode()
+- lastIndexOf()
+- search()
+- slice()
+- substring()
+- substr()
+- valueOf()
+####10.3 Date日期对象
+1. Date对象
+例子：
+<script>
+var date = new Date();
+document.write(date);
+</script>
+执行结果：Mon Sep 14 2020 10:40:42 GMT+0900 (日本标准时间)
+2. 获得当日的日期
+3. 常用方法
+- getFullYear():获取年份
+var date = new Date();
+document.write(date.getFullYear());
+- getTime():获取毫秒
+- setFullYear():设置具体的日期
+- getDay():获取星期
+例子：
+<body onload="startTime()">
+div id=&quot;timetxt&quot;&gt;</div>
+<script>
+function startTime() {
+var today = new Date();
+var h = today.getHours();
+var m = today.getMinutes();
+var s = today.getSeconds();
+document.getElementById(&quot;timetxt&quot;).innerHTML = h+&quot;:&quot;+m+&quot;:&quot;+s;
+t = setTimeout(function () {
+startTime();
+},1000);
+}
+</script>
+</body>
+####10.4 Array数组对象
+1. Array对象
+使用单独的变量名来存储一系列的值
+2. 数组的创建
+例：var myArray=[&quot;apple&quot;,&quot;orange&quot;,&quot;banana&quot;];
+3. 数组的访问
+通过指定数组名以及索引号码，可以访问某个特定的元素
+注意：[0]是数组的第一个元素。
+4. 数组常用方法
+- concat():合并数组
+例子：
+var a = [&quot;apple&quot;,&quot;orange&quot;];
+var b = [&quot;banana&quot;,&quot;mango&quot;];
+var c = a.concat(b);
+- sort():排序
+例子1(升序)：
+var a = [&quot;3&quot;,&quot;2&quot;,&quot;4&quot;,&quot;1&quot;,&quot;5&quot;,&quot;9&quot;];
+document.write(a.sort());
+例子2(降序)：
+var a = [&quot;3&quot;,&quot;2&quot;,&quot;4&quot;,&quot;1&quot;,&quot;5&quot;,&quot;9&quot;];
+document.write(a.sort(function (a,b) {
+return b-a;
+}));
+- push():末尾追加元素
+例子：
+var m = [&quot;a&quot;,&quot;b&quot;];
+m.push(&quot;c&quot;)
+document.write(m);
+- reverse():数组元素翻转
+例子：
+var m = [&quot;b&quot;,&quot;a&quot;,&quot;c&quot;,&quot;d&quot;]
+document.write(m.reverse());
+####10.5 Math对象
+1. Math对象
+执行常见的算数任务
+2. 常用方法
+- round(): 四舍五入
+document.write(Math.round(3.4));
+- random(): 返回0～1之间的随机数
+document.write(Math.random());//0到1的随机数<br>
+document.write(parseInt(Math.random()*10));//1到10的随机数
+- max(): 返回最高值
+document.write(Math.max(10,20,4,2));
+- min(): 返回最低值
+document.write(Math.min(10,20,4,2));
+- abs(): 返回绝对值
+document.write(Math.abs(-10));
+###11. DOM对象控制HTML
+####11.1 DOM对象控制HTML
+11.1.1 方法
+1. getElementsByName(): 获取名字
+例子：
+<p name="pName">Hello</p>
+<p name="pName">Hello</p>
+<p name="pName">Hello</p></p>
+<pre><code>        &lt;script&gt;
+            function getName() {
+                var n = document.getElementsByName(&quot;pName&quot;);
+                var m = n[0];
+                m.innerHTML = &quot;Hi&quot;;
+            }
+            getName();
+        &lt;/script&gt;
+        执行结果：
+          Hi 
+          Hello
+          Hello
+    2. getElementsByTagName(): 获取元素
+       例子：
+       &lt;p name=&quot;pName&quot;&gt;Hello&lt;/p&gt;
+       &lt;p name=&quot;pName&quot;&gt;Hello&lt;/p&gt;
+       &lt;p name=&quot;pName&quot;&gt;Hello&lt;/p&gt;
+        
+       &lt;script&gt;
+        function getName() {
+            var n = document.getElementsByTagName(&quot;p&quot;);
+            var m = n[0];
+            m.innerHTML = &quot;Hi&quot;;
+        }
+        getName();
+      &lt;/script&gt;
+      执行结果：
+        Hi 
+        Hello
+        Hello
+    3. getAttribute(): 获取元素属性
+        例子：
+        &lt;a id=&quot;aID&quot; title=&quot;这是a标签的title属性&quot;&gt;&lt;/a&gt;
+        &lt;script&gt;
+            function getAttr() {
+                var anode = document.getElementById(&quot;aID&quot;);
+                var attr = anode.getAttribute(&quot;title&quot;);
+                document.write(attr);
+            }
+            getAttr();
+        &lt;/script&gt;
+    4. setAttribute(): 设置元素属性
+        例子：
+        &lt;a id=&quot;aID&quot;&gt;&lt;/a&gt;
+        &lt;script&gt;
+            function setAttr() {
+                var anode = document.getElementById(&quot;aID&quot;);
+                    anode.setAttribute(&quot;title&quot;,&quot;这是a标签的title属性&quot;);
+                var attr = anode.getAttribute(&quot;title&quot;);
+                   document.write(attr);
+            }
+            setAttr();
+        &lt;/script&gt;
+    5. childNodes(): 访问子节点
+        例子：
+        &lt;ul&gt;
+            &lt;li&gt;apple&lt;/li&gt;
+            &lt;li&gt;orange&lt;/li&gt;
+            &lt;li&gt;banana&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;script&gt;
+            function getChildNode() {
+                var childnode = document.getElementsByTagName(&quot;ul&quot;)[0].childNodes;
+                alert(childnode.length);
+                alert(childnode[0].nodeType);
+            }
+            getChildNode();
+        &lt;/script&gt;
+    6. parentNode(): 访问父节点
+        例子：
+        &lt;div&gt;
+            &lt;p id=&quot;pID&quot;&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            function getParentNode() {
+                var pnd = document.getElementById(&quot;pID&quot;);
+                document.write(pnd.parentNode.nodeName);
+            }
+            getParentNode();
+        &lt;/script&gt;
+        执行结果：DIV
+    7. createElement(): 创建元素节点
+        例子：
+        &lt;body&gt;
+            &lt;script&gt;
+                function createNode() {
+                    var body = document.body;
+                    var input = document.createElement(&quot;input&quot;);
+                    input.type = &quot;button&quot;;
+                    input.value = &quot;按钮&quot;;
+                    body.appendChild(input); //向末尾插入节点
+                }
+                createNode();
+            &lt;/script&gt;
+        &lt;/body&gt;
+    8. createTextNode(): 创建文本节点
+    9. insertBefore(): 插入节点
+        例子：
+        &lt;div id=&quot;divID&quot;&gt;
+            &lt;p id=&quot;pID&quot;&gt;这是div元素的p元素&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+            function insertNode() {
+                var div = document.getElementById(&quot;divID&quot;);
+                var node = document.getElementById(&quot;pID&quot;);
+                var newnode = document.createElement(&quot;p&quot;);
+                newnode.innerHTML = &quot;手动插入一个p元素&quot;;
+                div.insertBefore(newnode,node);
+            }
+            insertNode();
+        &lt;/script&gt;
+    10. removeChild(): 删除节点
+        例如：
+        &lt;div id=&quot;divID&quot;&gt;
+            &lt;p id=&quot;pID&quot;&gt;这是div元素的p元素&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;script&gt;
+        function removeNode() {
+            var div = document.getElementById(&quot;divID&quot;);
+            var p = div.removeChild(div.childNodes[1]);//删除div的第一个节点
+        }
+        removeNode();
+    11. offsetHeight(): 网页尺寸(不包含滚动条)
+        例子：
+        &lt;body&gt;
+        &lt;script&gt;
+            function getSize() {
+                var width = document.body.offsetWidth||document.documentElement.offsetWidth;
+                var height = document.body.offsetHeight||document.documentElement.offsetHeight;
+                document.write(width+&quot;, &quot;+height);
+            }
+            getSize();
+        &lt;/script&gt;
+        &lt;/body&gt;
+    12. scrollHeight(): 网页尺寸(包含滚动条)
+</code></pre>
+<p>###12. JS浏览对象
+####12.1 Window对象<br>
+1. window对象
+window对象是BOM的核心，window对象指当前的浏览器窗口
+所有JavaScript全局对象，函数以及变量均自动成为window对象的成员
+全局变量是window对象的属性
+全局函数是window对象的方法
+甚至HTML DOM的document也是window对象的属性之一
+2. window尺寸
+window.innerHeight: 浏览器窗口的内部高度（不包括工具栏和滚动条）
+window.innerWidth: 浏览器窗口的内部宽度
+例子：
+<script>
+document.write(&quot;宽度：&quot;+window.innerWidth+&quot;, 高度：&quot;+ window.innerHeight);
+</script>
+3. window方法
+3.1 window.open(): 打开新窗口
+例子：
+<button id="btn" onclick="btnClick()">提交</button>
+<script>
+function btnClick() {
+window.open(&quot;OpenWindow.html&quot;,&quot;windowname&quot;,&quot;height=200,width=200,top=100,left=100,toolbar=no&quot;);
+}
+</script>
+3.2 window.close(): 关闭当前窗口
+例子：
+<button id="btn" onclick="btnClick()">提交</button>
+<script>
+function btnClick() {
+window.close();
+}
+</script>
+####12.2 计时器
+1. 计时事件
+通过使用JavaScript，可以做到在一个设定的时间间隔之后来执行代码，而不是在函数被调用之后立即执行，我们称之为计时事件
+2. 计时方法
+2.1.1 setInterval(): 间隔指定的毫秒数不停地执行指定的代码,即让函数不停的执行
+例子：
+<p id="ptime"></p>
+<script>
+var mytime = setInterval(function () {
+getTime();
+},1000);</p>
+<pre><code>            function getTime() {
+                var d = new Date();
+                var t = d.toLocaleTimeString();//时分秒转换成字符串
+                document.getElementById(&quot;ptime&quot;).innerHTML=t;
+            }
+        &lt;/script&gt;
+    2.1.2 clearInterval(): 用于停止setInterval()方法执行的函数代码
+        例子：            
+        &lt;p id=&quot;ptime&quot;&gt;&lt;/p&gt;
+        &lt;button id=&quot;btnID&quot; onclick=&quot;stopInterval()&quot;&gt;clear&lt;/button&gt;
+        &lt;script&gt;
+            var mytime = setInterval(function () {
+                getTime();
+            },1000);
+        
+            function getTime() {
+                var d = new Date();
+                var t = d.toLocaleTimeString();//时分秒转换成字符串
+                document.getElementById(&quot;ptime&quot;).innerHTML=t;
+            }
+            function stopInterval() {
+                clearInterval(mytime);
+            }
+        &lt;/script&gt;
+    2.2.1 setTimeout(): 暂停指定的毫秒数后执行指定的代码
+        例子：
+        &lt;button id=&quot;btn&quot; onclick=&quot;myTimeout()&quot;&gt;延时执行&lt;/button&gt;
+        &lt;script&gt;
+            var win;
+            function myTimeout() {
+                win = setTimeout(function () {
+                alert(&quot;hello&quot;)},3000); //延时3s执行
+            }
+        &lt;/script&gt;
+    2.2.2 clearTimeout(): 用于停止执行setTimeout()方法的函数代码
+        例子：
+        &lt;body onload=&quot;myTimeout()&quot;&gt;
+        &lt;button id=&quot;btn&quot; onclick=&quot;stopTimeout()&quot;&gt;停止执行&lt;/button&gt;
+        &lt;script&gt;
+            var win;
+            function myTimeout() {
+                alert(&quot;hello&quot;);
+                win = setTimeout(function () {
+                    myTimeout()},3000);
+                }
+                function stopTimeout() {
+                    clearTimeout(win);
+                }
+        &lt;/script&gt;
+        &lt;/body&gt;
+</code></pre>
+<p>####12.3 History对象
+1. History对象
+window.histor：对象包含浏览器的历史(url)的集合
+2. History方法
+2.1 history.back(): 与在浏览器中点击后退按钮相同
+例子：
+<!--html1-->
+<body>
+<a href="Browser.html">跳转到后退网页</a></p>
+<pre><code>        &lt;!--html2--&gt;
+        &lt;body&gt;
+        &lt;button id=&quot;btn&quot; onclick=&quot;goTest()&quot;&gt;按钮&lt;/button&gt;
+        &lt;script&gt;
+            function goTest() {
+                history.back();
+            }
+        &lt;/script&gt;
+        &lt;/body&gt;
+    2.2 history.forward(): 与在浏览器中点击按钮向前相同
+        例子：
+        &lt;!--html1--&gt;
+        &lt;body&gt;
+        &lt;a href=&quot;Browser.html&quot;&gt;跳转到后退网页&lt;/a&gt;
+        &lt;button id=&quot;btn&quot; onclick=&quot;goForward()&quot;&gt;按钮&lt;/button&gt;
+        &lt;script&gt;
+            function goForward(){
+                history.forward();
+            }
+        &lt;/script&gt;
+                    
+        &lt;!--html2--&gt;
+        &lt;body&gt;
+        &lt;button id=&quot;btn&quot; onclick=&quot;goTest()&quot;&gt;按钮&lt;/button&gt;
+        &lt;script&gt;
+        function goTest() {
+            history.back();
+        }
+        &lt;/script&gt;
+        &lt;/body&gt;
+    2.3 history.go(): 进入历史中的某个页面
+        例子：
+        &lt;!--html1--&gt;
+        &lt;body&gt;
+            &lt;a href=&quot;History_go.html&quot;&gt;跳转到History网页&lt;/a&gt;
+        &lt;/body&gt;
+        
+        &lt;!--html2--&gt;
+        &lt;form&gt;
+            &lt;input type=&quot;text&quot; id=&quot;username&quot;&gt;
+        &lt;/form&gt;
+        &lt;button id=&quot;btn&quot; onclick=&quot;safe()&quot;&gt;按钮&lt;/button&gt;
+        &lt;script&gt;
+            function safe() {
+                var name = document.getElementById(&quot;username&quot;).value;
+                if(name==&quot;Chen&quot;){
+                    history.go(-1);
+                }else{
+                    alert(&quot;输入错误！&quot;);
+                }
+            }
+        &lt;/script&gt;
+</code></pre>
+<p>####12.4 Location对象
+1. Location对象
+window.location对象用于获得当前页面的地址(URL),并把浏览器重定向到新的页面
+2. Location对象的属性
+2.1 location.hostname: 返回web主机的域名
+例子：
+<button id="btn" onclick="getLocate()">提交</button>
+<p id="pID"></p>
+<script>
+function getLocate() {
+document.getElementById(&quot;pID&quot;).innerHTML = window.location.hostname;
+}
+</script>
+2.2 location.pathname: 返回当夜页面的路径和文件名
+例子：
+<button id="btn" onclick="getLocate()">提交</button>
+<p id="pID"></p>
+<script>
+function getLocate() {
+document.getElementById(&quot;pID&quot;).innerHTML = window.location.pathname;
+}
+</script>
+2.3 location.port: 返回web主机的端口
+例子：
+<button id="btn" onclick="getLocate()">提交</button>
+<p id="pID"></p>
+<script>
+function getLocate() {
+document.getElementById(&quot;pID&quot;).innerHTML = window.location.port;
+}
+</script>
+2.4 location.protocol: 返回所使用的web协议(http://或https://)
+例子：
+<button id="btn" onclick="getLocate()">提交</button>
+<p id="pID"></p>
+<script>
+function getLocate() {
+document.getElementById(&quot;pID&quot;).innerHTML = window.location.protocol;
+}
+</script>
+2.5 location.href: 返回当前页面的url
+例子：
+<button id="btn" onclick="getLocate()">提交</button>
+<p id="pID"></p>
+<script>
+function getLocate() {
+document.getElementById(&quot;pID&quot;).innerHTML = window.location.href;
+}
+</script>
+2.6 location.assign():加载新的文档<br>
+例子：
+<button id="btn" onclick="getLocate()">提交</button>
+<p id="pID"></p>
+<script>
+function getLocate() {
+location.assign(&quot;http://www.google.co.jp&quot;);
+}
+</script><br>
+####12.5 Screen对象
+1. Screen对象
+window.screen对象包含有关用户屏幕的信息
+2. 属性
+2.1 screen.availWidth: 可用的屏幕宽度
+2.2 screen.availHeight: 可用的屏幕高度
+2.3 screen.Height: 屏幕高度
+2.4 screen.Width: 屏幕宽度
+3. 例子
+<script>
+document.write(&quot;可用高度：&quot;+screen.availHeight+&quot;, 可用宽度&quot;+screen.availWidth);
+document.write(&quot;高度：&quot;+screen.height+&quot;, 宽度&quot;+screen.width);
+</script>
+###13. JS瀑布流效果</p>
+
+</body>
+</html>
