@@ -9,10 +9,10 @@
 ### 2. 属性
 - `class`：规定元素的类名
 - `id`：规定元素唯一ID
-- `bgcolor`：背景色 `<br>`
+- `bgcolor`：背景色 <br>
 `<body bgcolor="#8b0000"></body>`
-- `align`: 位置 `<br>`
-`<h1 align="right">`标题1`</h1>`
+- `align`: 位置 <br>
+`<h1 align="right">标题1</h1>`
 - `target`：网页打开方式
 ```
 <a href="www.google.co.jp" target="_blank">另开网页</a>
@@ -33,8 +33,8 @@
 - `<del>`：删除字
 ### 4. 样式
 #### 4.1 标签
-- `<style>`:样式定义
-- `<link>`：资源定义
+- `<style>`: 样式定义
+- `<link>`: 资源定义
 #### 4.2 属性
 - `rel="stylesheet"`：外部样式表
 - `type="text/css"`：引入文档的类型
@@ -71,7 +71,7 @@ p{
 #### 5.3 img标签属性
 - `alt`：替换文本属性
 - `width`：宽
-- `height`：高
+- `height`：高 <br>
 `<a href="http://www.google.co.jp"><img src="pic/yaoyao.jpeg" width="100px" height="80px" alt="yaoyao"></a>`
 ### 6.表格
 #### 6.1 标签
@@ -85,7 +85,7 @@ p{
 - `<tfoot>`：定义表格的页脚
 - `<col>`：定义表格的列属性
 #### 6.2 标签属性
-- `ellpadding`：单元格边距
+- `cellpadding`：单元格边距
 - `cellspacing`：单元格间距
 - `bgcolor`:表格内的背景颜色
 - `background`：表格内的背景图像
@@ -203,16 +203,18 @@ p{
 ```
 请选择您喜欢的水果：
 <select>
-<option>---苹果---</option>
-<option>---橘子---</option>
-<option>---香蕉---</option>
+    <option>---苹果---</option>
+    <option>---橘子---</option>
+    <option>---香蕉---</option>
 </select>
 ```
 ##### 10.3.5 文本域
- `<textarea cols="30" rows="30">请填写个人信息</textarea>`
+`<textarea cols="30" rows="30">请填写个人信息</textarea>`
 ##### 10.3.6 按钮
- `<input type="button" value="按钮">`
- `<input type="submit" value="确认">`
+```
+<input type="button" value="按钮">
+<input type="submit" value="确认">
+```
 ### 11. 框架
 #### 11.1 常用标签
 - `<noresize>`: 固定框架大小
@@ -291,13 +293,12 @@ nav元素应用场景：<br>
 <nav>
     <ul>
         <li><a href="#HTML">HTML的历史</a></li>
-        <li><a href="#CSS">`CSS的历史`</a>` `</li>
+        <li><a href="#CSS">CSS的历史</a></li>
     </ul>
 </nav>
 ```
 - `<aside>`:
-用来表示当前页面或文章的附属信息部分，<br>
-它可以包含与当前页面或主要内容相关的引用，侧边栏，广告，导航条，<br>
+用来表示当前页面或文章的附属信息部分，它可以包含与当前页面或主要内容相关的引用，侧边栏，广告，导航条，<br>
 以及其他类似的有区别与主要内容的部分。<br>
 - `<time>`与微格式:
 ```
@@ -357,7 +358,7 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
     <input type="submit" name="s4" value="v4" formtarget="framename" formaction="xx5.jsp">第五页
 </form>
 ```
-- `autofocus`：为文本框，选择框或按钮控件加上autofocus属性，当画面打开时，该控件自动获取光标焦点
+- `autofocus`：为文本框，选择框或按钮控件加上`autofocus`属性，当画面打开时，该控件自动获取光标焦点
 ```
 <form>
     <input type="text" autofocus>
@@ -373,8 +374,8 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
 </form>
 ```
 - ？`labels`:为所有可使用标签的表单元素，`button`，`select`元素等，定义一个`labels`属性 <br>
- 属性值为一个NodeList对象，代表该元素所绑定的标签元素所构成的集合。<br>
-- ？`control`：可以在标签内部放置一个表单元素，并且通过该标签的control属性来访问该表单元素 <br>
+ 属性值为一个`NodeList`对象，代表该元素所绑定的标签元素所构成的集合。<br>
+- ？`control`：可以在标签内部放置一个表单元素，并且通过该标签的`control`属性来访问该表单元素 <br>
 - ※`placeholder`：是指当文本框处于未输入状态时显示的输入提示。<br>
 当文本框处于未输入状态且未获取光标焦点时，模糊显示输入提示文字。<br>
 `<input type="text" placeholder="请输入用户名 ">`
@@ -403,10 +404,10 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
 ```
 - ?`SelectionDirection`: 对`input`和`textarea`元素，增加了该属性。
 当用户在这两个元素中用鼠标选取部分文字时，可以使用该属性来获取方向。<br>
-当用户正在选取文字时，该属性值为"forward"，<br>
-当用户反向选取文字时，该属性值为"backward"。<br>
+当用户正在选取文字时，该属性值为"`forward`"，<br>
+当用户反向选取文字时，该属性值为"`backward`"。<br>
 当用户没有选取任何文字时，该属性值为"forward"。<br>
-- ?`indete` `rminate`:对复选框checkbox元素来说过去只是选取与非选取这两种状态。<br>
+- ?`indete` `rminate`:对复选框`checkbox`元素来说过去只是选取与非选取这两种状态。<br>
 在HTML5中，可以在JavaScript脚本代码中对该元素使用该属性，<br>
 以说明复选框出去"尚未明确是否选取"状态。<br>
 - `image`:提交按钮的`height`属性和`width`属性 <br>

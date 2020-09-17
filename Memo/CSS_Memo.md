@@ -93,12 +93,12 @@ li strong{
 #### 7.2 属性和值选择器
 ```
 <style type="text/css">
-[title]{
-color: chocolate;
-}
-[title=te]{
-   color: darkcyan;
-}
+    [title]{
+        color: chocolate;
+    }
+    [title=te]{
+        color: darkcyan;
+    }
 </style>  
 <p title="t">属性选择器</p>
 <p title="te">属性和值选择器</p>
@@ -119,30 +119,30 @@ p{
 - `background-image`: 把图片设置为背景 <br>
 ```
 body{
- background-image:url("../../pic/yaoyao.jpeg") ;
+    background-image:url("../../pic/yaoyao.jpeg") ;
 }
 ```
 - `background-position`: 设置背景图片的起始位置 <br>
 ```
 body{
- background-image: url("../../pic/cat.jpg");
- background-repeat: no-repeat;
- background-position: right top;
+    background-image: url("../../pic/cat.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
 }
 ```
 - `background-repeat`: 设置背景图片是否及如何重复 <br>
 ```
 body{
- background-image: url("../../pic/yaoyao.jpeg");
- background-repeat: no-repeat;
+    background-image: url("../../pic/yaoyao.jpeg");
+    background-repeat: no-repeat;
 }
 ```
 - `background-attachment`: 背景图像是否固定或者随页面的其余部分滚动 <br>
 ```
 body{
- background-image: url("../../pic/cat.jpg");
- background-repeat: no-repeat;
- background-attachment: fixed;
+    background-image: url("../../pic/cat.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 ```
 - `background-size`: 规定背景图片的尺寸 <br>
@@ -199,9 +199,9 @@ CSS字体属性定义文本的字体系列，大小，加粗，风格和变形
 ##### 8.4.4 例子
 ```
 a:link{
-   color: red;
-   text-decoration: none;
-   background-color: cornflowerblue;
+       color: red;
+       text-decoration: none;
+       background-color: cornflowerblue;
 }
 ```
 #### 8.5 列表
@@ -210,22 +210,22 @@ a:link{
 - `list-style-image`: 列表项图像
 ```
 ul li{
-  list-style-image: url("../../pic/cat.jpg");
+     list-style-image: url("../../pic/cat.jpg");
 }
 ```
 - `list-style-position`: 列表标志位置
 ```
 ul.ul1{
-   list-style-position: inside;
+     list-style-position: inside;
 }
 ul.ul2{
-   list-style-position: outside;
+     list-style-position: outside;
 }
 ```
 - `list-style-type`: 列表类型
 ```
 ul li{
-  list-style-type: circle;
+    list-style-type: circle;
 }
 /*去掉list前面的标志符号*/
 list-style-type:none;
@@ -281,7 +281,7 @@ p{
 - 绝对布局
 ##### 9.1.3 CSS定位属性
 - `position`: 把元素放在一个静态的，相对的，绝对的或固定的位置中 <br>
-   - static:对偏移量不起任何效果
+   - static: 对偏移量不起任何效果
    - relative
    - absolute
    - fixed
@@ -335,30 +335,30 @@ p{
 </div>
 /*css*/
 #div1{
-  width: 100px;
-  height: 100px;
-  background-color:red;
-  float:left;
+    width: 100px;
+    height: 100px;
+    background-color:red;
+    float:left;
 }
 #div2{
-  width: 100px;
-  height: 100px;
-  background-color:blue;
-  float:left;
+    width: 100px;
+    height: 100px;
+    background-color:blue;
+    float:left;
 }
 #div3{
-  width: 100px;
-  height: 100px;
-  background-color:green;
-  float: left;
+    width: 100px;
+    height: 100px;
+    background-color:green;
+    float: left;
 }
 #container{
-  width: 500px;
-  height: 300px;
-  background-color: cornflowerblue;
+    width: 500px;
+    height: 300px;
+    background-color: cornflowerblue;
 }
 #clear{
-  clear: left;
+    clear: left;
 }
 ```
 ### 10. 盒子模型
@@ -419,7 +419,7 @@ p{
 - `margin-right`: 设置有边距
 - `margin-top`: 设置上边距
 #### 10.5 外边距合并
-###### 10.5.1 定义
+##### 10.5.1 定义
 外边距合并就是一个叠加的概念，以外边距大的为参照标准
 ### 11. CSS常用操作
 #### 11.1 对齐
@@ -547,7 +547,7 @@ a.div{color:red;}
 - 类选择器和ID选择器区别
 ID只能在文档中使用一次，而类可以多次使用 <br>
 ID选择器不能结合使用 <br>
-当使用js时，需要用到id <br>
+当使用js时，需要用到`id` <br>
 #### 12.5 属性选择器详解
 - 简单属性选择 
  如：`[title]{}`

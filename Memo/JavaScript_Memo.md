@@ -1150,7 +1150,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
     }
 </script>
 ```
-- `clearInterval()`: 用于停止setInterval()方法执行的函数代码 <br>
+- `clearInterval()`: 用于停止`setInterval()`方法执行的函数代码 <br>
 ```   
 <p id="ptime"></p>
 <button id="btnID" onclick="stopInterval()">clear</button>
@@ -1180,7 +1180,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
     }
 </script>
 ``` 
-- `clearTimeout()`: 用于停止执行setTimeout()方法的函数代码 <br>
+- `clearTimeout()`: 用于停止执行`setTimeout()`方法的函数代码 <br>
 ```
 <body onload="myTimeout()">
 <button id="btn" onclick="stopTimeout()">停止执行</button>
@@ -1199,7 +1199,7 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 ```
 #### 12.3 History对象
 ##### 12.3.1. History对象
-`window.histor`：对象包含浏览器的历史(url)的集合
+`window.histor`：对象包含浏览器的历史(`url`)的集合
 ##### 12.3.2 History方法
 - `history.back()`: 与在浏览器中点击后退按钮相同 <br>
 
