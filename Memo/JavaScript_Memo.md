@@ -1,8 +1,7 @@
 ## JavaScript
 ### 1. 基础
 #### 1.1 介绍
-互联网上最流行的脚本语言，这门语言可用于Web和HTML，<br>
-更可广泛用于服务器，pc端，移动端。
+互联网上最流行的脚本语言，这门语言可用于Web和HTML，更可广泛用于服务器，pc端，移动端。
 #### 1.2 脚本语言
 是一种轻量级的编程语言。<br>
 是可以插入HTML页面的编程代码。<br>
@@ -15,16 +14,15 @@ HTML中的脚本必须位于`<script></script>`标签之间。<br>
 在`<script></script>`之间书写代码
 
 #### 1.5 使用权限
-在HTML中，不限制脚本数量
-通常会把脚本放置于`<head>`标签中，以不干扰页面内容
+在HTML中，不限制脚本数量。通常会把脚本放置于`<head>`标签中，以不干扰页面内容
 
 #### 1.6 输出
  JavaScript通常用来操作HTML <br>
- 文档输出
+- 文档输出
  ```
 document.write("<p>JavaScript</p>");
  ```
- 更换内容:将pID变更为`www.google.co.jp`
+- 更换内容: 将`pID`变更为`www.google.co.jp`
  ```
  <p id="pID">Hello</P>
  <script>
@@ -33,8 +31,7 @@ document.write("<p>JavaScript</p>");
  ```
 ### 2. 语句
 #### 2.1 定义
-JavaScript语句向浏览器发出的命令。<br>
-语句的作用是告诉浏览器该做什么。
+JavaScript语句向浏览器发出的命令。语句的作用是告诉浏览器该做什么。
 #### 2.2 分号
 语句之间的分割是分号（；）<br>
 注意：分号是可选项，有时候看到不以分号隔开的。
@@ -77,13 +74,13 @@ var z = "Hello"；
 执行结果：无显示
 ```
 #### 3.2 数据类型
-##### 3.2.1 String：字符串
+##### 3.2.1 `String`：字符串
 `var string = "Hello";`
 ##### 3.2.2 Number：数字
 `var i1 = 10;`
 ##### 3.2.3 Boolean：布尔
 `var flag = true;`
-##### 3.2.4 Array：数组
+##### 3.2.4 `Array`：数组
 ```
 var arr = ["apple","orange","banana"];
 var arr2 = new Array("apple","orange","banana");
@@ -92,12 +89,12 @@ var arr3 = new Array();
     arr3[1] = "orange";
     arr3[2] = "banana";
 ```
-##### 3.2.5 Object：对象
-##### 3.2.6 null：空 <br>
+##### 3.2.5 `Object`：对象
+##### 3.2.6 `null`：空 <br>
 `var n = null;`
 ##### 3.2.7 未定义
 `var r;`
-##### 3.2.8 可以通过赋值为null的方式清除变量
+##### 3.2.8 可以通过赋值为`null`的方式清除变量
 ```
 var i1 = 10;
 i1 = null;
@@ -362,7 +359,7 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 </script>
 ```
 ##### 5.5.2 注意
-在使用return语句时，函数会停止执行，同时返回值
+在使用`return`语句时，函数会停止执行，同时返回值
 ### 6. JavaScript异常捕获
 #### 6.1 异常
 当JavaScript引擎执行JavaScript代码时，发生了错误，导致程序停止运行
@@ -371,9 +368,9 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 #### 6.3 异常捕获
 ```
 try{
-    发生异常的代码块；
+    发生异常的代码块;
 }catch(err){
-    错误信息处理
+    错误信息处理;
 }
 ```
 ```
@@ -389,7 +386,7 @@ try{
 </script>
 ```
 #### 6.4 Throw语句
-通过throw语句创建一个自定义错误<br>
+通过`throw`语句创建一个自定义错误<br>
 ```
 <form>
     用户名：
@@ -420,7 +417,7 @@ try{
 #### 7.1 定义
 事件是可以被JavaScript侦测到的行为
 #### 7.2 主要事件
-##### 7.2.1 onClick:点击事件
+##### 7.2.1 `onClick`: 点击事件
 ```
 <button onclick="demo()">提交</button>
 <script>
@@ -429,8 +426,8 @@ try{
     }
 </script>
 ```
-##### 7.2.2 onMouseOver:鼠标经过事件
-##### 7.2.3 onMouseOut:鼠标移出事件
+##### 7.2.2 `onMouseOver`: 鼠标经过事件
+##### 7.2.3 `onMouseOut`: 鼠标移出事件
 ```
 <div class="div" onmouseover="onOver(this)" onmouseout="onPut(this)"> </div>
 <script>
@@ -442,7 +439,7 @@ try{
     }
 </script>
 ```
-##### 7.2.4 onChange:文本内容改变事件
+##### 7.2.4 `onChange`: 文本内容改变事件
 ```
 <form>
     <input type= "text" onchange="changeDemo(this)">
@@ -458,8 +455,8 @@ try{
     <input type="text" onchange="alert('内容改变了')">
 </form>
 ```
-##### 7.2.5 onSelect:文本框选中事件
-##### 7.2.6 onFocus:光标聚集事件
+##### 7.2.5 `onSelect`: 文本框选中事件
+##### 7.2.6 `onFocus`: 光标聚集事件
 ```
 <form>
     <input type="text" onselect="changeDemo(this)" onfocus="changeDemo2(this)">
@@ -474,7 +471,7 @@ try{
     }
 </script>
 ```
-##### 7.2.7 onBlur:移开光标事件
+##### 7.2.7 `onBlur`: 移开光标事件
 ```
 <form>
     <input type="text" onblur="onBlurDemo(this)">
@@ -485,7 +482,7 @@ try{
     }
 </script>
 ```
-##### 7.2.8 onLoad:网页加载事件
+##### 7.2.8 `onLoad`: 网页加载事件
 ```
 <body onload="msg()">
 <script>
@@ -494,7 +491,7 @@ try{
     }
 </script>
 ``` 
-##### 7.2.9 onUnload:关闭网页事件
+##### 7.2.9 `onUnload`: 关闭网页事件
 ### 8. JavaScriptDOM对象
 #### 8.1 DOM简介
  当网页被加载时，浏览器会创建页面的文档对象模型(Document Object Model)<br>
@@ -505,9 +502,9 @@ try{
 - JavaScript能对页面中的所有事件作出反应
 #### 8.2 DOM操作HTML
 ##### 8.2.1 改变HTML输出流
-  注意：绝对不要在文档加载完成之后使用document.write()。这会覆盖该文档
+  注意：绝对不要在文档加载完成之后使用`document.write()`。这会覆盖该文档
 ##### 8.2.2 寻找元素
-- 通过id找到HTML元素<br>
+- 通过`id`找到HTML元素<br>
 - 通过标签名找到HTML元素 <br>
 ```
 <p id="pid">Hello</p>
@@ -636,10 +633,10 @@ function  demo(){
 </script>
 ```
 ##### 9.2.3 DOM2级事件处理
-`addEventListener("事件名"，"事件处理函数"，"布尔值"）;`<br>
-true:事件捕获 <br>
-false:事件冒泡 <br>
-`removeEventListener();` <br>
+- `addEventListener("事件名"，"事件处理函数"，"布尔值"）;`<br>
+  - true:事件捕获 <br>
+  - false:事件冒泡 <br>
+- `removeEventListener();` <br>
 ```
 <div id="divID">
     <button id="button1">提交</button>
@@ -681,7 +678,7 @@ false:事件冒泡 <br>
 #### 9.3 事件对象
 ##### 9.3.1 事件对象
 在触发DOM事件的时候都会产生一个对象
-##### 9.3.2 事件对象event
+##### 9.3.2 事件对象`event`
 - `type`:获取事件类型 <br>
 ```
 <div id="divID">
@@ -730,9 +727,11 @@ false:事件冒泡 <br>
 </script>
 ```    
 ```
-执行结果：[object HTMLButtonElement] div
+执行结果：
+[object HTMLButtonElement] 
+div
 ```   
-    出现事件冒泡现象，为了阻止此现象，将以上代码改成：
+以上代码出现事件冒泡现象，为了阻止此现象，将以上代码改成：
 ```
 function showTarget(event) {
     alert(event.target);
