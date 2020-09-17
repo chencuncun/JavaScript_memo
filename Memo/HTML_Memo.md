@@ -63,11 +63,9 @@ p{
 `<a href="http://www.google.co.jp"><img src="pic/yaoyao.jpeg"></a>`
 #### 5.2 属性
 - href属性：指向另一个文档的链接
+`<a href="#tips">跳转到hello</a>`
 - name属性：创建文档内的链接
-```
-<a name="tips">hello</a>
-<a href="#tips">跳转到hello</a>
-```
+`<a name="tips">hello</a>`
 #### 5.3 img标签属性
 - `alt`：替换文本属性
 - `width`：宽
@@ -222,6 +220,34 @@ p{
 - `<rows>`: 行
 #### 11.2 内联框架
 - `<iframe>`
+```
+<!--Frame.html-->
+<body>
+    <iframe src="Frame_c.html" frameborder="0" width="800px" height="800px"></iframe>
+</body>
+```
+```
+<!--Frame_a.html-->
+<body bgcolor="#6495ed">
+    frame_a
+    <br/>
+    <a href="https://www.baidu.com/" target="_parent">百度主页</a>
+</body>
+```
+```
+<!--Frame_b.html-->
+<body bgcolor="#008b8b">
+    frame_b
+    <iframe src="Frame_a.html" width="400px" height="400px"></iframe>
+</body>
+```
+```
+<!--Frame_c.html-->
+<body bgcolor="#a52a2a">
+    frame_c
+    <iframe src="Frame_b.html" width="600px" height="600px"></iframe>
+</body>
+```
 ### 12. 背景
 #### 12.1 标签
 - `<background>`:背景图片
@@ -267,40 +293,55 @@ p{
 </ul>
 ```
 - `designMode`：整个页面是否可编辑，只能在Javascript脚本里被修改编辑 <br>
-on：可编辑 <br>
-off：不可编辑 <br>
+  - on：可编辑 <br>
+  - off：不可编辑 <br>
 - `hidden`：通知浏览器不渲染该元素 <br>
-true：元素处于不可见状态 <br>
-false：元素处于可见状态 <br>
+  - true：元素处于不可见状态 <br>
+  - false：元素处于可见状态 <br>
 ```
 <h3>不可见列表</h3>
-    <ul hidden="">
-        <li>列表1</li>
-        <li>列表2</li>
-        <li>列表3</li>
-    </ul>
+<ul hidden="">
+    <li>列表1</li>
+    <li>列表2</li>
+    <li>列表3</li>
+</ul>
 ```
-- `spellcheck`: 针对`input`和`textarea`元素提供的属性 <br>
-对输入文本进行拼写检查 <br>
+- `spellcheck`: 针对`input`和`textarea`元素提供的属性,对输入文本进行拼写检查 <br>
 ```
 <!--spellcheck-->
-    <input type="text" spellcheck="true">
+<input type="text" spellcheck="true">
 ```
 - `tabindex`:tab键的位置
 ```
 <!--tabindex-->
-    <a href="#" tabindex="1">hello</a>
-    <a href="#" tabindex="3">hello</a>
-    <a href="#" tabindex="2">hello</a>
+<a href="#" tabindex="1">hello</a>
+<a href="#" tabindex="3">hello</a>
+<a href="#" tabindex="2">hello</a>
 ```
 ### 15.主体结构元素
-- `<article>`: <br>
+- `<article>` <br>
 可以嵌套使用，也可用来表示插件 <br>
+```
+<article>
+    <header>
+        <h1>header</h1>
+        <p>hello,header</p>
+    </header>
+    <article>
+        <header>作者</header>
+        <p>评论</p>
+        <footer>时间</footer>
+    </article>
+    <foorer>
+        <p>This is footer</p>
+    </foorer>
+</article>
+```
 `<embed src="#" width="600" height="400">`:将外部内容嵌入文档中的指定位置 <br>
-- `<section>`: <br>
+- `<section>` <br>
 用于对网站或应用程序中页面上的内容进行分块，通常由内容和标题组成。<br>
 `section`元素并非一个普通的容器元素；当一个容器需要被直接定义样式或通过脚本定义行为时，推荐使用`div`而非`section`元素。<br>
-- `<nav>`: <br>
+- `<nav>` <br>
 是一个可以用作页面导航的连接组，其中的导航元素链接到其他页面或当前页面的其他部分。<br>
 并不是所有的连接组都要被放进`nav`元素，只需要将主要的，基本的连接组放进`nav`元素即可。<br>
 `nav`元素应用场景：<br>
@@ -316,29 +357,103 @@ false：元素处于可见状态 <br>
     </ul>
 </nav>
 ```
-- `<aside>`:
+- `<aside>` <br>
 用来表示当前页面或文章的附属信息部分，它可以包含与当前页面或主要内容相关的引用，侧边栏，广告，导航条，<br>
 以及其他类似的有区别与主要内容的部分。<br>
-- `<time>`与微格式:
+```
+<header>
+    <h1>js入门</h1>
+</header>
+<article>
+    <h1>语法</h1>
+    <p>文章的正文</p>
+    <aside>
+        <h1>名词的解释</h1>
+        <p>语法：这是一个对语言来说很重要的内容体</p>
+    </aside>
+</article>
+<aside>
+    <nav>
+        <h2>评论</h2>
+        <ul>
+            <li><a href="#">2018-10-10</a></li>
+            <il><a href="#">内容不错！</a></il>
+        </ul>
+    </nav>
+</aside>
+```
+- `<time>`与微格式: <br>
 ```
 <time datetime="2020-9-8">2020-9-8</time>
 <time datetime="2020-9-8T20:00">2020-9-8</time>
 <time datetime="2020-9-8T20:00Z">2020-9-8</time>
 <time datetime="2020-9-8T20:00+09:00">2020-9-8</time>
 ``` 
-- `pubdate`属性
+- `pubdate`属性 <br>
+```
+<article>
+    <header>
+        <h1>苹果</h1>
+        <p>发布日期
+            <time datetime="2020-9-8" pubdate>2020-9-8</time>
+        </p>
+        <p>发货日期
+            <time datetime="2020-9-9">2020-9-9</time>
+        </p>
+    </header>
+</article>
+```
 ### 16.非主体结构元素
 - `<header>` <br>
 一种具有引导和导航作用的结构元素，用来防止整个页面或页面内的一个内容区块的标题，<br>
 但也可以包含其他内容，例如数据表格，搜索表单或相关的logo图片 <br>
+```
+<header>
+    <h1>IT</h1>
+    <a href="http://google.co.jp">google</a>
+    <nav>
+        <ul>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+        </ul>
+    </nav>
+</header>
+```
 - `<footer>` <br>
 可以作为其上层父级内容区块或是一个根区块的脚注。<br>
 `footer`通常包括其相关区块的脚注信息，如作者，相关阅读链接及版权信息等。<br>
+```
+<footer>
+    <ul>
+        <li>作者</li>
+        <li>版权</li>
+    </ul>
+</footer>
+```
 - `<hgroup>` <br>
 将标题及其子标题进行分组的元素。`hgroup`元素通常会将`h1`~`h6`元素进行分组，譬如一个内容区块的标题及其子元素算一组。<br>
+``` 
+<header>
+    <hgroup>
+        <h1>h1</h1>
+        <h2>h2</h2>
+    </hgroup>
+</header>
+```
 - `<address>` <br>
 用来在文档中呈现联系信息，包括文档作者或文档维护者的名字，他们的网站链接，电子邮件，真实地址，电话号码等。<br>
 `address`应该不只用来呈现电子油箱或真实地址，还用来展示跟文档相关的联系人的所有联系信息。<br>
+```
+<footer>
+    <div>
+        <address>
+            <a href="#">联系方式</a>
+            <time datetime="2020-9-9">2020-9-9</time>
+        </address>
+    </div>
+</footer>
+```
 ### 17.表单属性
 - `<form>` <br>
 - `formaction` <br>
@@ -399,7 +514,7 @@ false：元素处于可见状态 <br>
 属性值为一个`NodeList`对象，代表该元素所绑定的标签元素所构成的集合。<br>
 - ？`control` <br>
 可以在标签内部放置一个表单元素，并且通过该标签的`control`属性来访问该表单元素 <br>
-- ※`placeholder` <br>
+- `placeholder` <br>
 是指当文本框处于未输入状态时显示的输入提示。当文本框处于未输入状态且未获取光标焦点时，模糊显示输入提示文字。<br>
 `<input type="text" placeholder="请输入用户名 ">`
 - `list` <br>
@@ -416,7 +531,17 @@ false：元素处于可见状态 <br>
 ```
 - ?`AutoComplete` <br>
 规定输入字段是否应该启用自动完成功能<br>
-- ※`pattern` <br>
+```
+<form>
+    <input type="text" name="greeting" autocomplete="on" list="greetings">
+    <datalist id="greetings" style="display: none">
+    <option value="HTML5">HTML5</option>
+    <option value="CSS">CSS</option>
+    <option value="Javascript">Javascript</option>
+    </datalist>
+</form>
+```
+- `pattern` <br>
 对input元素使用pattern属性，并且将属性值设为某个格式的正则表达式，在提交时会针对这些进行检查，检查其内容是否合格给定格式。<br>
 当输入内容不符合给定格式时，则不允许提交，同时在浏览器中显示提示文字,提示输入的内容必须符合给定格式。 <br>
 ```
