@@ -410,8 +410,7 @@ p{
 - `border-image`: 边框图片 <br>
 #### 10.4 外边距
 ##### 10.4.1 定义
-围绕在内容边框的区域就是外边距，外边距默认为透明区域 <br>
-外边距接受任何长度单位，百分数值 <br>
+围绕在内容边框的区域就是外边距，外边距默认为透明区域。外边距接受任何长度单位，百分数值 <br>
 ##### 10.4.2 属性
 - `margin`: 设置所有边距
 - `margin-bottom`: 设置底边距
@@ -744,7 +743,7 @@ div{
 .div1{
     column-count: 4;
     column-gap: 50px;
-    column-rule: 2px outset red;
+    column-rule: 2px outset red; //宽度 线条类型 颜色
 }
 ```
 
