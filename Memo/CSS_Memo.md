@@ -4,14 +4,14 @@ CSS指层叠样式表，CSS样式表极大地提高了工作效率
 ### 2. 基本语法
 ```
 selector{
-property:value
+    property:value
 }
 ```
 ### 2.1 属性大于一个，需要用分号隔开
 ```
 h1{
-color:red;
-font-size:14px;
+    color:red;
+    font-size:14px;
 }
 ```   
 ### 2.2 值大于一个单词，需要加上引号
@@ -24,13 +24,13 @@ p{
 #### 3.1 选择器分组
 ```
 h1,h2,h3,h4,h5,h6{ 
-  color:red;
+    color:red;
 }   
 ``` 
 #### 3.2 继承
 ```
 body{
-color:green;
+    color:green;
 }
 ```
 ### 4. 派生选择器
@@ -43,7 +43,7 @@ color:green;
 </ul>
 /*css*/
 li strong{
- color: blue;
+    color: blue;
 }
 ```
 ### 5. id选择器
@@ -75,7 +75,7 @@ li strong{
 <div class="divClass">divClass</p>
 /*css*/
 .divClass{
-  color: cornflowerblue;
+    color: cornflowerblue;
 }
 ```
 - class选择器可以用作派生选择器 <br>
@@ -84,7 +84,7 @@ li strong{
 <p class="pClass">这是一个class<a href="http://www.google.co.jp">谷歌</a></p>
 /*css*/
 .pClass a{
-  color: forestgreen;
+    color: forestgreen;
 }
 ```
 ### 7. 属性选择器
@@ -236,20 +236,20 @@ list-style-type:none;
 - `border`: 表格边框
 ```
 #tb,tr,th,td{
-border: 2px solid blueviolet;
+    border: 2px solid blueviolet;
 }
 ```
 - `border-collapse`: 折叠边框
 ```
 #tb{
-border-collapse: collapse;
+    border-collapse: collapse;
 }
 ```  
 - `width`，`height`：表格宽高
 ```
 #tb{
-width: 200px;
-height: 200px;
+    width: 200px;
+    height: 200px;
 }
 ```   
 - `text-align`：表格文本对齐

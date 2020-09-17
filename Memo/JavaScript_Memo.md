@@ -1349,8 +1349,277 @@ window.screen对象包含有关用户屏幕的信息
     document.write("高度："+screen.height+", 宽度"+screen.width);
 </script>
 ```
+### 13.JS面向对象
+#### 13.1 认识面向对象
+##### 13.1.1 面向对象中的概念
+- 一切事物皆对象
+- 对象具有封装和继承特性
+- 信息隐藏
+#### 13.2 基本面向对象
+```
+var person={
+    name:"Chen",
+    age: 31,
+    writeCode:function () {
+        alert("写代码");
+    }
+}
+alert(person.writeCode());
+```
+#### 13.3 函数构造器构造对象
+```
+function Person() {
 
+}
+Person.prototype={
+    name: "Wang",
+    age: 33,
+    writeCode:function () {
+        alert("写代码");
+    }
+}
+var p = new Person();
+p.age
+p.name
+p.writeCode()
+```
+#### 13.4 深入JavaScript面向对象
+##### 13.1 面向对象（1）
+- 创建一个子类
+```
+function People() {
+    
+}
+People.prototype.say = function () {
+    alert("peo-hello");
+}
+function Student() {
 
+}
+Student.prototype = new People();
+var s = new Student();
+s.say();
+```
+```
+执行结果：peo-hello
+```
+- 复写父类的方法
+```
+function People() {
+    
+}
+People.prototype.say = function () {
+    alert("peo-hello");
+}
+function Student() {
+
+}
+Student.prototype = new People();
+var superSay = Student.prototype.say;
+Student.prototype.say = function () {
+    superSay.call(this);
+    alert("stu-hello");
+}
+var s = new Student();
+s.say();
+```
+```
+执行结果：
+ peo-hello 
+ stu-hello
+```
+- 传参
+```
+function People(name) {
+    this._name = name;
+}
+People.prototype.say = function () {
+    alert("peo-hello: "+this._name);
+}
+function Student(name) {
+    this._name = name;
+}
+Student.prototype = new People();
+var superSay = Student.prototype.say;
+Student.prototype.say = function () {
+    superSay.call(this);
+    alert("stu-hello: "+this._name);
+}
+var s = new Student("Chen");
+s.say();
+```
+```
+执行结果：
+ peo-hello: Chen 
+ stu-hello: Chen
+```
+- 封装
+```
+(function (){
+    var n = "Cuncun";
+    function People(name) {
+        this._name = name;
+    }
+    People.prototype.say = function () {
+        alert("peo-hello: "+this._name+" "+n);
+    }
+    window.People = People;
+}());
+
+(function () {
+    function Student(name) {
+        this._name = name;
+    }
+    Student.prototype = new People();
+    var superSay = Student.prototype.say;
+    Student.prototype.say = function () {
+        superSay.call(this);
+        alert("stu-hello: "+this._name+" "+n); //无法访问n，因为n已被父类封装
+    }
+    window.Student = Student;
+}())
+
+var s = new Student("Chen");
+s.say();
+```
+```
+执行结果：peo-hello: Chen Cuncun
+```
+##### 13.2 面向对象（2）
+- 创建类
+```
+//创建一个类
+function Person() {
+    var _this = {}
+    _this.sayHello = function () {
+        alert("P-Hello");
+    }
+    return _this;
+}
+//继承Person类
+function Teacher() {
+    var _this = Person();
+    return _this;
+}
+var t = new Teacher();
+t.sayHello();
+```
+```
+执行结果：P-Hello
+```
+- 复写父类中的属性
+```
+//创建一个类
+function Person() {
+    var _this = {}
+    _this.sayHello = function () {
+        alert("P-Hello");
+    }
+    return _this;
+}
+//继承Person类
+function Teacher() {
+    var _this = Person();
+    _this.sayHello = function () {
+        alert("T-Hello");
+    }
+    return _this;
+}
+var t = new Teacher();
+t.sayHello();
+```
+```
+执行结果：T-Hello
+```
+- 调用父类中的方法
+```
+//创建一个类
+function Person() {
+    var _this = {}
+    _this.sayHello = function () {
+        alert("P-Hello");
+    }
+    return _this;
+}
+//继承Person类
+function Teacher() {
+    var _this = Person();
+    var superSay = _this.sayHello;
+    _this.sayHello = function () {
+        superSay.call(_this);
+        alert("T-Hello");
+    }
+    return _this;
+}
+var t = new Teacher();
+t.sayHello();
+```
+```
+执行结果：
+ P-Hello
+ T-Hello
+```
+- 传参
+```
+//创建一个类
+function Person(name) {
+    var _this = {}
+    _this.name = name;
+    _this.sayHello = function () {
+        alert("P-Hello: "+_this.name);
+    }
+    return _this;
+}
+//继承Person类
+function Teacher(name) {
+    var _this = Person(name);
+    var superSay = _this.sayHello;
+    _this.sayHello = function () {
+        superSay.call(_this);
+        alert("T-Hello: "+_this.name);
+    }
+    return _this;
+}
+var t = new Teacher("Chen");
+t.sayHello();
+```
+```
+执行结果：
+  P-Hello: Chen 
+  T-Hello: Chen
+```
+- 封装
+```
+//封装一个类
+(function (){
+    var n = "Cuncun";
+    function Person(name) {
+        var _this = {}
+        _this.name = name;
+        _this.sayHello = function () {
+            alert("P-Hello: "+_this.name +" "+n);
+        }
+        return _this;
+    }
+    window.Person = Person;
+}())
+
+//继承Person类
+function Teacher(name) {
+    var _this = Person(name);
+    var superSay = _this.sayHello;
+    _this.sayHello = function () {
+        superSay.call(_this);
+        alert("T-Hello: "+_this.name+n); //无法访问n，因为n已被父类封装
+    }
+    return _this;
+}
+var t = new Teacher("Chen");
+t.sayHello();
+```
+```
+执行结果：P-Hello: Chen Cuncun
+```
 
 
  
