@@ -293,11 +293,11 @@ p{
 </ul>
 ```
 - `designMode`：整个页面是否可编辑，只能在Javascript脚本里被修改编辑 <br>
-  - on：可编辑 <br>
-  - off：不可编辑 <br>
+  - `on`：可编辑 <br>
+  - `off`：不可编辑 <br>
 - `hidden`：通知浏览器不渲染该元素 <br>
-  - true：元素处于不可见状态 <br>
-  - false：元素处于可见状态 <br>
+  - `true`：元素处于不可见状态 <br>
+  - `false`：元素处于可见状态 <br>
 ```
 <h3>不可见列表</h3>
 <ul hidden="">
