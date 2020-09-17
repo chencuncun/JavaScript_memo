@@ -46,10 +46,10 @@ li strong{
     color: blue;
 }
 ```
-### 5. id选择器
+### 5. `id`选择器
 #### 5.1 定义
-- id选择器可以为标有id的HTML元素指定特定的样式
-- id选择器以"#"来定义
+- `id`选择器可以为标有`id`的HTML元素指定特定的样式
+- `id`选择器以"`#`"来定义
 ```
 <!--html-->
 <div id="divID">这是一个divID</div>
@@ -58,8 +58,8 @@ li strong{
    color: darkblue;
 }
 ```
-#### 5.2 id选择器和派生选择器
-目前比较常用的方式是id选择器常常用于建立派生选择器 <br>
+#### 5.2 `id`选择器和派生选择器
+目前比较常用的方式是`id`选择器常常用于建立派生选择器 <br>
 ```
 <!--html-->
 <p id="pID">这是一个pID<a href="http://www.google.co.jp">谷歌</a></p>
@@ -68,7 +68,7 @@ li strong{
    color: #ff0059;
 }
 ```
-### 6. class选择器
+### 6. `class`选择器
 - `class`选择器以`"."`来定义 <br>
 ```
 <!--html-->
@@ -78,7 +78,7 @@ li strong{
     color: cornflowerblue;
 }
 ```
-- class选择器可以用作派生选择器 <br>
+- `class`选择器可以用作派生选择器 <br>
 ```
 <!--html-->
 <p class="pClass">这是一个class<a href="http://www.google.co.jp">谷歌</a></p>
@@ -146,7 +146,7 @@ body{
 }
 ```
 - `background-size`: 规定背景图片的尺寸 <br>
-- `background-size: 200px 200px`;
+  `background-size: 200px 200px`;
 - `background-origin`: 规定背景图片的定位区域
 - `background-clip`: 规定背景的绘制区域
 #### 8.2 文本
@@ -381,7 +381,7 @@ p{
 ##### 10.3.1 定义
 可以创建出效果出色的边框，并可以应于任何元素
 ##### 10.3.2 样式
-- `border-style`: 定义了10个不同的非继承样式，包括none <br>
+- `border-style`: 定义了10个不同的非继承样式，包括`none` <br>
   `border-style: solid;`
 ##### 10.3.3 边框单边的样式
 - `border-top-style`
@@ -403,11 +403,11 @@ p{
 - `border-right-color`
 - `border-bottom-color` 
 ##### 10.3.8 CSS边框
-- `border-radius`: 圆角边框
+- `border-radius`: 圆角边框 <br>
    `border-radius: 20px;`
-- `box-shadow`: 边框阴影
-  `box-shadow: 10px 10px 5px royalblue;`
-- `border-image`: 边框图片
+- `box-shadow`: 边框阴影 <br>
+  `box-shadow: 10px 10px 5px royalblue;` //X轴偏移量，Y轴偏移量，模糊半径，颜色
+- `border-image`: 边框图片 <br>
 #### 10.4 外边距
 ##### 10.4.1 定义
 围绕在内容边框的区域就是外边距，外边距默认为透明区域 <br>
@@ -424,12 +424,16 @@ p{
 ### 11. CSS常用操作
 #### 11.1 对齐
 ##### 11.1.1 使用margin属性进行水平对齐
-`margin:0px auto;`
-`margin-left:auto;`
-`margin-right:auto;`
+```
+margin:0px auto;
+margin-left:auto;
+margin-right:auto;
+```
 ##### 11.1.2 使用position属性进行左右对齐
-`position:absolute;`
-`right:0px;`
+```
+position:absolute;
+right:0px;
+```
 ##### 11.1.3 使用float属性进行左右对齐
 `float:right;`
 #### 11.2 尺寸 
@@ -635,9 +639,7 @@ li+li{
 ### 13. CSS动画
 #### 13.1 2D，3D转换
 ##### 13.1.1 定义
-通过CSS转换，对元素进行移动，缩放，转动，拉长或拉伸 <br>
-转换是使元素改变形状，尺寸和位置的一种效果 <br>
-可以使用2D，3D来转换元素 <br>
+通过CSS转换，对元素进行移动，缩放，转动，拉长或拉伸。转换是使元素改变形状，尺寸和位置的一种效果，可以使用2D，3D来转换元素 <br>
 ##### 13.1.2 2D转换方法
 - `translate()`: 移动
 ```
