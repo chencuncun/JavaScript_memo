@@ -67,7 +67,7 @@ p{
 - name属性：创建文档内的链接
 `<a name="tips">hello</a>`
 #### 5.3 img标签属性
-- `alt`：替换文本属性
+- `alt`：替换文本属性:当图片显示不出来的时候，可以显示该图片的内容注释
 - `width`：宽
 - `height`：高 <br>
 `<a href="http://www.google.co.jp"><img src="pic/yaoyao.jpeg" width="100px" height="80px" alt="yaoyao"></a>`
@@ -254,11 +254,11 @@ p{
 - `<bgcolor>`:背景颜色
 #### 12.2 颜色
 - 由一个十六进制符号来定义，这个符号由红色，绿色和蓝色的值组成。
-- 颜色值最小值：0（#00）
-- 颜色值最大值：255（#FF）
-- 红色：#FF0000
-- 绿色：#00FF00
-- 蓝色：#0000FF
+- 颜色值最小值：0（`#00`）
+- 颜色值最大值：255（`#FF`）
+- 红色：`#FF0000`
+- 绿色：`#00FF00`
+- 蓝色：`#0000FF`
 ### 13. XHTML
 #### 13.1 简介
 - XHTML指的是可扩展超文本标记语言
@@ -501,7 +501,7 @@ p{
     <input type="text">
 </form>
 ```
-- ※`required` <br>
+- `required` <br>
 可以应用在大多数输入元素上。在提交时，如果元素中内容为空白，则不允许提交，同时在浏览器中显示信息提示文字<br>
 ```
 <form action="xx01.jsp">
@@ -565,7 +565,7 @@ p{
 ```
 <form action="test.jsp" method="post">
     姓名：<input type="text" name="name">
-    <input type="image" src="xx.jpeg" alt="编辑" width="60" height="40">
+    <input type="image" src="xx.jpeg" alt="这是一张风景图片" width="60" height="40">
 </form>
 ```
 
