@@ -162,7 +162,7 @@ p{
 #### 8.3 HTML`<div>`元素
 `<div>`元素也被成为块元素，其主要时组合HTML元素的容器
 #### 8.4 HTML`<span>`元素
-`<span>`元素时内联元素，可作为文本的容器
+`<span>`元素是内联元素，可作为文本的容器
 ### 9. 布局
 #### 9.1 使用`<div>`元素布局
 #### 9.2 使用`<table>`元素布局
@@ -258,10 +258,13 @@ p{
 - XHTML属性值必须用引号包围
 - XHTML属性最小化也是禁止的
 ### 14. 全局属性
-- `contentEditabl`：可编辑列表 <br>
+- `contentEditable`：可编辑列表 <br>
 ```
-<ul contenteditable="true">
 <ul contenteditable="false">
+    <li>列表1</li>
+    <li>列表2</li>
+    <li>列表3</li>
+</ul>
 ```
 - `designMode`：整个页面是否可编辑，只能在Javascript脚本里被修改编辑 <br>
 on：可编辑 <br>
@@ -269,22 +272,38 @@ off：不可编辑 <br>
 - `hidden`：通知浏览器不渲染该元素 <br>
 true：元素处于不可见状态 <br>
 false：元素处于可见状态 <br>
-- `spellcheck`: 针对input和textarea元素提供的属性 <br>
+```
+<h3>不可见列表</h3>
+    <ul hidden="">
+        <li>列表1</li>
+        <li>列表2</li>
+        <li>列表3</li>
+    </ul>
+```
+- `spellcheck`: 针对`input`和`textarea`元素提供的属性 <br>
 对输入文本进行拼写检查 <br>
+```
+<!--spellcheck-->
+    <input type="text" spellcheck="true">
+```
 - `tabindex`:tab键的位置
+```
+<!--tabindex-->
+    <a href="#" tabindex="1">hello</a>
+    <a href="#" tabindex="3">hello</a>
+    <a href="#" tabindex="2">hello</a>
+```
 ### 15.主体结构元素
 - `<article>`: <br>
 可以嵌套使用，也可用来表示插件 <br>
 `<embed src="#" width="600" height="400">`:将外部内容嵌入文档中的指定位置 <br>
 - `<section>`: <br>
 用于对网站或应用程序中页面上的内容进行分块，通常由内容和标题组成。<br>
-section元素并非一个普通的容器元素；<br>
-当一个容器需要被直接定义样式或通过脚本定义行为时，<br>
-推荐使用div而非section元素。<br>
-- `<nav>`:
+`section`元素并非一个普通的容器元素；当一个容器需要被直接定义样式或通过脚本定义行为时，推荐使用`div`而非`section`元素。<br>
+- `<nav>`: <br>
 是一个可以用作页面导航的连接组，其中的导航元素链接到其他页面或当前页面的其他部分。<br>
-并不是所有的连接组都要被放进nav元素，只需要将主要的，基本的连接组放进nav元素即可。<br>
-nav元素应用场景：<br>
+并不是所有的连接组都要被放进`nav`元素，只需要将主要的，基本的连接组放进`nav`元素即可。<br>
+`nav`元素应用场景：<br>
   - 传统导航条
   - 侧边栏导航
   - 页内导航
@@ -309,22 +328,21 @@ nav元素应用场景：<br>
 ``` 
 - `pubdate`属性
 ### 16.非主体结构元素
-- `<header>`
+- `<header>` <br>
 一种具有引导和导航作用的结构元素，用来防止整个页面或页面内的一个内容区块的标题，<br>
 但也可以包含其他内容，例如数据表格，搜索表单或相关的logo图片 <br>
-- `<footer>`
+- `<footer>` <br>
 可以作为其上层父级内容区块或是一个根区块的脚注。<br>
-footer通常包括其相关区块的脚注信息，如作者，相关阅读链接及版权信息等。<br>
-- `<hgroup>`
-将标题及其子标题进行分组的元素。<br>
-hgroup元素通常会将h1~h6元素进行分组，譬如一个内容区块的标题及其子元素算一组。<br>
-- `<address>`
-用来在文档中呈现联系信息，包括文档作者或文档维护者的名字，<br>
-他们的网站链接，电子邮件，真实地址，电话号码等。<br>
-address应该不只用来呈现电子油箱或真实地址，还用来展示跟文档相关的联系人的所有联系信息。<br>
+`footer`通常包括其相关区块的脚注信息，如作者，相关阅读链接及版权信息等。<br>
+- `<hgroup>` <br>
+将标题及其子标题进行分组的元素。`hgroup`元素通常会将`h1`~`h6`元素进行分组，譬如一个内容区块的标题及其子元素算一组。<br>
+- `<address>` <br>
+用来在文档中呈现联系信息，包括文档作者或文档维护者的名字，他们的网站链接，电子邮件，真实地址，电话号码等。<br>
+`address`应该不只用来呈现电子油箱或真实地址，还用来展示跟文档相关的联系人的所有联系信息。<br>
 ### 17.表单属性
-- `<form>`
-- `formaction`：单击不同的按钮时可以将表单提交到不同的页面
+- `<form>` <br>
+- `formaction` <br>
+单击不同的按钮时可以将表单提交到不同的页面 <br>
 ```
 <form id="testform">
     <input type="submit" name="s1" value="v1" formaction="xx1.jsp">第一页
@@ -332,15 +350,16 @@ address应该不只用来呈现电子油箱或真实地址，还用来展示跟�
     <input type="submit" name="s3" value="v3" formaction="xx3.jsp">第三页
 </form>
 ```
-- `formmethod`：对每一个表单元素分别指定不同的提交方法
+- `formmethod` <br>
+对每一个表单元素分别指定不同的提交方法 <br>
 ```
 <form id="testform">
     <input type="submit" name="s1" value="v1" formmethod="post" formaction="xx01.jsp">
     <input type="submit" name="s2" value="v2" formmethod="get" formaction="xx02.jsp">
 </form>
 ```
-- ?`formenctype`:用于指定在表单发送到服务其之前应该如何对表单内的数据进行编码
-html5中的`formenctype`属性对表单分别指定不同的编码方式
+- ?`formenctype` <br>
+用于指定在表单发送到服务其之前应该如何对表单内的数据进行编码,html5中的`formenctype`属性对表单分别指定不同的编码方式 <br>
 ```
 <form>
     <input type="text" formenctype="text/plain">
@@ -348,7 +367,8 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
     <input type="text" formenctype="application/x-www-form-urlencoded">
 </form>
 ```
-- `formtarget`:用于指定在何处打开表单提交后所需要加载的页面
+- `formtarget` <br>
+用于指定在何处打开表单提交后所需要加载的页面 <br>
 ```
 <form>
     <input type="submit" name="s1" value="v1" formtarget="_blank" formaction="xx1.jsp">第一页
@@ -358,28 +378,32 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
     <input type="submit" name="s4" value="v4" formtarget="framename" formaction="xx5.jsp">第五页
 </form>
 ```
-- `autofocus`：为文本框，选择框或按钮控件加上`autofocus`属性，当画面打开时，该控件自动获取光标焦点
+- `autofocus` <br>
+为文本框，选择框或按钮控件加上`autofocus`属性，当画面打开时，该控件自动获取光标焦点 <br>
 ```
 <form>
     <input type="text" autofocus>
     <input type="text">
 </form>
 ```
-- ※`required`:可以应用在大多数输入元素上。在提交时，如果元素中内容为空白，<br>
- 则不允许提交，同时在浏览器中显示信息提示文字<br>
+- ※`required` <br>
+可以应用在大多数输入元素上。在提交时，如果元素中内容为空白，则不允许提交，同时在浏览器中显示信息提示文字<br>
 ```
 <form action="xx01.jsp">
     <input type="text" required="required">
-    <button type="submit">`提交`</button>
+    <button type="submit">提交</button>
 </form>
 ```
-- ？`labels`:为所有可使用标签的表单元素，`button`，`select`元素等，定义一个`labels`属性 <br>
- 属性值为一个`NodeList`对象，代表该元素所绑定的标签元素所构成的集合。<br>
-- ？`control`：可以在标签内部放置一个表单元素，并且通过该标签的`control`属性来访问该表单元素 <br>
-- ※`placeholder`：是指当文本框处于未输入状态时显示的输入提示。<br>
-当文本框处于未输入状态且未获取光标焦点时，模糊显示输入提示文字。<br>
+- ？`labels` <br>
+为所有可使用标签的表单元素，`button`，`select`元素等，定义一个`labels`属性 <br>
+属性值为一个`NodeList`对象，代表该元素所绑定的标签元素所构成的集合。<br>
+- ？`control` <br>
+可以在标签内部放置一个表单元素，并且通过该标签的`control`属性来访问该表单元素 <br>
+- ※`placeholder` <br>
+是指当文本框处于未输入状态时显示的输入提示。当文本框处于未输入状态且未获取光标焦点时，模糊显示输入提示文字。<br>
 `<input type="text" placeholder="请输入用户名 ">`
-- `list`：类似于选择框，但当用户想要设定的值不在选择列表之内时，允许自行输入。
+- `list` <br>
+类似于选择框，但当用户想要设定的值不在选择列表之内时，允许自行输入。<br>
 ```
 <form>
     <input type="text" name="greeting" list="greetings">
@@ -390,11 +414,11 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
     </datalist>
 </form>
 ```
-- ?`AutoComplete`:规定输入字段是否应该启用自动完成功能<br>
-- ※`pattern`：对input元素使用pattern属性，并且将属性值设为某个格式的正则表达式，<br>
-在提交时会针对这些进行检查，检查其内容是否合格给定格式。<br>
-当输入内容不符合给定格式时，则不允许提交，同时在浏览器中显示提示文字 <br>
-提示输入的内容必须符合给定格式。 <br>
+- ?`AutoComplete` <br>
+规定输入字段是否应该启用自动完成功能<br>
+- ※`pattern` <br>
+对input元素使用pattern属性，并且将属性值设为某个格式的正则表达式，在提交时会针对这些进行检查，检查其内容是否合格给定格式。<br>
+当输入内容不符合给定格式时，则不允许提交，同时在浏览器中显示提示文字,提示输入的内容必须符合给定格式。 <br>
 ```
 <form>
     请输入内容：
@@ -402,17 +426,17 @@ html5中的`formenctype`属性对表单分别指定不同的编码方式
     <input type="submit">
 </form>
 ```
-- ?`SelectionDirection`: 对`input`和`textarea`元素，增加了该属性。
+- ?`SelectionDirection` <br>
+对`input`和`textarea`元素，增加了该属性。 <br>
 当用户在这两个元素中用鼠标选取部分文字时，可以使用该属性来获取方向。<br>
 当用户正在选取文字时，该属性值为"`forward`"，<br>
 当用户反向选取文字时，该属性值为"`backward`"。<br>
-当用户没有选取任何文字时，该属性值为"forward"。<br>
-- ?`indete` `rminate`:对复选框`checkbox`元素来说过去只是选取与非选取这两种状态。<br>
-在HTML5中，可以在JavaScript脚本代码中对该元素使用该属性，<br>
-以说明复选框出去"尚未明确是否选取"状态。<br>
-- `image`:提交按钮的`height`属性和`width`属性 <br>
-针对类型为`image`的`input`元素，HTML5新增了两个属性， <br>
-`height`，`width`分别用来指定图片按钮的高度和宽度 <br>
+当用户没有选取任何文字时，该属性值为"`forward`"。<br>
+- ?`indete` `rminate` <br>
+对复选框`checkbox`元素来说过去只是选取与非选取这两种状态。<br>
+在HTML5中，可以在JavaScript脚本代码中对该元素使用该属性，以说明复选框出去"尚未明确是否选取"状态。<br>
+- `image` <br>
+提交按钮的`height`属性和`width`属性，针对类型为`image`的`input`元素，HTML5新增了两个属性，`height`，`width`分别用来指定图片按钮的高度和宽度 <br>
 ```
 <form action="test.jsp" method="post">
     姓名：<input type="text" name="name">
