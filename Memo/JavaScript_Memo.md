@@ -45,7 +45,7 @@ JavaScript同样对大小写很敏感
 #### 2.6 空格
 忽略多余的空格
 #### 2.7 注释
-单行注释：//
+单行注释：// <br>
 多行注释：/**/
 ### 3. 变量和数据类型
 #### 3.1 变量
@@ -56,8 +56,8 @@ var y = 10.2；
 var z = "Hello"；
 ```
 ##### 3.1.2 局部变量和全局变量
-1. 局部变量：只能在当前函数中使用 <br>
-2. 全局变量：在任何地方都可以使用 <br>
+- 局部变量：只能在当前函数中使用 <br>
+- 全局变量：在任何地方都可以使用 <br>
 ```
 <script>
     var n = 10; //全局变量
@@ -97,7 +97,7 @@ var arr3 = new Array();
 ##### 3.2.8 可以通过赋值为`null`的方式清除变量
 ```
 var i1 = 10;
-i1 = null;
+    i1 = null;
 ```
 ### 4. 语法
 #### 4.1 运算符
@@ -272,8 +272,7 @@ function 函数名(){
 }
 ```
 ##### 5.2.2 注意
-JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br>
-在函数调用时，也必须按照函数的相同名称来调用函数。<br>
+JavaScript对大小写十分敏感，所以这里的`function`必须小写。在函数调用时，也必须按照函数的相同名称来调用函数。<br>
 函数名头字母一般小写，如果出现两个单词，第二个单词首字母大写。<br>
 #### 5.3 函数调用
 ##### 5.3.1 函数调用
@@ -325,8 +324,7 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 <button onclick="demo('Chen',30)">提交</button>
 ```
 ##### 5.4.2 注意
-参数的个数可以为任意多，每个参数通过`"，"`隔开 <br>
-参数在传递时，其顺序必须一致
+参数的个数可以为任意多，每个参数通过`"，"`隔开。参数在传递时，其顺序必须一致
 ##### 5.4.3 意义
 通过传递参数的个数及参数的类型不同完成不同的功能 
 #### 5.5 带返回值的函数
@@ -364,7 +362,7 @@ JavaScript对大小写十分敏感，所以这里的`function`必须小写。<br
 #### 6.1 异常
 当JavaScript引擎执行JavaScript代码时，发生了错误，导致程序停止运行
 #### 6.2 异常抛出
-当异常产生，并且将这个异常生产一个错误信息
+当异常产生，并且将这个异常生成一个错误信息
 #### 6.3 异常捕获
 ```
 try{
@@ -426,10 +424,9 @@ try{
     }
 </script>
 ```
-##### 7.2.2 `onMouseOver`: 鼠标经过事件
-##### 7.2.3 `onMouseOut`: 鼠标移出事件
+##### 7.2.2 `onMouseOver`: 鼠标经过事件 和 `onMouseOut`: 鼠标移出事件
 ```
-<div class="div" onmouseover="onOver(this)" onmouseout="onPut(this)"> </div>
+<div class="div" onmouseover="onOver(this) onmouseout="onPut(this)""> </div>
 <script>
     function onOver(ooj) { //鼠标经过事件
         ooj.innerHTML = "Hello";
@@ -439,7 +436,7 @@ try{
     }
 </script>
 ```
-##### 7.2.4 `onChange`: 文本内容改变事件
+##### 7.2.3 `onChange`: 文本内容改变事件
 ```
 <form>
     <input type= "text" onchange="changeDemo(this)">
@@ -455,34 +452,34 @@ try{
     <input type="text" onchange="alert('内容改变了')">
 </form>
 ```
-##### 7.2.5 `onSelect`: 文本框选中事件
-##### 7.2.6 `onFocus`: 光标聚集事件
+##### 7.2.4 `onSelect`: 文本框选中事件
 ```
 <form>
-    <input type="text" onselect="changeDemo(this)" onfocus="changeDemo2(this)">
-   //onSelect:文本框选中事件 AND onFocus:光标聚集事件
+    <input type="text" onselect="onSelectDemo(this)"> 
 </form>
 <script>
-    function changeDemo(bg) {
+    function onSelectDemo(bg) {
         bg.style.backgroundColor="green";
-    }
-    function changeDemo2(bg) {
-        bg.style.backgroundColor="blue";
     }
 </script>
 ```
-##### 7.2.7 `onBlur`: 移开光标事件
+##### 7.2.5 `onFocus`: 光标聚集事件 和 `onBlur`: 光标移开事件
 ```
 <form>
-    <input type="text" onblur="onBlurDemo(this)">
+    <input type="text" onfocus="onFocusDemo(this)" onblur="onBlurDemo(this)"> 
 </form>
 <script>
+    //光标聚集事件
+    function onFocusDemo(bg) { 
+        bg.style.backgroundColor="blue";
+    }
+    //光标移开事件
     function onBlurDemo(bg) {
         bg.style.backgroundColor="yellow";
     }
 </script>
 ```
-##### 7.2.8 `onLoad`: 网页加载事件
+##### 7.2.6 `onLoad`: 网页加载事件 和 `onUnload`: 关闭网页事件
 ```
 <body onload="msg()">
 <script>
@@ -491,7 +488,6 @@ try{
     }
 </script>
 ``` 
-##### 7.2.9 `onUnload`: 关闭网页事件
 ### 8. JavaScriptDOM对象
 #### 8.1 DOM简介
  当网页被加载时，浏览器会创建页面的文档对象模型(Document Object Model)<br>
