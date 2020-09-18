@@ -1,7 +1,4 @@
 ## JavaScript
-### 0. 目录
-### 1. 基础
-### 5. 函数
 ### 1. 基础
 #### 1.1 介绍
 互联网上最流行的脚本语言，这门语言可用于Web和HTML，更可广泛用于服务器，pc端，移动端。
@@ -15,12 +12,10 @@ HTML中的脚本必须位于`<script></script>`标签之间。<br>
 #### 1.4 标签
 在HTML中插入JavaScript，使用`<script>`标签<br>
 在`<script></script>`之间书写代码
-
 #### 1.5 使用权限
 在HTML中，不限制脚本数量。通常会把脚本放置于`<head>`标签中，以不干扰页面内容
-
 #### 1.6 输出
- JavaScript通常用来操作HTML <br>
+JavaScript通常用来操作HTML <br>
 - 文档输出
  ```
 document.write("<p>JavaScript</p>");
