@@ -790,8 +790,7 @@ function showTarget(event) {
 ```
 #### 10.2 String字符串对象
 - `String`对象 <br>
-String对象用于处理已有的字符串 <br>
-字符串可以使用双引号或单引号 <br>
+`String`对象用于处理已有的字符串。字符串可以使用双引号或单引号 <br>
   
 - `indexOf()`: 在字符串中查找字符串 <br>
 ```
@@ -856,7 +855,7 @@ document.write(date.getFullYear());
 
 ```
 <body onload="startTime()">
-    div id="timetxt"></div>
+<div id="timetxt"></div>
 <script>
     function startTime() {
         var today = new Date();
@@ -871,8 +870,8 @@ document.write(date.getFullYear());
 </script>
 </body>
 ```
-#### 10.4 Array数组对象
-##### 10.4.1 Array对象
+#### 10.4 `Array`数组对象
+##### 10.4.1 `Array`对象
 使用单独的变量名来存储一系列的值
 ##### 10.4.2 数组的创建
 例：`var myArray=["apple","orange","banana"];`
@@ -985,6 +984,10 @@ document.write(m.reverse());
     getAttr();
 </script>
 ```
+```
+执行结果：
+这是a标签的title属性
+```
 - `setAttribute()`: 设置元素属性 <br>
 ```
 <a id="aID"></a>
@@ -997,6 +1000,10 @@ document.write(m.reverse());
     }
     setAttr();
 </script>
+```
+```
+执行结果：
+这是a标签的title属性
 ```
 - `childNodes()`: 访问子节点 <br>
 ```
@@ -1046,8 +1053,7 @@ document.write(m.reverse());
 </script>
 </body>
 ```  
-- `createTextNode()`: 创建文本节点 <br>
-- `insertBefore()`: 插入节点 <br>
+- `createTextNode()`: 创建文本节点 和 `insertBefore()`: 插入节点
 ```
 <div id="divID">
     <p id="pID">这是div元素的p元素</p>
@@ -1056,17 +1062,25 @@ document.write(m.reverse());
     function insertNode() {
         var div = document.getElementById("divID");
         var node = document.getElementById("pID");
+        // 创建文本节点
         var newnode = document.createElement("p");
+        //插入节点
         newnode.innerHTML = "手动插入一个p元素";
         div.insertBefore(newnode,node);
     }
     insertNode();
 </script>
 ``` 
+``` 
+执行结果：
+手动插入一个p元素
+这是div元素的p元素
+``` 
 - `removeChild()`: 删除节点 <br>
 ```
 <div id="divID">
-    <p id="pID">这是div元素的p元素</p>
+    <p id="pID1">这是div元素的第一个p元素</p>
+    <p id="PID2">这是div元素的第二个p元素</p>
 </div>
 <script>
     function removeNode() {
@@ -1074,6 +1088,11 @@ document.write(m.reverse());
         var p = div.removeChild(div.childNodes[1]);//删除div的第一个节点
     }
     removeNode();
+</script>
+```
+```
+执行结果：
+这是div元素的第二个p元素
 ```
 - `offsetHeight()`: 网页尺寸(不包含滚动条) <br>
 ```
@@ -1090,14 +1109,11 @@ document.write(m.reverse());
 ```
 - `scrollHeight()`: 网页尺寸(包含滚动条) <br>
 ### 12. JS浏览对象
-#### 12.1 Window对象  
-##### 12.1.1 window对象
-window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
-所有JavaScript全局对象，函数以及变量均自动成为window对象的成员 <br>
-全局变量是window对象的属性 <br>
-全局函数是window对象的方法 <br>
-甚至HTML DOM的document也是window对象的属性之一 <br>
-##### 12.1.2 window尺寸
+#### 12.1 `Window`对象  
+##### 12.1.1 `window`对象
+`window`对象是DOM的核心，`window`对象指当前的浏览器窗口。所有JavaScript全局对象，函数以及变量均自动成为`window`对象的成员 <br>
+全局变量是`window`对象的属性，全局函数是`window`对象的方法，甚至HTML DOM的`document`也是`window`对象的属性之一 <br>
+##### 12.1.2 `window`尺寸
 `window.innerHeight`: 浏览器窗口的内部高度（不包括工具栏和滚动条）<br>
 `window.innerWidth`: 浏览器窗口的内部宽度 <br>
 ```
@@ -1190,10 +1206,10 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
 </script>
 </body>
 ```
-#### 12.3 History对象
-##### 12.3.1. History对象
-`window.histor`：对象包含浏览器的历史(`url`)的集合
-##### 12.3.2 History方法
+#### 12.3 `History`对象
+##### 12.3.1. `History`对象
+`window.history`：对象包含浏览器的历史(`url`)的集合
+##### 12.3.2 `History`方法
 - `history.back()`: 与在浏览器中点击后退按钮相同 <br>
 
 ```
@@ -1257,9 +1273,9 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
     }
 </script>
 ```
-#### 12.4 Location对象
-##### 12.4.1 Location对象
-`window.location`对象用于获得当前页面的地址(URL),并把浏览器重定向到新的页面
+#### 12.4 `Location`对象
+##### 12.4.1 `Location`对象
+`window.location`对象用于获得当前页面的地址(`URL`),并把浏览器重定向到新的页面
 ##### 12.4.2 Location对象的属性
 - `location.hostname`: 返回web主机的域名
 
@@ -1327,9 +1343,9 @@ window对象是BOM的核心，window对象指当前的浏览器窗口 <br>
     }
 </script>  
 ```
-#### 12.5 Screen对象 
-##### 12.5.1 Screen对象
-window.screen对象包含有关用户屏幕的信息
+#### 12.5 `Screen`对象 
+##### 12.5.1 `Screen`对象
+`window.screen`对象包含有关用户屏幕的信息
 ##### 12.5.2 属性
 - `screen.availWidth`: 可用的屏幕宽度 
 - `screen.availHeight`: 可用的屏幕高度
