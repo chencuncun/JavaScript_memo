@@ -788,7 +788,7 @@ function showTarget(event) {
     document.write("name:"+son.name+", age:"+son.age);
 </script>
 ```
-#### 10.2 String字符串对象
+#### 10.2 `String`字符串对象
 - `String`对象 <br>
 `String`对象用于处理已有的字符串。字符串可以使用双引号或单引号 <br>
   
@@ -831,8 +831,8 @@ function showTarget(event) {
    - `substring()`
    - `substr()`
    - `valueOf()`
-#### 10.3 Date日期对象
-##### 10.3.1 Date对象
+#### 10.3 `Date`日期对象
+##### 10.3.1 `Date`对象
 ```
 <script>
     var date = new Date();
@@ -877,7 +877,7 @@ document.write(date.getFullYear());
 例：`var myArray=["apple","orange","banana"];`
 ##### 10.4.3 数组的访问
 通过指定数组名以及索引号码，可以访问某个特定的元素 <br>
-注意：[0]是数组的第一个元素。
+注意：`[0]`是数组的第一个元素。
 ##### 10.4.4 数组常用方法
 - `concat()`:合并数组 <br>
 ```
@@ -910,8 +910,8 @@ document.write(m);
 var m = ["b","a","c","d"]
 document.write(m.reverse());
 ```
-#### 10.5 Math对象
-##### 10.5.1 Math对象
+#### 10.5 `Math`对象
+##### 10.5.1 `Math`对象
 执行常见的算数任务
 ##### 10.5.2 常用方法
 - `round()`: 四舍五入 <br>
@@ -1121,7 +1121,7 @@ document.write(m.reverse());
    document.write("宽度："+window.innerWidth+", 高度："+ window.innerHeight);
 </script>
 ```
-##### 12.1.3 window方法
+##### 12.1.3 `window`方法
 - `window.open()`: 打开新窗口 <br>
 ```
 <button id="btn" onclick="btnClick()">提交</button>
@@ -1276,7 +1276,7 @@ document.write(m.reverse());
 #### 12.4 `Location`对象
 ##### 12.4.1 `Location`对象
 `window.location`对象用于获得当前页面的地址(`URL`),并把浏览器重定向到新的页面
-##### 12.4.2 Location对象的属性
+##### 12.4.2 `Location`对象的属性
 - `location.hostname`: 返回web主机的域名
 
 ```
