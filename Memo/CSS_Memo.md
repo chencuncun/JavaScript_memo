@@ -87,6 +87,11 @@ li strong{
     color: forestgreen;
 }
 ```
+- `class` 在一个元素上可以同时应用多个class，通过空格来分割 <br/>
+如: `<img class="class1 class2">`
+```
+ <a href="#"><img class="smaller-image thick-green-border" src="cat.jpg" alt="萌猫"></a>
+```
 ### 7. 属性选择器
 #### 7.1 属性选择器
 对带有指定属性的HTML元素设置样式
@@ -182,6 +187,14 @@ text-wrap:normal;
 #### 8.3 字体
 CSS字体属性定义文本的字体系列，大小，加粗，风格和变形
 - `font-family`: 设置字体系列
+所有浏览器都有几种默认字体。这些通用字体包括`monospace`，`serif`和`sans-serif`。
+当字体不可用，你可以告诉浏览器通过 “降级” 去使用其他字体。
+例如，如果你想将一个元素的字体设置成`Helvetica`，当`Helvetica`不可用时，降级使用`sans-serif`字体，那么可以这样写：
+```
+p {
+  font-family: Helvetica, sans-serif;
+}
+```
 - `font-size`: 设置字体的尺寸
 - `font-style`: 设置字体的风格
 - `font-variant`: 以小型大写字体或正常字体显示文本
@@ -368,15 +381,19 @@ p{
 - `border`: 边框
 - `padding`: 内边距
 - `content`: 内容
-#### 10.2 内边距：
+#### 10.2 内边距
 ##### 10.2.1 定义
-在content外，边框内
+`padding`控制着元素内容与`border`之间的间隙大小
 ##### 10.2.2 属性
 - `padding`: 设置所有边距
 - `padding-bottom`: 设置底边距
 - `padding-left`: 设置左边距
 - `padding-right`: 设置右边距
-- `padding-top`: 设置上边距 
+- `padding-top`: 设置上边距
+注意：如果不想每次都要分别声明`padding-bottom`，`padding-left`，`padding-right`，`padding-top`属性，<br/>
+可以把他们汇总在`padding`属性里面声明：
+`padding: 10px 20px 10px 20px` <br/>
+这四个值按顺时针排序：上，右，下，左。
 #### 10.3 边框
 ##### 10.3.1 定义
 可以创建出效果出色的边框，并可以应于任何元素
@@ -411,12 +428,17 @@ p{
 #### 10.4 外边距
 ##### 10.4.1 定义
 围绕在内容边框的区域就是外边距，外边距默认为透明区域。外边距接受任何长度单位，百分数值 <br>
+控制元素的边框与其他元素之间的距离
 ##### 10.4.2 属性
 - `margin`: 设置所有边距
 - `margin-bottom`: 设置底边距
 - `margin-left`: 设置左边距
 - `margin-right`: 设置有边距
 - `margin-top`: 设置上边距
+每个方向的外边距值可以在`margin`属性里面汇总声明，<br/>
+来代替分别声明`margin-top`，`margin-right`，`margin-bottom`和`margin-left`属性的方式，代码如下：<br/>
+`margin: 10px 20px 10px 20px;`
+这四个值按顺时针排序：上，右，下，左。
 #### 10.5 外边距合并
 ##### 10.5.1 定义
 外边距合并就是一个叠加的概念，以外边距大的为参照标准
@@ -548,8 +570,14 @@ a.div{color:red;}
 - 类似于类选择器
 `#id{}`
 - 类选择器和ID选择器区别
-ID只能在文档中使用一次，而类可以多次使用 <br>
-ID选择器不能结合使用 <br>
+ID只能在文档中使用一次，而类可以多次使用，ID选择器不能结合使用 <br/>
+ID选择器的执行优先于类选择器。有时候它们声明的样式会意外的覆盖你的CSS样式。<br/>
+当你需要保证你的CSS样式不受影响，你可以使用`!important`。<br/>
+```
+.pink-text {
+    color: pink !important;
+ }
+```
 当使用js时，需要用到`id` <br>
 #### 12.5 属性选择器详解
 - 简单属性选择 
