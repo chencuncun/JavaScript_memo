@@ -191,6 +191,17 @@ p{
 香蕉<input type="checkbox">
 橘子<input type="checkbox">
 ```
+每一个复选框都应该嵌套在它自己的`label`（标签）元素中。
+所有关联的复选框应该拥有相同的`name`属性。
+最佳实践是在`label`元素上设置`for`属性，让其值与复选框的`id`属性值相等，
+这样就在`label`元素和它的子元素复选框之间创建了一种链接关系。
+```
+<form>
+    <label for="loyalty"><input id="loyalty" type="checkbox" name="personality">忠诚</label>
+    <label for="enterprising"><input id="enterprising" type="checkbox" name="personality">进取</label>
+    <label for="introvert"><input id="introvert" type="checkbox" name="personality">内向</label>
+</form>
+```
 #### 10.3.3 单选按钮
 ```
 性别:
@@ -198,7 +209,8 @@ p{
 女<input type="radio" name="sex">
 ```
 每一个单选按钮都应该嵌套在它自己的`label`（标签）元素中。<br>
-最佳实践是在`label`元素上设置`for`属性，让其值与单选按钮的`id`属性值相等，这样就在`label`元素和它的子元素单选按钮之间创建了一种链接关系。
+最佳实践是在`label`元素上设置`for`属性，让其值与单选按钮的`id`属性值相等，
+这样就在`label`元素和它的子元素单选按钮之间创建了一种链接关系。
 ```
 <form>
     <label for="indoor">
@@ -224,6 +236,12 @@ p{
 ```
 <input type="button" value="按钮">
 <input type="submit" value="确认">
+```
+#### 10.3.7 默认选中
+通过添加`checked`属性，可以设置某个单选按钮或多选按钮被默认选中 <br/>
+为此只需要给`input`元素添加`checked`属性。
+```
+<input type="radio" name="test-name" checked>
 ```
 ### 11. 框架
 #### 11.1 常用标签
