@@ -197,6 +197,18 @@ p{
 男<input type="radio" name="sex">
 女<input type="radio" name="sex">
 ```
+每一个单选按钮都应该嵌套在它自己的`label`（标签）元素中。<br>
+最佳实践是在`label`元素上设置`for`属性，让其值与单选按钮的`id`属性值相等，这样就在`label`元素和它的子元素单选按钮之间创建了一种链接关系。
+```
+<form>
+    <label for="indoor">
+        <input id="indoor" type="radio" name="indoor-outdoor">indoor
+    </label>
+    <label for="outdoor">
+        <input id="outdoor" type="radio" name="indoor-outdoor">outdoor
+    </label>
+</form>
+```
 ##### 10.3.4 下拉列表
 ```
 请选择您喜欢的水果：
