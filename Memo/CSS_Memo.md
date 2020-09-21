@@ -389,7 +389,7 @@ p{
 - `padding-bottom`: 设置底边距
 - `padding-left`: 设置左边距
 - `padding-right`: 设置右边距
-- `padding-top`: 设置上边距
+- `padding-top`: 设置上边距 <br/>
 注意：如果不想每次都要分别声明`padding-bottom`，`padding-left`，`padding-right`，`padding-top`属性，<br/>
 可以把他们汇总在`padding`属性里面声明：
 `padding: 10px 20px 10px 20px` <br/>
@@ -434,7 +434,7 @@ p{
 - `margin-bottom`: 设置底边距
 - `margin-left`: 设置左边距
 - `margin-right`: 设置有边距
-- `margin-top`: 设置上边距
+- `margin-top`: 设置上边距 <br/>
 每个方向的外边距值可以在`margin`属性里面汇总声明，<br/>
 来代替分别声明`margin-top`，`margin-right`，`margin-bottom`和`margin-left`属性的方式，代码如下：<br/>
 `margin: 10px 20px 10px 20px;`
@@ -774,12 +774,77 @@ div{
     column-rule: 2px outset red; //宽度 线条类型 颜色
 }
 ```
-
-
+### 14. CSS的自定义变量
+#### 14.1 定义变量
+创建一个CSS变量，你只需要在变量名前添加两个破折号，并为其赋值：<br/>
+`--penguin-skin: gray;`
+#### 14.2 引用变量
+创建变量后，CSS属性可以通过引用变量名来使用它的值 <br/>
+```
+<style>
+  .penguin {
+     --penguin-skin: black;
+   }
+  .penguin-top {
+     background: var(--penguin-skin);
+   }
+  .penguin-bottom {
+     background: var(--penguin-skin);
+   }
+</style>
+```
+#### 14.3 给CSS变量附加回退值
+如果使用不支持CSS变量的旧浏览器或者设备不支持设置的变量值，可以写成如下形式：<br/>
+```
+<style>
+  .penguin {
+     --penguin-skin: gray;
+   }
+  .penguin-top {
+     background: var(--penguin-skin,black);
+   }
+  .penguin-bottom {
+     background: var(--penguin-skin,black);
+   }
+</style>
+```
+#### 14.4 层级CSS变量
+CSS变量通常会定义在`:root`元素里。<br/>
+在`:root`创建的变量，在整个网页里面都能生效。<br/>
+```
+:root {
+    --penguin-belly: pink;
+  }
+```
+#### 14.5 更改特定区域的变量
+```
+<style>
+  :root {
+    --penguin-belly: pink;
+  }
+  .penguin {
+    --penguin-belly: white;
+  }
+</style>
+```
+#### 14.6 使用媒体查询更改变量
+CSS 变量可以简化媒体查询的方式。<br/>
+例如，当屏幕小于或大于媒体查询所设置的值，通过改变变量的值，那么应用了变量的元素样式都会得到响应修改。<br/>
+```
+<style>
+  :root {
+    --penguin-size: 300px;
+    --penguin-skin: gray;
+  }
   
-
-  
-
+  @media (max-width: 350px) {
+    :root {
+     --penguin-size: 200px;
+     --penguin-skin: black; 
+    }
+  }
+</style> 
+```
 
  
 
