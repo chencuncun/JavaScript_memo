@@ -294,10 +294,14 @@ p{
 - 绝对布局
 ##### 9.1.3 CSS定位属性
 - `position`: 把元素放在一个静态的，相对的，绝对的或固定的位置中 <br>
-   - static: 对偏移量不起任何效果
-   - relative
-   - absolute
-   - fixed
+   - `static`: 对偏移量不起任何效果
+   - `relative`: 允许通过CSS指定给元素在当前普通流页面下的相对偏移量
+   - `absolute`: 相对于其包含块定位。<br/>
+      和`relative`定位不一样，`absolute`定位会将元素从当前文档流里面移除，周围的元素会忽略它。<br/>
+      可以用CSS的`top`，`bottom`，`left`，`right`属性来调整元素的位置。<br/>
+      `absolute`定位比较特殊的一点是元素的定位参照于最近的已定位祖先元素。<br/>
+      如果它的父元素没有添加定位规则(默认是`position:relative`)，浏览器会继续寻找直到默认的`body`标签。
+   - `fixed`: 它是一种特殊的绝对定位，区别是其包含块是浏览器窗口。定位元素不会随着屏幕滚动而移动 <br/>
 - `top`: 元素向上的偏移量
 - `left`: 元素向左的偏移量
 - `right`: 元素向右的偏移量
@@ -423,7 +427,14 @@ p{
 - `border-radius`: 圆角边框 <br>
    `border-radius: 20px;`
 - `box-shadow`: 边框阴影 <br>
-  `box-shadow: 10px 10px 5px royalblue;` //X轴偏移量，Y轴偏移量，模糊半径，颜色
+  `box-shadow`属性的每个阴影依次由下面这些值描述：<br/>
+  - `offset-x`: 阴影的水平偏移量 <br/>
+  - `offset-y`: 阴影的垂直偏移量 <br/>
+  - `blur-radius`: 模糊距离 <br/>
+  - `spread-radius`: 阴影尺寸 <br/>
+  - `color` : 颜色 <br/>
+其中`blur-raduis`和`spread-raduis`是可选的。<br/>
+`box-shadow: 10px 10px 5px royalblue;` //X轴偏移量，Y轴偏移量，模糊半径，颜色
 - `border-image`: 边框图片 <br>
 #### 10.4 外边距
 ##### 10.4.1 定义
@@ -459,7 +470,8 @@ right:0px;
 `float:right;`
 #### 11.2 尺寸 
 - `line-height`: 设置行高，以此来设置行间距 <br>
-  `line-height:200%；`
+  `line-height:200%；` <br/>
+  `line-height:25px`<br/>
 - `width`: 设置元素宽度
 - `height`: 设置元素高度
 - `max-width`: 设置元素最大宽度
