@@ -894,7 +894,7 @@ background: repeating-linear-gradient(
       black 80px
     );
 ```
-#### 15.5 通过添加细微团作为背景图像来创建纹理
+#### 15.5 通过添加细微图案作为背景图像来创建纹理
 ```
 body {
     background: url("https://i.imgur.com/MJAkxbh.png");
