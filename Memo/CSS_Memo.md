@@ -135,7 +135,7 @@ body{
     background-position: right top;
 }
 ```
-- `background-repeat`: 设置背景图片是否及如何重复 <br>
+- `background-repeat`: 设置背景图片是否及如何重复 <br/>
 ```
 body{
     background-image: url("../../pic/yaoyao.jpeg");
@@ -857,7 +857,49 @@ CSS 变量可以简化媒体查询的方式。<br/>
   }
 </style> 
 ```
+### 15. 颜色
+#### 15.1 三原色
+电脑显示器和手机屏幕是一种加色模型，将红（R）、绿（G）、蓝（B）三原色的色光以不同的比例相加，以产生多种多样的色光。<br/>
+两种原色相加产生二次色：蓝绿（G+B）、品红（R+B）和黄色（R+G）。<br/>
+这些二次色恰好是在合成它们时未使用的原色的补色，即在色环中位于两端。<br/>
+例如，品红色是红色和蓝色相加产生，它是绿色的补色。<br/>
+三次色是由原色和二次色相加产生的颜色，例如红色（原色）和黄色（二次色）相加产生橙色。<br/>
+将这六种颜色中相邻的颜色相加，便产生了十二色色环。<br/>　
+橙色：`#FF7D00` <br/>
+蓝绿色：`#00FFFF` <br/>
+树莓红：`#FF007D` <br/>
 
+#### 15.2 `hsl`函数
+使用色相，饱和度，亮度来定义颜色。 <br/>
+- 色相(H)：色彩的基本属性，就是平常所说的颜色名称，如红色，黄色等。 <br/>
+- 饱和度(S)：色彩的纯度，越高色彩越纯，低则逐渐变灰，取0-100%的数值。 <br/>
+- 亮度(L):　取0-100%，增加亮度，颜色会向白色变化；减少亮度，颜色会向黑色变化。<br/>
+
+#### 15.3 创建一个CSS线性渐变
+HTML元素的背景色并不局限于单色。CSS还提供了颜色过渡，也就是渐变。<br/>
+可以通过`background`里面的`linear-gradient()`来实现线性渐变，下面是它的语法：<br/>
+`background: linear-gradient(gradient_direction, 颜色 1, 颜色 2, 颜色 3, ...);`
+
+第一个参数指定了颜色过渡的方向-它的值是角度，`90deg`代表垂直渐变，`45deg`的渐变角度和反斜杠方向差不多。剩下的参数指定了渐变颜色的顺序：<br/>
+`background: linear-gradient(90deg, red, yellow, rgb(204, 204, 255));`
+
+#### 15.4 使用CSS线性渐变创建条纹元素
+`repeating-linear-gradient()`函数和`linear-gradient()`很像，主要区别是`repeating-linear-gradient`重复指定的渐变。<br/>
+```
+background: repeating-linear-gradient(
+      45deg,
+      yellow 0px,
+      yellow 40px,
+      black 40px,
+      black 80px
+    );
+```
+#### 15.5 通过添加细微团作为背景图像来创建纹理
+```
+body {
+    background: url("https://i.imgur.com/MJAkxbh.png");
+  }
+```
  
 
 
