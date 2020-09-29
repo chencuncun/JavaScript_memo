@@ -13,13 +13,6 @@
 `<body bgcolor="#8b0000"></body>`
 - `align`: 位置 <br>
 `<h1 align="right">标题1</h1>`
-- `target`：网页打开方式
-```
-<a href="www.google.co.jp" target="_blank">另开网页</a>
-<a href="www.google.co.jo" target="_self">本网页</a>
-```
-- `href`：指向另一个文档的链接
-- `name`：创建文档内的链接 
 ### 3. 格式标签
 - `<b>`：粗体文本  
 - `<big>`：大号字
@@ -65,22 +58,54 @@ p{
 - 图片链接 <br>
 `<a href="http://www.google.co.jp"><img src="pic/yaoyao.jpeg"></a>`
 #### 5.2 属性
-- href属性：指向另一个文档的链接
-`<a href="#tips">跳转到hello</a>`
-- name属性：创建文档内的链接
-`<a name="tips">hello</a>`
-#### 5.3 img标签属性
+- `href`属性
+  - 回到顶部 <br/>
+    `<a href="#">回到顶部</a>` <br/>
+  - 去往同一页面的任何位置 <br/>
+   `<a href="#bottom">跳到底部</a>` <br/>
+   `<p id="bottom">这是文章的底部</p>`
+  - 没有任何功能的超链接，作为占字符使用 <br/>
+   `<a href="javascript:;">这是一个超链接</a>` <br/>
+- `name`属性：创建文档内的链接 <br/>
+    `<a href="#tips">跳转到hello</a>` <br/>
+    `<a name="tips">hello</a>`
+- `target`属性：网页打开方式 <br>
+   `<a href="www.google.co.jp" target="_blank">另开网页</a>` <br/>
+   `<a href="www.google.co.jo" target="_self">本网页</a>` <br/>
+#### 5.3 img标签属性(属于替换元素，介于块元素和行内元素之间)
 - `alt`：替换文本属性:当图片显示不出来的时候，可以显示该图片的内容注释
 - `width`：宽
 - `height`：高 <br>
-`<a href="http://www.google.co.jp"><img src="pic/yaoyao.jpeg" width="100px" height="80px" alt="yaoyao"></a>`
+`<a href="http://www.google.co.jp"><img src="pic/yaoyao.jpeg" width="100px" height="80px" alt="yaoyao"></a>` <br/>
+注意：<br/>
+一般情况下，为了保持图片的清晰度，建议只修改宽或高的任意一方。因为改变宽度，高度也会随之改变。<br/>
+但一般情况下，在PC端不建议修改图片的大小。不过在移动端，经常需要对图片进行缩放(大图缩小)。<br/>
+- 图片格式：
+  - jpeg(jpg) <br/>
+    支持的颜色比较丰富，不支持透明效果，不支持动图。 <br/>
+    一般用来显示照片。 <br/>
+  - gif <br/>
+    支持的颜色比较少，支持简单透明效果，支持动图。 <br>
+    适合颜色单一的图片，动图。 <br/>
+  - png <br/>
+    支持的颜色丰富，支持负责透明，不支持动图。<br/>
+    适合颜色丰富，复杂透明的照片（专为网页而生）。<br/>
+  - webp <br/>
+    这种格式是谷歌推出的专门用来表示网页中的图片的一种格式。<br/>
+    它具备其他图片格式的所有优点，而且文件还特别的小。<br/>
+    缺点：兼容性不好。<br/>
+  - base64 <br/>
+    将图片使用base64编码，这样可以将图片转换为字符。通过字符的形式来引入图片。<br/>
+    一般都是一些需要和网页一起加载的图片才会使用base64。<br/>
+    如何将图片转化成base64，
+选择图片格式标准: 效果一样，用小的；效果不一样，用效果好的。<br/>  
 ### 6.表格
 #### 6.1 标签
 - `<table>`：定义表格
 - `<caption>`：定义表格标题
 - `<th>`：定义表格的表头
 - `<tr>`：定义表格的行
-- `<td>`：定义表格的单元
+- `<td>`：定义表格的单元 
 - `<thead>`：定义表格的页眉
 - `<tbody>`：定义表格的主体
 - `<tfoot>`：定义表格的页脚
@@ -162,7 +187,8 @@ p{
 如：`<b>`,`<a>`,`<img>`
 #### 8.3 注意
 块元素可以包含块元素和行内元素，但是行内元素不能包含块元素。<br/>
-特例：`<p>`标签不可以包含块元素。
+特例：`<p>`标签不可以包含块元素。<br/>
+`<a>`标签可以嵌套除它自己之外的任何元素。
 #### 8.4 HTML`<div>`元素
 `<div>`元素也被成为块元素，其主要时组合HTML元素的容器
 #### 8.5 HTML`<span>`元素
@@ -183,7 +209,7 @@ p{
 - `<optgroup>`：选项组
 - `<option>`：下拉列表中的选项
 - `<button>`：按钮
-#### 10.3常用属性
+#### 10.3 常用属性
 ##### 10.3.1 用户/密码
 ```
 用户名：
