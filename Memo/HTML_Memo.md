@@ -97,8 +97,44 @@ p{
   - base64 <br/>
     将图片使用base64编码，这样可以将图片转换为字符。通过字符的形式来引入图片。<br/>
     一般都是一些需要和网页一起加载的图片才会使用base64。<br/>
-    如何将图片转化成base64，
+    如何将图片转化成base64，可以在网上搜索将图片base64编码。<br/>
 选择图片格式标准: 效果一样，用小的；效果不一样，用效果好的。<br/>  
+#### 5.4 音频 
+- `<audio>`： 用来向网页中引入一个外部的音频文件 <br/>
+注意：音视频文件引入时，默认情况下不允许用户自己控制播放停，可以加`controls`属性 <br/>
+  - `controls`属性：是否允许用户控制播放 <br/>
+  `<audio src="" controls></audio>`
+  - `autoplay`属性：音频文件是否自动播放 <br/>
+    如果设置了`autoplay`，则音乐在打开网页时自动播放，但是目前来讲大部分浏览器不会自动对音乐进行播放 <br/>
+  `<audio src="" controls autoplay></audio>` <br/>
+  - `loop`属性：循环播放 <br/>
+  `<audio src="./source/audio.mp3" controls autoplay loop></audio>` <br/>
+  除了`src`指定文件，还可以通过`source`来指定文件 <br/>
+ ```
+  <audio controls>
+    抱歉！您的浏览器不支持播放音频，请升级您的浏览器！
+    <source src="./source/audio.mp3">
+    <source src="./source/audio.ogg">
+  </audio>
+ ```
+- `<embed>`：兼容低版本的浏览器 <br/>
+  `<embed src="./source/audio.mp3" type="audio/mp3" width="200px" height="100px">`
+ ```
+  <audio controls>
+    <source src="./source/audio.mp3">
+    <source src="./source/audio.ogg">
+    <embed src="./source/audio.mp3" type="audio/mp3" width="200px" height="100px">
+  </audio>
+ ``` 
+- `<video>` :用来向网页中引入一个外部的视频文件 <br/>
+    使用方式和`<audio>`基本一样 <br/>
+ ```
+  <video controls>
+    <source src="./source/flower.webm">
+    <source src="./source/flower.mp4">
+    <embed src="./source/flower.mp4" type="vedio/mp4">
+  </video>
+ ``` 
 ### 6.表格
 #### 6.1 标签
 - `<table>`：定义表格
@@ -290,7 +326,7 @@ p{
 ```
 ```
 <!--Frame_a.html-->
-<body bgcolor="#6495ed">
+<body bgcolor="#6495ed">  
     frame_a
     <br/>
     <a href="https://www.baidu.com/" target="_parent">百度主页</a>
