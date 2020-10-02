@@ -96,17 +96,64 @@ li strong{
 #### 7.1 属性选择器
 对带有指定属性的HTML元素设置样式
 #### 7.2 属性和值选择器
+- [属性名]：选择含有指定属性的元素
 ```
 <style type="text/css">
     [title]{
         color: chocolate;
     }
+</style>  
+<p title="t">属性选择器</p>
+<p title="te">属性和值选择器</p>
+```
+- [属性名=属性值]：选择含有指定属性和属性值的元素
+```
+<style type="text/css">
     [title=te]{
         color: darkcyan;
     }
 </style>  
 <p title="t">属性选择器</p>
 <p title="te">属性和值选择器</p>
+```
+- [属性名^=属性值]：选择属性值以指定值开头的元素
+```
+<style>
+    p[title^=abc]{
+        color:orange;    
+    }
+</style>
+<body>
+    <p title="abc">少小离家老大回</p>
+    <p title="abcdef">乡音无改鬓毛衰</p>
+    <p title="hello">儿童相见不相识</p>
+</body>
+```
+- [属性名$=属性值]：选择属性值以指定值结尾的元素
+```
+<style>
+    p[title^=abc]{
+        color:orange;    
+    }
+</style>
+<body>
+    <p title="abc">少小离家老大回</p>
+    <p title="abcdef">乡音无改鬓毛衰</p>
+    <p title="helloabc">儿童相见不相识</p>
+</body>
+```
+- [属性名*=属性值]：选择属性值中含有某值的元素
+```
+<style>
+    p[title*=abc]{
+        color:orange;    
+    }
+</style>
+<body>
+    <p title="abc">少小离家老大回</p>
+    <p title="abcdef">乡音无改鬓毛衰</p>
+    <p title="helloabc">儿童相见不相识</p>
+</body>
 ```
 ### 8. 样式
 #### 8.1 背景
@@ -651,7 +698,11 @@ ID选择器的执行优先于类选择器。有时候它们声明的样式会意
 后代选择器可以选择作为某元素后代的元素 <br>
 ```
 <!--html-->
-<p>my <strong>web<i>page</i></strong></p>
+<p>my 
+    <strong>web
+            <i>page</i>
+    </strong>
+</p>
 /*css*/
 p strong i{
     color: red;
@@ -674,7 +725,173 @@ p strong i{
 li+li{
     color:red;
 }
+``` 
+#### 12.9 伪类选择器
+定义：不存在的类，特殊的类。用来描述一个元素的特殊状态。<br/>
+比如：第一个子元素，被点击的元素，鼠标移入的元素。。。<br/>
+一般情况下都是以`：`开头 <br/>
+##### 12.9.1 常用伪类
+- `:first-child`：第一个子元素
 ```
+<style>
+    ul > li:first-child{
+        color:red;
+     }
+</style>
+<body>
+    <ul>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+        <li>第五个</li>
+    </ul>    
+</body>
+```
+- `:last-child`：最后一个子元素
+```
+<style>
+    ul > li:last-child{
+        color:red;
+     }
+</style>
+<body>
+    <ul>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+        <li>第五个</li>
+    </ul>    
+</body>
+```
+- `:nth-child()`：选中第n个子元素 <br/>
+特殊值`n`：`n`的范围0到正无穷 <br/>
+`2n`或`even`表示选中偶数位的元素 <br/>
+`2n+1`或`odd`表示选中奇数位的元素 <br/>
+
+```
+<style> 
+    ul > li:nth-child(2){
+        color:red;
+     }
+</style>
+<body>
+    <ul>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+        <li>第五个</li>
+    </ul>    
+</body>
+```
+- `:first-of-type`
+- `:last-of-type`
+- `:nth-of-type()` <br/>
+以上这几个伪类的功能与`child`类似，不同点是在同类型元素中进行排序 <br/>
+- `:not()`：否定伪类 <br/>
+将符合条件的元素从选择器中去除
+```
+<style>
+    ul>li:not(:nth-of-type(3)){
+        color: darkcyan;
+    }
+</style>
+</head>
+<body>
+    <ul>
+        <span>我是span元素</span>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+        <li>第五个</li>
+    </ul>
+</body>
+```
+##### 12.9.2 链接有关的伪类
+- `a:link`: 未被访问的链接 <br/>
+```
+a:link{
+    color: red;
+}
+```
+- `a:visited`: 已访问的链接 <br/>
+为了保护隐私，`a:visited`这个伪类只能修改链接的颜色 <br/>
+```
+a:visited{
+    color: orange;
+}
+```
+- `a:hover`: 鼠标指针位于链接的上方 <br/>
+```
+a:hover{
+    color: blue;
+}
+```
+- `a:active`: 链接被点击的时刻 <br/>
+```
+a:active{
+    color: green;
+}
+```
+#### 12.10 伪元素选择器
+表示页面中一些特殊的并不真实的存在的元素（特殊的位置）<br/>
+伪元素使用`::`开头 <br/>
+- `::first-letter` 表示第一个字母 <br/>
+```
+//将p里面的首字母大小改为50px
+<head>
+    <style>
+        p::first-letter{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        This is a page for studying html.
+    </p>
+</body>
+```
+- `::first-line` 表示第一行
+```
+p::first-line{
+    background-color: yellow;
+}
+```
+- `::selection` 表示选中的内容
+```
+//当鼠标选中某区域，某区域变为绿色
+p::selection{
+    background-color: green;
+}
+```
+- `::before` 元素的开始位置 与`::after`元素的结束位置 <br/>
+`::before`和`::after`必须结合`content`属性来使用，因为是在css中添加的内容，所以不能被选中。
+```
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p::before{
+            content: 'abc';
+            color: red;
+        }
+        p::after{
+            content: 'xyz';
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        This is a page for studying html.
+    </p>
+</body>
+```
+
 ### 13. CSS动画
 #### 13.1 2D，3D转换
 ##### 13.1.1 定义
