@@ -1,5 +1,5 @@
-# Web开发学习日程
-## 2020年9月
+# 2020年Web开发学习日程
+## 9月
 ### 1. 学习网站
 视频网站(极客学院) <br/>
 <https://www.bilibili.com/video/BV1Mx411m7fd?p=1>
@@ -7,20 +7,20 @@
 - HTML基础
 - CSS基础
 - JavaScript基础
-## 2020年10月
+## 10月
 ### 1. 学习网站
 视频网站(尚硅谷:李立超老师) <br/>
 <https://www.bilibili.com/video/BV1XJ411X7Ud?p=1>
 ### 2. 学习内容
 - 10月1号 休息♨️
-- 10月2号 <br/>
-  - CSS：伪类选择器
-  - CSS：超链接的伪类
-  - CSS：伪元素
-  - CSS：餐厅练习 <br/>
-  <http://flukeout.github.io/>
-            
-
+- 10月2号 CSS<br/>
+  - 伪类选择器
+  - 超链接的伪类
+  - 伪元素
+  - 餐厅练习: <http://flukeout.github.io/>  答案：<https://www.codenong.com/cs105735509/>
+  - 继承
+  - 选择器的权重 
+  - 像素`px`/百分比`%`，`em`/`rem`
 - 10月3号 <br/>
 - 10月4号 <br/>
 - 10月5号 <br/>
