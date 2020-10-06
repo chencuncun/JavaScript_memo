@@ -521,8 +521,8 @@ margin: 0 auto;
 }
 ```
 以上方法去除浏览器默认样式，可能会有残余。<br/>
-- `reset.css`：直接去除了浏览器的默认样式 
-CSS文件网址：<https://meyerweb.com/eric/tools/css/reset/> <br/>
+- `reset.css`：直接去除了浏览器的默认样式 <br/>
+<https://meyerweb.com/eric/tools/css/reset/> <br/>
 - `normalize.css`：对默认样式进行了统一 <br/>
 <https://necolas.github.io/normalize.css/> <br/>
 
