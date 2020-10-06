@@ -338,4 +338,191 @@ p::selection{
   - 行内元素在页面中从左向右水平排列。如果一行之中不能容纳所有的行内元素，则会换到第二行继续自左向右排列
   - 行内元素的默认宽度和高度都是被内容撑开
 #### 2.2.2 不在文档流中（脱离文档流）
+## 3. 盒模型
+### 3.1 定义
+- CSS将页面中的所有元素都设置为了一个矩形的盒子
+- 将元素设置为矩形的盒子后，对页面的布局就变成将不同的盒子摆放到不同的位置
+- 每个盒子都由以下几个部分组成
+  - 内容区（content）
+  - 内边距（padding）
+  - 边框（border）
+  - 外边距（margin）
+### 3.2 盒子组成详解
+#### 3.2.1 内容区（content）
+元素中的所有的子元素和文本内容都在内容区中排列 <br/>
+内容区的大小由`width`和`height`两个属性来设置 <br/>
+- 内容区的宽度：`width`
+- 内容区的高度：`height`
+```
+.box1{
+    width:200px;
+    height:200px;
+    background-color:green;
+}
+```
+#### 3.2.2 边框（border）
+边框属于盒子边缘，边框里边属于盒子内部，出了边框就是盒子的外部 <br/>
+边框的大小会影响到整个盒子的大小。要设置边框，需要至少设置三个样式 <br/>
+- 边框的宽度：`border-width` 
+    - 默认值：一般为3个像素
+    - 值的情况
+      - 四个值：上，右，下，左
+      - 三个值：上，左右，下
+      - 两个值：上下，左右
+      - 一个值：上下左右
+```
+.box1{
+    border-width:10px 20px; //上下10px，左右20px
+}
+```      
+   - 单独指定某一个边的宽度：`border-xxx-width`
+     - `border-top-width`
+     - `border-bottom-width`
+     - `border-left-width`
+     - `border-right-width`
+     
+- 边框的颜色：`border-color`：可以分别指定四个边的边框，规则和`border-width`一样 <br/>
+注意：`border-color`也可以省略不写，如果省略了则自动使用`color`颜色值 <br/>
+`border-color:orange red yellow green`
+- 边框的样式：`border-style`：可以分别指定四个边的样式，规则和`border-width`一样
+  - `solid`：表示实线
+  - `dotted`：点状虚线
+  - `dashed`：虚线
+  - `double`：双线
+```
+.box1{
+    border-width:10px;
+    border-color:orange;
+    border-style:solid;
+}
+```
+- `border`简写属性：通过该属性可以同时设置边框所有的相关样式，并且没有顺序要求 <br/>
+`border:10px orange solid;`
+- `border-xxx`：每个边框单独设置样式
+  - `border-top:10px orange solid;`
+  - `border-bottom:10px orange solid;`
+  - `border-left:10px orange solid;`
+  - `border-right:10px orange solid;`
+```
+border:10px red solid;
+border-right:none;
+```
+#### 3.2.3 内边距（padding）
+内容区和边框之间的距离是内边距，一共有四个方向的内边距。<br/>
+内边距的设置会影响到盒子的大小，同时背景颜色会延伸到内边距上 <br/>
+一个盒子的可见框的大小，由内容区，内边距和边框加到一起计算。 <br/>
+- 属性
+  - `padding-top`
+  - `padding-right`
+  - `padding-bottom`
+  - `padding-left`
+- `padding`内边距的简写属性，可以同时指定四个方向的内边距 <br/>
+`padding: 10px 20px 30px 40px;`
+  - 值的情况
+    - 四个值：上，右，下，左
+    - 三个值：上，左右，下
+    - 两个值：上下，左右
+    - 一个值：上下左右
+#### 3.2.4 外边距（margin）
+外边距不会影响盒子可见框的大小，但是外边距会影响盒子的位置。<br/>
+`margin`会影响到盒子实际占用空间。<br/>
+一共有四个方向的外边距 <br/>
+- 属性
+  - `margin-top`：上外边距，设置一个正值，元素会向下移动。正值都会往相反的方向移动。
+  - `margin-right`：由浏览器自动调整
+  - `margin-bottom`：下边距，设置一个正值，其下边的元素会向下移动。
+  - `margin-left`：左外边距，设置一个正值，元素会向右移动。
+- `margin`也可以设置负值，如果是负值则元素会向相反的方向移动。 <br/>
+注意：`margin-top`和`margin-left`是移动自己，`margin-right`和`margin-bottom`是挤别人。<br/>
+元素在页面中是按照自左向右的顺序排列的，所以默认情况下，我们设置的左和上边距则会移动元素自身，而设置下和右边距会移动其他元素。<br/>
+- `margin`的简写属性 <br/>
+`margin`可以同时设置四个方向的外边距，用法和`padding`一样 <br/>
+`margin: 10px 20px 30px 40px;`
+### 3.3 盒子的水平布局
+元素在其父元素中水平方向的位置由以下几个属性共同决定 <br/>
+- `margin-left`
+- `border-left`
+- `padding-left`
+- `width`
+- `padding-right`
+- `border-right`
+- `margin-right`
+一个元素在其父元素中，水平布局必须要满足以下的等式 ：<br/>
+`margin-left` + `border-left` + `padding-left` + `width` + `padding-right` + `border-right` + `margin-right` <br/>
+以上等式必须满足，如果相加结果使等式不成立，则称为过渡约束，则等式会被浏览器自动调整  <br/>
+调整的情况：如果这7个值中没有`auto`的情况，则浏览器会自动调整`margin-right`值以确保等式成立 <br/>
+这7个值中有3个值可以设置为`auto` <br/>
+- `width`：默认值为`auto`
+- `margin-left`
+- `margin-right`
+如果某个值为`auto`，则会自动调整为`auto`的那个值以确保等式成立 <br/>
+如果将一个宽度和一个外边距设置为`auto`，则宽度会调到最大 <br/>
+如果将三个值都设置为`auto`，则外边距都是0，宽度最大 <br/>
+如果将两个外边距设置为`auto`，宽度固定值，则会将外边距设置为相同的值，所以经常利用这个特点来使一个元素在其父元素中水平居中 <br/>
+例子：<br/>
+```
+width: xxx px;
+margin: 0 auto;
+```
+### 3.4 盒子的垂直方向布局
+- 父元素设定了高度就是其高度
+```
+.outer{
+    background-color: green;
+    height: 600px;
+}
+```
+- 父元素不设定高度，其高度是被子元素撑开的高度
+子元素是在父元素的内容区中排列的，如果子元素的大小超过了父元素，则子元素会从父元素中溢出 <br/>
+使用`overflow`属性来设置父元素如何处理溢出的子元素 <br/>
+  - 可选值
+    - `visible`：默认值 子元素会从父元素中溢出，在父元素外部的位置显示
+    - `hidden`：溢出内容将会被裁剪不会显示
+    - `scroll`：生成两个滚动条，通过滚动条来查看完整的内容
+    - `auto`：根据需要生成滚动条 <br/>
+  `overflow: auto;` //更灵活
+  - `overflow-x`和`overflow-y`：单独处理x轴方向和单独处理y轴方向
+### 3.5 外边距的折叠
+相邻的垂直方向外边距会发生重叠现象 <br/>
+- 兄弟元素
+  - 兄弟元素间的相邻垂直外边距会取两者之间的较大值（两者都是正值）
+  - 如果相邻的外边距一正一负，则取两者的和
+  - 如果相邻的外边距都是负值，则取两者中绝对值较大的
+  - 兄弟元素之间的外边距的重叠，对于开发是有利的，所以我们不需要处理
+- 父子元素
+  - 父子元素间相邻外边距，子元素的会传递给父元素（上外边距）
+  - 父子外边距的折叠会影响到页面布局，必须要进行处理  
+### 3.6 行内元素的盒模型
+行内元素不支持设置宽度和高度，所以给行内元素设置`width`和`height`没有效果。<br/>
+行内元素可以设置`padding`，垂直方向`padding`不会影响页面的布局。<br/>
+行内元素可以设置`border`，垂直方向的`border`不会影响页面的布局。<br/>
+行内元素可以设置`margin`，垂直方向的`margin`不会影响布局。<br/>
+- `display`: 用来设置元素显示的类型 <br/>
+可选值：<br/>
+  - `inline`： 将元素设置为行内元素
+  - `block`： 将元素设置为块元素 
+  - `inline-block`：将元素设置为行内块元素：行内块，既可以设置宽度和高度又不会独占一行
+  - `table`：将元素设置为一个表格
+  - `none`：元素不在页面中显示
+- `visibility`：用来设置元素的显示状态 <br/>
+可选值：<br/>
+  - `visible`：默认值，元素在页面中正常显示
+  - `hidden`：元素在页面中隐藏不显示，但是依然占据页面的位置
+### 3.7 默认样式
+#### 3.7.1 介绍
+通常情况下，浏览器都会为元素设置一些默认样式。默认样式的存在会影响到页面的布局。<br/>
+通常情况下，编写网页时必须要去除浏览器的默认样式(PC端的页面)。<br/>
+#### 3.7.2 去除浏览器默认样式
+- 小demo的情况下
+```
+*{
+    margin: 0;
+    padding: 0;
+}
+```
+以上方法去除浏览器默认样式，可能会有残余。<br/>
+- `reset.css`：直接去除了浏览器的默认样式 
+CSS文件网址：<https://meyerweb.com/eric/tools/css/reset/> <br/>
+- `normalize.css`：对默认样式进行了统一 <br/>
+<https://necolas.github.io/normalize.css/> <br/>
 
