@@ -1280,13 +1280,54 @@ div{
 }
 ```
   - 雪碧图的特点：一次性将多个图片加载进页面，降低请求的次数，加快访问速度，提升用户的体验
-### 7.2 线性渐变
+### 7.2 渐变
+通过渐变可以设置一些复杂的背景颜色，可以实现从一个颜色向其他颜色过渡的效果<br/>
+渐变是图片，需要通过`background-image`来设置。
+### 7.2.1 线性渐变
+- `linear-gradient()`：颜色沿着一条直线发生变化 <br/>
+  `linear-gradient(red,yellow);`：红色在开头，黄色在结尾，中间是过渡区域 <br/>
+  - 线性渐变的开头，我们可以指定一个渐变的方向
+    - to left：向左
+    - to right：向右
+    - to bottom：向下
+    - to top：向上
+    - xxx deg：表示旋转度数
+    - xxx trun：表示圈
+```  
+/* 从右向左，从红色到黄色渐变 */
+background-image: linear-gradient(to left,red,yellow);
+```
+  - 渐变可以同时指定多个颜色，多个颜色默认情况下平均分布，也可以手动指定渐变的分布情况 <br/>
+  `background-image: linear-gradient(red 50px,yellow 100px,grenn 120px);`
+- `repeating-linear-gradient();`：可以平铺的线性渐变 <br/>
+`background-image: repeating-linear-gradient(red 50px,yellow 100px);`
+### 7.2.2 径向渐变
+- `radial-gradient()`：径向渐变，放射性效果，从中心往四周发射 <br/>
+`background-image:radial-gradient(red,yellow);` <br/>
+默认情况下径向渐变圆心的形状根据元素的形状来计算的，可以手动指定径向渐变的大小 <br/>
+  - 正方形 --> 圆形
+  - 长方形 --> 椭圆形 <br/> 
+`background-image:radial-gradient(100px 100px,red,yellow);`
+  - `circle`：正圆
+  - `ellipse`：椭圆 <br/>
+`background-image:radial-gradient(ellipse,red,yellow);`
+  - 可以指定渐变的位置：`background-image:radial-gradient(100px 100px at 100px 100px,red,yellow);` <br/>
+  语法：`radial-gradient(大小 at 位置, 颜色 位置, 颜色 位置);` <br/> 
+  大小：<br/>
+    - `circle`：圆形
+    - `ellipse`：椭圆
+    - `closest-side`：近边
+    - `closest-corner`：近角
+    - `farthest-side`：圆边
+    - `farthest-corner`：远角
+  位置：<br/>
+    - `top`
+    - `right`
+    - `left`
+    - `center`
+    - `bottom`
 
-### 7.3 径向渐变
-
-
-
-  
+ 
 
 
 
