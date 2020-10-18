@@ -126,5 +126,69 @@ tbody > tr:nth-child(2n+1){
     </div>
 </body>
 ``` 
+## 2. 表单
+### 2.1 基本属性
+在现实生活中，表单用于提交数据。<br/>
+在网页中也可以使用表单，网页中的表单用于将本地的数据提交给远程的服务器 <br/>
+使用`form`标签来创建一个表单 <br/>
+- `action`：表单要提交的服务器的地址
+```
+<form action="target.html">
+    <!-- 文本框：数据提交到服务器中，必须要为元素指定一个name -->
+    文本框 <input type="text" name="username">
+    
+    <!-- 密码框：与文本框一样，必须要为元素指定一个name -->
+    密码框 <input type="password" name="password">
+    
+    <!-- 提交按钮，value表示按钮内的名字 -->
+    <input type="submit" value="登录">
 
+    <!-- 单选按钮：name属性必须保持一致 
+        且必须指定一个value属性，value属性最终会作为用户填写的值传递给服务器
+        checked：可以将单选按钮设置为默认选中 
+    -->
+    单选按钮 <input type="radio" name="hello" value="male" checked>
+            <input type="radio" name="hello" value="female">
 
+    <!-- 多选框 -->
+    多选框 <input type="checkedbox" name="test" value="1">
+          <input type="checkedbox" name="test" value="2">
+          <input type="checkedbox" name="test" value="3">
+
+    <!-- 下拉列表 selected：默认选中 -->
+    <select name="list">
+        <option value="i">选项1</option>
+        <option selected value="ii">选项2</option>
+        <option value="iii">选项3</option>
+    </select>
+</form>
+```
+### 2.2 其他属性
+- 按钮
+```
+<!-- 提交按钮 -->
+<input type="submit">
+<!-- 重置按钮 -->
+<input type="reset">
+<!-- 普通按钮 -->
+<input type="button" value="按钮">
+```
+```
+<button type="submit">提交</button>
+<button type="reset">重置</button>
+<button type="button">按钮</button>
+```
+- `autocomplete="off";`：关闭自动补全
+```
+<!-- 将所有输入框内的数据清除 -->
+<form action="target.html" autocomplete="off">
+
+<!-- 将指定的输入框内的数据清除 -->
+<input type="text" name="username" autocomplete="off">
+```
+- `readonly`：将表单项设置为只读，数据会提交 <br/>
+`<input type="text" name="username" readonly>`
+- `disabled`：将表单项设置为禁用，数据不会提交 <br/>
+`<input type="text" name="username" disabled>`
+- `autofocus`：设置表单项目自动获取焦点 <br/>
+`<input type="text" name="username" autofocus>`
