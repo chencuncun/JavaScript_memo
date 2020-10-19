@@ -1287,12 +1287,12 @@ div{
 - `linear-gradient()`：颜色沿着一条直线发生变化 <br/>
   `linear-gradient(red,yellow);`：红色在开头，黄色在结尾，中间是过渡区域 <br/>
   - 线性渐变的开头，我们可以指定一个渐变的方向
-    - to left：向左
-    - to right：向右
-    - to bottom：向下
-    - to top：向上
-    - xxx deg：表示旋转度数
-    - xxx trun：表示圈
+    - `to left`：向左
+    - `to right`：向右
+    - `to bottom`：向下
+    - `to top`：向上
+    - `xxx deg`：表示旋转度数
+    - `xxx turn`：表示圈
 ```  
 /* 从右向左，从红色到黄色渐变 */
 background-image: linear-gradient(to left,red,yellow);
