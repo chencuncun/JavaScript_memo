@@ -112,7 +112,7 @@
 - [属性名$=属性值]：选择属性值以指定值结尾的元素
 ```
 <style>
-    p[title^=abc]{
+    p[title$=abc]{
         color:orange;    
     }
 </style>
@@ -638,7 +638,7 @@ BFC(Block Formatting Context)：块级格式化环境 <br/>
     .box1{
         width: 200px;
         height: 200px;
-        <!-- 将父元素开启BFC -->
+        /* 将父元素开启BFC */
         overflow: hidden;
         background-color: rosybrown;
     }
@@ -681,7 +681,7 @@ BFC(Block Formatting Context)：块级格式化环境 <br/>
     .box2{
         width: 200px;
         height: 200px;
-        <!-- 清除左浮动，使其不被box1覆盖 -->
+        /* 清除左浮动，使其不被box1覆盖 */
         clear: left;
         background-color: saddlebrown;
     }
@@ -706,7 +706,7 @@ BFC(Block Formatting Context)：块级格式化环境 <br/>
         float: left;
     }
     .box3{
-        <!-- 清除浮动对其的影响 -->
+        /* 清除浮动对其的影响 */
         clear: both;
     }
 </style>
@@ -1326,12 +1326,99 @@ background-image: linear-gradient(to left,red,yellow);
     - `left`
     - `center`
     - `bottom`
+## 8. 过渡
+通过过渡可以指定一个属性发生变化时的切换方式 <br/>
+通过过渡可以创建一些非常好的效果，提升用户的体验 <br/>
+- 属性 <br/>
+  - `transition-property`：指定要执行过渡的属性。
+    - 多个属性用`,`隔开
+    - 如果所有属性都需要过渡，则使用`all`关键字
+    - 大部分可计算的属性都支持过渡效果
+    - 注意：过渡时必须时从一个有效数值向另外一个有效数值进行过渡
+    - 例子：`transition-property: width,height;` `transition-property: all;`
+  - `transition-duration`：指定过渡效果的持续时间
+    - 时间单位：`s`和`ms`
+    - 例子：`transition-duration: 2s;`
+  - `transition-timing-function`：过渡的时序函数，指定过渡的执行的方式
+    可选值：<br/>
+    - `ease`：默认值，慢速开始，先加速，后减速
+    - `linear`：匀速运动
+    - `ease-in`：加速运动
+    - `ease-out`：减速运动
+    - `ease-in-out`：先加速，后减速
+    - `cubic-bezier()`：指定时序函数：<https://cubic-bezier.com>
+    - `steps()`：分步执行过渡效果
+    可以设置一个第二个值 <br/>
+      - `end`：在时间结束时执行过渡（默认值）
+      - `start`：在时间开始时执行过渡 
+  - `transition-delay`：过渡效果的延迟，等待一段时间后再执行过渡 
+  - `transition`：可以同时设置过渡相关的所有属性，只有一个要求：如果要写延迟，则两个时间中第一个是持续时间，第二个是延迟
+## 9. 动画
+动画和过渡类似，都是可以实现一些动态的效果，不同的是过渡需要在某个属性发生变化时才会触发，而动画可以自动触发动态效果 <br/>
+设置动画效果，必须先要设置一个关键帧，关键帧设置了动画执行每一个步骤。 <br/>
+```
+@keyframes test{
+  /* from表示动画的开始位置，也可以使用0% */   
+  from{ 
+    margin-left: 0;
+  }
+  /* to表示动画的结束位置 */
+  to{
+    margin-left: 700px;
+  }
+}
+.box1{
+  background-color: #bfa;
 
- 
+  /* animation-name：要对当前元素生效的关键帧的名字 */
+  animation-name: test;
 
+  /* animation-name：动画的执行时间 */
+  animation-duration: 4s;
 
+  /* animation-delay：动画的延时 */
+  animation-delay: 2s;
 
+  /* animation-timing-function：运动的方式（以下为匀速运动，其他运动参考过渡笔记） */
+  animation-timing-function: linear;
 
+  /* animation-iteration-count：动画执行的次数 
+    可选值：
+      - 次数
+      - infinite：无限执行
+  */
+  animation-iteration-count: 3;
 
+  /* animation-direction 指定动画运行的方向 
+    可选值：
+      - normal：默认值 从from向to运行 每次都是这样
+      - reverse：从to向from运行 每次都是这样
+      - alternate：从from向to运行 重复执行动画时反向执行
+      - alternate-reverse：从to向from运行 重复执行动画时反向执行
+  */
+  animation-direction: alternate-reverse;
+
+  /* animation-play-state：设置动画的执行状态
+    可选值：
+      - running：默认值 动画执行
+      - paused：动画暂停  
+   */
+  animation-play-state: paused;
+
+  /* animation-fill-mode：动画的填充模式 
+    可选值：
+      - none：默认值 动画执行完毕，元素回到原来位置
+      - forwards：动画执行完毕，元素停止在动画结束的位置
+      - backwards：动画延时等待时，元素就会处于开始位置
+      - both：结合了forwards和backwards
+   */
+  animation-fill-mode: none;
+
+  /* 综合 */
+  animation: test 2s 2 1s;
+
+}
+
+```
 
 
