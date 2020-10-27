@@ -1352,73 +1352,504 @@ background-image: linear-gradient(to left,red,yellow);
       - `end`：在时间结束时执行过渡（默认值）
       - `start`：在时间开始时执行过渡 
   - `transition-delay`：过渡效果的延迟，等待一段时间后再执行过渡 
-  - `transition`：可以同时设置过渡相关的所有属性，只有一个要求：如果要写延迟，则两个时间中第一个是持续时间，第二个是延迟
+  - `transition`：可以同时设置过渡相关的所有属性，只有一个要求：如果要写延迟，则两个时间中第一个是持续时间，第二个是延迟时间
 ## 9. 动画
 动画和过渡类似，都是可以实现一些动态的效果，不同的是过渡需要在某个属性发生变化时才会触发，而动画可以自动触发动态效果 <br/>
 设置动画效果，必须先要设置一个关键帧，关键帧设置了动画执行每一个步骤。 <br/>
+- `@keyframes 名字{ from{} to{} }`：关键帧
+  - `from`：表示动画的开始位置，也可以使用`0%`
+  - `to`：表示动画的技术位置，也可以使用`100%`
+- `animation-name`：要对当前元素生效的关键帧的名字
+- `animation-duration`：动画的执行时间
+- `animation-delay`：动画的延时
+- `animation-timing-function`：运动的方式
+  可选值：<br/>
+  - `ease`：默认值，慢速开始，先加速，后减速
+  - `linear`：匀速运动
+  - `ease-in`：加速运动
+  - `ease-out`：减速运动
+  - `ease-in-out`：先加速，后减速
+  - `cubic-bezier()`：指定时序函数：<https://cubic-bezier.com>
+  - `steps()`：分步执行过渡效果
+- `animation-iteration-count`：动画执行的次数 
+  可选值：
+  - 次数：1,2,3...
+  - `infinite`：无限执行
+- `animation-direction`：指定动画运行的方向 
+  可选值：
+  - `normal`：默认值 从`from`向`to`运行 每次都是这样
+  - `reverse`：从`to`向`from`运行 每次都是这样
+  - `alternate`：从`from`向`to`运行 重复执行动画时反向执行
+  - `alternate-reverse`：从`to`向`from`运行 重复执行动画时反向执行
+- `animation-play-state`：设置动画的执行状态
+  可选值：
+  - `running`：默认值 动画执行
+  - `paused`：动画暂停  
+- `animation-fill-mode`：动画的填充模式 
+  可选值：
+  - `none`：默认值 动画执行完毕，元素回到原来位置
+  - `forwards`：动画执行完毕，元素停止在动画结束的位置
+  - `backwards`：动画延时等待时，元素就会处于开始位置
+  - `both`：结合了forwards和backwards
+- `animation`：可以同时设置动画相关的所有属性，只有一个要求：如果要写延迟，则两个时间中第一个是持续时间，第二个是延迟时间
 ```
 @keyframes test{
-  /* from表示动画的开始位置，也可以使用0% */   
   from{ 
     margin-left: 0;
   }
-  /* to表示动画的结束位置 */
   to{
     margin-left: 700px;
   }
 }
 .box1{
   background-color: #bfa;
-
-  /* animation-name：要对当前元素生效的关键帧的名字 */
   animation-name: test;
-
-  /* animation-name：动画的执行时间 */
   animation-duration: 4s;
-
-  /* animation-delay：动画的延时 */
   animation-delay: 2s;
-
-  /* animation-timing-function：运动的方式（以下为匀速运动，其他运动参考过渡笔记） */
   animation-timing-function: linear;
-
-  /* animation-iteration-count：动画执行的次数 
-    可选值：
-      - 次数
-      - infinite：无限执行
-  */
   animation-iteration-count: 3;
-
-  /* animation-direction 指定动画运行的方向 
-    可选值：
-      - normal：默认值 从from向to运行 每次都是这样
-      - reverse：从to向from运行 每次都是这样
-      - alternate：从from向to运行 重复执行动画时反向执行
-      - alternate-reverse：从to向from运行 重复执行动画时反向执行
-  */
   animation-direction: alternate-reverse;
-
-  /* animation-play-state：设置动画的执行状态
-    可选值：
-      - running：默认值 动画执行
-      - paused：动画暂停  
-   */
   animation-play-state: paused;
-
-  /* animation-fill-mode：动画的填充模式 
-    可选值：
-      - none：默认值 动画执行完毕，元素回到原来位置
-      - forwards：动画执行完毕，元素停止在动画结束的位置
-      - backwards：动画延时等待时，元素就会处于开始位置
-      - both：结合了forwards和backwards
-   */
   animation-fill-mode: none;
-
-  /* 综合 */
   animation: test 2s 2 1s;
-
 }
-
 ```
+## 10. 变形 `transform`
+变形是指通过CSS来改变元素的形状或位置，变形不会影响都页面的布局 <br/>
+`transform`：用来设置元素的变形效果
+### 10.1 平移
+平移元素的百分比是相对于自身计算的
+- `translateX()`：沿着x轴方向平移
+  - `transform: translateX(-100px);` 
+- `translateY()`：沿着y轴方向平移
+  - `transform: translateY(100%);`
+- `translateZ()`：沿着z轴方向平移
+- 左右居中效果
+```
+.box1{
+  background-color: orange;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%) tanslateY(-50%);
+}
+<div class="box1">aaa</div>
+```
+- 实例：鼠标划过一个图片时，图片会向上移动。
+```
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标划过，图片上移</title>
+    <style>
+        body{
+            background-color: silver;
+        }
+        .box1{
+            width: 220px;
+            height: 300px;
+            background-color: #fff;
+            margin: 100px 100px;
+            transition: all .3s;
+
+        }
+        .box1:hover{
+            transform:translateY(-5px);
+            box-shadow: 0 0 10px rgba(0,0,0,.5);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+</body>
+```
+### 10.2 z轴平移
+调整元素在z轴的位置，正常情况下，就是调整元素和人眼之间的距离。距离越大，元素离人越近。<br/>
+z轴平移属于立体效果（近大远小），默认情况下网页是不支持透视的。<br/>
+如果需要看见效果，必须设置网页的视距。
+```
+<head>
+<title>z轴平移</title>
+    <style>
+        html{
+            /* 设置当前网页的视距为800px，人眼距离网页的距离 */
+            perspective: 800px;
+        }
+        body{
+            border: 1px red solid;
+            background-color: silver;
+        }
+        .box1{
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+            margin: 200px auto;
+            /* 过渡效果为2s */
+            transition: all 2s;
+        }
+        body:hover .box1{
+            /* 向z轴平移400px */
+            transform: translateZ(400px);
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+</body>
+```
+### 10.3 旋转 
+通过旋转可以使元素沿着x轴y轴或z轴旋转指定的角度。<br/>
+- `rotateX()`
+- `rotateY()`
+- `rotateZ()`：`transform: rotateZ(90deg);`,`transform: rotateZ(1turn);`
+### 10.4 缩放
+对元素进行缩放的函数
+- `scaleX()`：水平方向缩放
+- `scaleY()`：垂直方向缩放
+- `scale()`：双方向缩放
+```
+<title>图片缩放</title>
+    <style>
+        .box1{
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            /* 避免父元素溢出 */
+            overflow: hidden;
+        }
+        img{
+            width: 100%;
+            /* 设置过渡时间 */
+            transition: .2s;
+        }
+        /* 当鼠标移入，图片放大1.2倍 */
+        img:hover{
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+            <img src="../img/13_4.png" alt="">
+    </div>
+</body>
+```
+### 10.5 变形的原点
+`transform-origin`
+  - `transform-origin: center;`：默认值
+  - `transform-origin: 0 0;`：起始点为(0,0)
+## 11. less
+### 11.1 简介
+less是一门css的预处理语言，less是一个css的增强版通过less剋编写更少的代码实现强大的样式 <br/>
+css原生支持变量的设置，但是less的兼容性并不好，在IE中无法显示。<br/>
+在less中添加了很多的新特性，像对变量的支持，对mixin的支持。。。<br/>
+less的语法大体上和css语法一致，但是less中增添了很多对css的扩展，所有浏览器无法直接执行less代码，要执行必须将less转换为css，然后再由浏览器执行。
+
+- `var`：变量
+```
+<head>
+<title>变量</title>
+    <style>
+        html{
+            --color:#fba;
+            --length:100px;
+        }
+        .box1{
+            width: var(--length);
+            height: var(--length);
+            background-color:var(--color);
+        }
+        .box2{
+            width: var(--length);
+            height: var(--length);
+            color: var(--color);
+        }
+        .box3{
+            width: var(--length);
+            height: var(--length);
+            border: 10px solid var(--color);
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">aaa</div>
+    <div class="box2">aaa</div>
+    <div class="box3">aaa</div>
+</body>
+```
+- `calc`：计算 `width: calc(200px*2);`
+### 11.2 语法
+#### 11.2.1 基本概念
+在变量中可以存储一个任意的值，并且可以任意修改变量中的值 <br/>
+  - 变量的语法：`@变量名`
+  - 使用变量时，如果时直接使用则以`@变量名`的形式使用即可
+  - 作为类名，或者一部分值使用时必须以`@{变量名}`的形式使用
+  - 变量发生重名时，会优先使用比较近的变量
+  - 可以在变量声明前就使用变量，不过不推荐此用法
+  - 使用属性时的语法：`$属性名`
+ ``` 
+ @a: 100px;
+ @b: #fba;
+ @c: box6;
+ .box1{
+   width: @a;
+   color: @b; 
+ }
+ //作为类名，或者一部分值使用时必须以`@{变量名}`的形式使用
+ .@{c}{
+   width: @a;
+   background-image: url("@{c}/i.png");
+   //使用属性时的语法：`$属性名`
+   height: $width;
+ }
+ ``` 
+  - 使用子元素时，用`>.类名`
+```
+.box1{
+  .box2{
+      color: red;
+  }
+  >.box3{
+      color: red;
+  }
+}
+```
+  - `&`：表示外层的父元素
+```
+.box1{
+  .box2{
+      color: red;
+  }
+  &:hover{
+    color: orange;
+  }
+}
+```
+  - `:extend()`：对当前选择器扩展指定选择器的样式（选择器分组）
+``` 
+.p1{
+    width: 100px;
+    height: 100px;
+}
+.p2:extend(.p1){
+    color:red;
+}
+```   
+  - mixin混合：直接对指定的样式进行引用
+```
+.p1{
+    width: 100px;
+    height: 100px;
+}
+.p3{
+    //将p1的样式进行复制
+    .p1();
+}
+```
+  - 使用类选择器时可以在选择器后边添加一个`()`，就创建了一个mixins，相当于函数
+```
+.p4(){
+    width: 100px;
+    height: 100px;
+    background-color: #fba;
+}
+.p5{
+  //引用了P4()
+    .p4();
+}
+```
+#### 11.2.2 混合函数
+在混合函数中可以直接设置变量。<br/>
+注意：调用混合函数，按顺序传递参数。<br/>
+```
+.test(@w,@h,@bg-color){ 
+    width: @w;
+    height: @h;
+    border: 1px solid @bg-color;
+}
+div{
+    .test(200px,300px,#fba);
+}
+```
+- `average`：取颜色的平均值
+```
+//取红色和蓝色的平均值
+color: average(red,blue);
+```
+- `darken()`：颜色加深 
+```
+background-color: darken(#bfa,20%);
+```
+#### 11.2.3 其他
+- `import`：用来将其他的less引入到当前的less
+```
+//将syntax.less文件引入
+@import "syntax.less"
+```
+- 在less中所有的数值都可以直接进行运算
+```
+.box1{
+  width: 100px + 100px;
+  height: 200px/2;
+}
+```
+## 12. 弹性盒：`flex`
+### 12.1 简介
+`flex`(弹性盒，伸缩盒)是CSS中的又一种布局手段，它主要用来代替浮动来完成页面的布局。<br/>
+`flex`可以使元素具有弹性，让元素可以跟随页面的大小的改变而改变。<br/>
+### 12.2 弹性容器
+要使用弹性盒，必须先将一个元素设置为弹性容器，通过`display`来设置弹性容器 <br/>
+- `display: flex;`：设置为块级弹性容器
+- `display: inline-flex;`：设置为行内弹性容器
+```
+<head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 800px;
+            border: 10px red solid;
+            /* 设置为弹性容器 */
+            display:flex;
+        }
+        li{
+            width: 100px;
+            height: 100px;
+            /* 左右居中 */
+            text-align: center;
+            /* 上下居中 */
+            line-height: 100px;
+            font-size: 30px;
+            background-color: #bfa;
+        }
+        li:nth-child(2){
+            background-color: #fba;
+        }
+        li:nth-child(3){
+            background-color: #baf;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+```
+- `flex-direction`：指定容器中弹性元素的排列方式 <br/>
+  - 可选值：<br/>
+    - `row`：默认值，弹性元素在容器中水平排列（左向右）
+      - 主轴：自左向右
+    - `row-reverse`：弹性元素在容器中反向水平排列（右向左）
+      - 主轴：自右向左
+    - `culumn`：弹性元素纵向排列（上向下）
+      - 主轴：自上向下
+    - `culumn-reverse`：弹性元素纵向排列（下向上）
+      - 主轴：自下向上
+  - 主轴：弹性元素的排列方向称为主轴
+  - 辅轴：与主轴垂直方向的称为辅轴
+- `flex-wrap`：设置弹性元素是否在弹性容器中自动换行 <br/>
+  - 可选值：<br/>
+    - `nowrap`：默认值，元素不会自动换行
+    - `wrap`：元素沿着辅轴方向自动换行
+    - `wrap-reverse`：元素沿着辅轴反方向换行
+- `flex-flow`：`flex-direction`和`flex-wrap`的简写属性
+```
+flex-flow: row wrap;
+```
+- `justify-content`：如何分配主轴上的空白空间，或者说是主轴上的元素如何排列 <br/>
+  - 可选值：<br/>
+    - `flex-start`：元素沿着主轴起边排列
+    - `flex-end`：元素沿着主轴终边排列
+    - `center`：元素居中排列
+    - `space-around`：空白分布到元素两侧
+    - `space-evenly`：空白分布到元素的单侧
+    - `space-between`：空白均匀分布到元素之间
+  - 注意点：`justify`讲的都是关于主轴上的
+- `align-items`：元素在辅轴上如何对齐，设置的是元素间的关系 <br/>
+  - 可选值：<br/>
+    - `stretch`：默认值，将元素的长度设置为相同的值
+    - `flex-start`：元素不会拉伸，沿着辅轴起边对齐
+    - `flex-end`：沿着辅轴的终边对齐
+    - `center`：居中对齐
+    - `baseline`：基线对齐
+- `justify-content`和`align-items`可以让元素居中对齐
+``` 
+justify-content: center;
+align-items: center;
+```
+- `align-content`：辅轴空白空间的分布
+  - `center`：两边空白对齐
+  - `flex-start`
+  - `flex-end`
+  - `space-between`
+- `align-self`：用来覆盖当前弹性元素上的`align-items`
+
+### 12.3 弹性元素
+弹性容器的直接子元素是弹性元素（弹性项），一个元素可以同时是弹性容器和弹性元素。<br/>
+- 属性：
+  - `flex-grow` 指定弹性元素的伸展系数
+    - 当父元素右多余空间的时候，子元素如何伸展
+    - 父元素的剩余空间，会按照比例进行分配 
+```
+<head>
+  <title>弹性盒子</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 800px;
+            border: 10px red solid;
+            /* 设置为弹性容器 */
+            display:flex;
+            /* 水平反向排列 */
+            flex-direction: row-reverse;
+        }
+        li{
+            width: 100px;
+            height: 100px;
+            /* 左右居中 */
+            text-align: center;
+            /* 上下居中 */
+            line-height: 100px;
+            font-size: 30px;
+            background-color: #bfa;
+        }
+        li:nth-child(1){
+            /* 保持原比例：100px*/
+            flex-grow: 0;
+        }
+        li:nth-child(2){
+            background-color: #fba;
+            /* 剩余500px中的2/5，也就是200px+原始100px=300px */
+            flex-grow: 2;
+        } 
+        li:nth-child(3){
+            background-color: #baf;
+            /* 剩余500px中的3/5，也就是300px+原始100px=400px */
+            flex-grow: 3;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+```
+  - `flex-shrink`：指定弹性元素的收缩系数
+    - 当父元素中的空间不足以容纳所有的子元素时，可以对子元素进行收缩
+
+
 
 
