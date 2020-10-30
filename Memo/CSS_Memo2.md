@@ -2084,12 +2084,83 @@ html{
     background-color: #bfa;
 }
 ```
-
-
-
-
-
-
+## 14. 响应式布局
+网页可以根据不同的设备或窗口大小呈现出不同的效果。使用响应 式布局，可以使一个网页适用于所有设备。<br/>
+响应布局的关键就是媒体查询。通过媒体查询，可以为不同的设备，或设备不同状态来分别设置样式。<br/>
+### 14.1 媒体查询
+- 语法：`@media 查询规则{}` <br/>
+- 媒体类型(查询规则)：可以用`,`连接多个媒体类型，这样它们之间就是一个或的关系
+  - `all` 所有设备
+  - `print` 打印设备
+  - `screen` 带屏幕的设备
+  - `speech` 屏幕阅读器
+``` 
+<style>
+    @media print,screen {
+        body{
+          background-color: #bfa;
+        }
+    }
+</style>
+```
+可以在媒体类型前添加一个`only`表示只有。`only`的使用主要是为了兼容一些老版本浏览器。
+```
+<style>
+    @media only screen {
+        body{ 
+          background-color: #bfa;
+        }
+    }
+</style>
+```
+### 14.2 媒体特性
+### 14.2.1 属性
+- `width` 视口的宽度
+- `height` 视口的高度
+- `min-width` 视口的最小宽度(视口大于指定宽度时生效)
+- `max-width` 视口的最大宽度(视口小于指定宽度时生效)
+```
+<style>
+    /* 视口的宽度为500px时，背景颜色变为#bfa */
+    @media(min-width:500px){
+        body{
+          background-color: #bfa;
+        }
+    }
+</style>
+```
+### 14.2.2 断点
+样式切换的分界点，我们称其为断点，也就是网页的样式会在这个点时发生变化。<br/>
+一般比较常用的断点：<br/>
+- 小于768px 超小屏幕 `max-width=768px`
+- 大于768px 小屏幕 `min-width=768px`
+- 大于992px 中型屏幕 `min-width=992px`
+- 大于1200px 大屏幕 `min-width=1200px`
+- `,`：或” 
+- `and`：“且”
+- `not`：除了(不常用)
+```
+<style>
+    /* 视口大于800px，或者小于600px时，背景色设置为#bfa */
+    @media only screen and (min-width:800px),(max-width:600px){
+      body{
+        background-color: #bfa;
+      }
+    }
+</style>
+```
+```
+<style>
+    /* 视口大于600px且小于800px时，背景色设置为#bfa */
+    @media only screen and (min-width:600px) and (max-width:800px){
+      body{
+        background-color: #bfa;
+        }
+      }
+</style>
+```
+### 14.2.3 响应式设计的网页
+原则：移动端优先 ➡️ 渐进增强
 
 
 

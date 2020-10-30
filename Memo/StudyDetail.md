@@ -168,16 +168,11 @@
     - 完成移动端的页面
   - 媒体查询简介
   - 美图手机导航机构
-- 10月31号 <br/>
   - 美图手机左侧图标
   - 美图手机左侧下拉菜单
   - 美图手机完成
-
-
-
-
-
-
+- 10月31号 <br/>
+  - HTML/CSS复习
 
 Javascript学习网站
 <https://www.bilibili.com/video/bv1YW411T7GX/?spm_id_from=333.788.b_636f6d6d656e74.12>
