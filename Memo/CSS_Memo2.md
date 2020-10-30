@@ -1849,6 +1849,246 @@ align-items: center;
 ```
   - `flex-shrink`：指定弹性元素的收缩系数
     - 当父元素中的空间不足以容纳所有的子元素时，可以对子元素进行收缩
+    - 收缩系数的计算方法比较复杂，收缩多少是根据收缩系数和元素大小来计算
+```
+/* 容器宽度为400px，其下的三个子元素分别是200px。
+如果使用flex-shrink: 1;则子元素会被收缩，使其包含在容器里。
+如果使用flex-shrink: 0;则子元素不会被收缩而是会保持原来的宽度，溢出容器。 */
+<head>
+  <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 400px;
+            border: 10px red solid;
+            /* 设置弹性盒 */
+            display: flex;
+        }
+        li{
+            width: 200px;
+            line-height: 100px;
+            font-size: 30px;
+            background-color: #bfa;
+            flex-grow: 1;
+            /* 弹性的收缩系数 */
+            flex-shrink: 1;
+
+        }
+        li:nth-child(1){
+        }
+        li:nth-child(2){
+            background-color: #fba;
+        }
+        li:nth-child(3){
+            background-color: #baf;
+        }
+  </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+```
+  - `flex-basis`：指定的是元素在主轴上的基础长度
+    - 如果主轴是横向的，则该值指定的就是元素的宽度
+    - 如果主轴是纵向的，则该值指定的就是元素的高度
+    - 默认值是`auto`，表示参考元素自身的宽度或高度
+    - 如果传递了一个具体的数值，则以该值为准
+```
+<head>
+  <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 800px;
+            border: 10px red solid;
+            /* 设置弹性盒 */
+            display: flex;
+        }
+        li{
+            width: 200px;
+            line-height: 100px;
+            font-size: 30px;
+            background-color: #bfa;
+            text-align: center;
+            /* 元素的基础长度 */
+            flex-basis: 100px;
+
+        }
+        li:nth-child(1){
+        }
+        li:nth-child(2){
+            background-color: #fba;
+        }
+        li:nth-child(3){
+            background-color: #baf;
+        }
+  </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+```
+  - `flex`：可以设置弹性元素所有的三个样式
+    - `flex 伸展 收缩 基础`
+    - 可选值： <br/>
+      - `initial`：表示`flex: 0 1 auto;`
+      - `auto`：表示`flex: 1 1 auto;`
+      - `none`：表示`flex: 0 0 auto;`：没有弹性
+      
+```
+flex: 1 1 auto;
+```
+  - `order`：决定弹性元素的排列顺序
+```
+<head>
+  <title>弹性盒子</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 800px;
+            border: 10px red solid;
+            /* 设置弹性盒 */
+            display: flex;
+        }
+        li{
+            width: 200px;
+            line-height: 100px;
+            font-size: 30px;
+            background-color: #bfa;
+            text-align: center;
+            /* 元素的基础长度 */
+            flex-basis: 100px;
+
+        }
+        li:nth-child(1){
+          /* 排第3 */
+            order: 3;
+        }
+        li:nth-child(2){
+          /* 排第1 */
+            order:1;
+            background-color: #fba;
+        }
+        li:nth-child(3){
+          /* 排第2 */
+            order: 2;
+            background-color: #baf;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body> 
+```
+## 13. 像素
+### 13.1 概念
+屏幕是由一个一个发光的小点构成，这一个个的小点就是像素。<br/>
+分辨率：1920 x 1080 就是屏幕中小点的数量。<br/>
+在前端开发中像素要分成两种情况讨论：物理像素和css像素。<br/>
+- 物理像素：上述所描述的小点就是物理像素
+- css像素：编写网页时，我们所用像素都是css像素 <br/>
+浏览器在显示网页时，需要将css像素转换为物理像素然后再呈现。一个css像素最终由几个物理像素显示，由浏览器决定。<br/>
+默认情况下，在pc端，一个css像素 = 一个物理像素。<br/>
+### 13.2 视口：viewport
+视口就是屏幕中用来显示网页的区域。可以通过查看视口的大小，来观察物理像素和css像素的比例 <br/>
+- 默认情况下：
+  - 视口宽度：1920px(css像素)。1920px(物理像素)。此时，css像素和物理像素的比值是1:1。
+- 放大两倍的情况下：
+  - 视口宽度： 960px(css像素)。1920px(物理像素)。此时，css像素和物理像素的比值是1:2。<br/>
+可以通过改变视口的大小，来改变css像素和物理像素的比值。
+### 13.3 手机像素
+在不同的屏幕，单位像素的大小是不同的，像素越小屏幕会越清晰。<br/>
+移动端分辨率：<https://material.io/resources/devices/> <br/>
+分辨率：<br/>
+- PC：24英寸 1920x1080px
+- iphone6：4.7寸 750x1334px <br/>
+智能手机的像素点，远远小于计算机的像素点 <br/>
+问题：一个宽度为900px的网页在iphone6中要如何显示呢？<br/>
+默认情况下，移动端的网页都会将视口设置为980像素(css像素)，以确保pc端网页可以在移动端正常访问。<br/>
+但是，如果网页的宽度超过了980px，移动端的浏览器会自动对网页缩放以完整显示网页。<br/>
+所以基本大部分的pc端网站都可以在移动端中正常浏览，但是往往都不会有一个很好的体验。<br/>
+为了解决这个问题，大部分网站都会专门为移动端设计网页。<br/>
+### 13.4 完美视口
+移动端默认的视口大小是980px(css像素)，默认情况下，移动端的像素比就是980/移动端宽度（980/750）<br/>
+如果直接在网页中编写移动端代码，这样在980px的视口下，像素比非常的不好,导致网页中的内容非常非常的小。<br/>
+编写移动网页时，必须要确保有一个比较合理的像素比：<br/>
+1css像素 对应 2个物理像素 <br/>
+1css像素 对应 3个物理像素 <br/>
+可以通过`meta`标签来设置视口大小。每一款移动设备设计时，都会有一个最佳的像素比。<br/>
+一般我们只需要将像素比设置为该值即可得到一个最佳效果。<br/>
+将像素比设置为最佳像素比的视口大小我们称其为完美视口。<br/>
+```
+<!-- 设置视口大小 device-width表示设备的宽度(完美视口) ，以下代码即将网页的视口设置为完美视口-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+### 13.5 vw单位
+不同的设备完美视口的大小是不一样的。<br/>
+iphone6     -- 375px <br/>
+iphone6plus -- 414px <br/>
+由于不同设备视口和像素比不同，所以同样的375px在不同设备下意义是不一样的。<br/>
+比如在iphone6中375px是全屏，而iphone6plus中不是全屏，所以在移动端开发时，就不能再使用px来进行布局，而应该用`vw`进行布局
+`vw`：表示的是视口的宽度(viewport width)，`vw`这个单位永远相当于视口宽度进行计算 <br/>
+- `100vw` = 一个视口的宽度
+- `1vw` = 1%视口的宽度 <br/>
+例如：设计图的宽度：`750px x 1125px`，使用`vm`作为单位的话是`100vm`。<br/>
+问题：创建一个`48px x 35px`大小的元素 <br>
+```
+750px(设计图的像素) = 100vm ➡️ 1px = 0.13333333vm
+48px = 6.4vw
+35px = 4.667vw
+➡
+width: 6.4vw;
+height: 4.667vw;
+```
+### 13.6 vw适配
+网页中字体大小最小是12px，不能设置一个比12px更小的字体。<br/>
+如果我们设置了一个小于12px的字体，则字体自动设置为12px。<br/>
+问题：创建一个`48px x 35px`大小的元素，可以用`rem`。<br/>
+```
+html{
+    /*
+      0.13333333vw = 1px
+      5.3333vw = 40px
+    */
+    font-size: 5.3333vm;
+}
+.box1{
+    /*
+      1 rem = 1html的字体大小
+      1 rem = 40px(设计图)
+    */
+    width: 1.2rem;
+    height: 0.875rem;
+    background-color: #bfa;
+}
+```
+
+
+
+
+
 
 
 
