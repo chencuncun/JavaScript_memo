@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>京东</title>
+    <!-- 引入重置样式表 -->
+    <link rel="stylesheet" href="../Memo/reset.css">
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* 京东最上面登录注册等的导航条设置宽，高，背景色 */
+        nav.nav1{
+            width: 100%;
+            height: 30px;
+            background: #DDD;
+        }
+        .nav1_bar{
+            width: 1190px;
+            margin: 0 auto;
+        }
+        .nav_location{
+            width: 58px;
+            height: 30px;
+            float: left;
+            border: 1px solid transparent;
+        }
+        
+        /* 设置所在地图标的效果 */
+        #map_marker{
+            /* margin-left: 135px; */
+            line-height: 30px;
+            font-size: 14px;
+            float: left;
+            color:#f10215;
+            /* background-color: tomato; */
+        }
+        #map_position{
+            line-height: 30px;
+            float: left;
+            font-size:12px;
+        }
+        /* 设置城市列表的效果 */
+        .nav_location .city_list{
+            width: 320px;
+            height: 436px;
+            /* 隐藏下拉单 */
+            display: none;
+            background-color: white;
+            border: 1px solid rgb(204,204,204);
+            border-top: none;
+            /* 设置绝对定位，使其不占据页面的位置 */
+            position: absolute;
+            margin-top: 30px;
+            margin-left: -1px;
+        }
+        .nav_location:hover{
+            background-color: white;
+            border: 1px solid rgb(204,204,204);
+            border-bottom: none;
+        }
+        /* 当鼠标移入到所在地时，让下拉单显示 */
+        .nav_location:hover .city_list{
+            display: block;
+            z-index: 9;
+        }
+        /* 设置下拉菜单第一部分的格式 */
+        .name_list{
+            width: 100%;
+            height: 218px;
+        }
+        .name_list li{
+            width: 50px;
+        }
+         /* 设置下拉菜单第二部分的格式 */
+        .location_vip{
+            width: 100%;
+            height: 105px;
+            border-top: 1px #EEE solid;
+            float: left;
+            /* background-color: teal; */
+        }
+        h3{
+            width: 100%;
+            font-size: 14px;
+            margin: 15px 0 15px 5px;
+            float: left;
+            /* background-color: teal; */
+        }
+        .location_vip ul,
+        .sites ul
+        {
+            width: 100%;
+        }
+        .location_vip ul li,
+        .sites ul li{
+            float: left;
+            margin-right: 40px;
+            /* background-color:tomato; */
+        }
+        .location_vip ul li a{
+            font-size: 12px;
+        }
+        /* 设置下拉菜单第三部分的格式 */
+        .sites{
+             width: 100%;
+             height: 300px;
+             float: left;
+             border-top: 1px #EEE solid;
+        }
+        /* ul的外边距向右移动590px */
+        nav.nav1 ul{
+            float: right;
+            /* height: 30px; */
+            /* margin-left: 350px; */
+            /* background-color: teal; */
+        }
+        /* li标签自左向右浮动，高居中，左右内间距为30px */
+        nav.nav1 ul li{
+            float: left;
+            line-height: 30px;
+            padding:0px 6px;
+        }
+        /* 设置顶部导航栏的颜色和字体大小 */
+        nav.nav1 a{
+           color: #888;
+           font-size: 13px;
+        }
+        /* 将鼠标放置导航栏位置显示红色 */
+        nav.nav1 a:hover{
+            color: #f10215;
+        }
+        /* 将导航栏的分割线设置为灰色 */
+        nav.nav1 span{
+            color: #888;
+            margin-right: -2px;;
+            margin-left: 4px;
+        }
+        /* 顶部导航栏下拉框的下拉标签 */
+        i{
+            color: #888;
+            padding: 0 0 3px 3px;
+            /* font-size: 2px; */
+            line-height: 30px;
+        }
+
+        /* 京东搜素导航栏设置宽高，左右居中*/
+        nav.nav2{
+            width: 990px;
+            height: 140px;
+            margin: 0px auto;
+            /* background-color: tan; */
+        }
+        /* 京东搜索栏左边的京东图片的高和导航栏一样 */
+        div.nav2_pic a img{
+            width: 120px;
+            height: 140px;
+            float:left;
+        }
+        /* 京东搜索栏以及下面菜单的高和导航栏一样，向左浮动 */
+        div.nav2_content{
+            width: 870px;
+            height: 140px;
+            float: left;
+            /* background-color: violet; */
+        }
+        /* 京东搜索栏设置宽，高，向下移动，向左移动，盒子大小不变 */
+        form{
+            width: 870px;
+            height: 60px;
+            padding-top: 25px;
+            padding-left: 75px;
+            float: left;
+            box-sizing: border-box;
+            /* background-color:tomato; */
+        }
+        #search{
+            width: 490px;
+            height: 35px;
+            border: 2px red solid;
+            float: left;
+            /* background-color: tomato; */
+        }
+        #submit{
+            width: 60px;
+            height: 35px;
+            float: left;
+            border: red;
+            background-color:red;
+        }
+        /* 搜索框下面的第一个导航栏 */
+        .nav2_memu0 ul{
+            width: 870px;
+            height: 10px;
+            padding-left: 55px;
+            float:left;
+            box-sizing: border-box;
+        }
+        .nav2_memu0 ul li{
+            float: left;
+        }
+        .nav2_memu0 ul li a{
+           font-size: 10px;
+           color: #888;
+        }
+        .nav2_memu0 ul li a:hover{
+           color:red;
+        }
+        /* 京东搜索栏下面的第二个导航菜单设置宽，高，向下移动，向左移动，盒子大小不变 */
+        div.nav2_menu ul{
+            width: 870px;
+            height: 20px;
+            margin-top: 45px;
+            padding-left: 55px;
+            float:left;
+            box-sizing: border-box;
+            /* background-color: teal; */
+        }
+        /* 京东搜索栏下面菜单设置为水平布局 */
+        div.nav2_menu ul li{
+            float: left;
+        }
+        div.nav2_menu ul li a{
+            font-size: 15px;
+        }
+
+        /* main */
+        .main{
+            /* width: 1192px; */
+            width: 1440px;
+            height: 491px;
+            background-color: #EEE;
+            margin: 13px auto;
+        }
+
+        /* 左菜单栏 */
+        .container{
+            margin-left: 124px;
+            margin-top: 10px;
+            width: 192px;
+            height: 471px;
+            /* margin-top: 180px; */
+            /* padding:10px 0px; */
+            float: left;
+            background-color: snow;
+        }
+         div ul li{
+            list-style: none;
+            /* margin-top: 2px; */
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 18px;
+        }
+        div.container ul li:first-child{
+            margin-top: 2px;
+        }
+        main div.container ul li:hover{
+            background-color: lightgray;
+        }
+        a{
+            text-decoration:none;
+            font-size: 14px;
+            color: #333;
+        }
+        a:hover{
+            color: red;
+        }
+        span{
+            font-size: 14px;
+            padding: 0px 4px;
+        }
+
+        /* 设置主图片容器 */
+        .article{
+            width: 560px;
+            height: 471px;
+            margin-top: 10px;
+            padding: 0px 10px;
+            float:left;
+        }
+        /* 给main中的图片设置宽和高，向左浮动 */
+        article a img{
+            width: 560px;
+            height: 471px;
+            box-sizing: border-box;
+            float: left;
+        }
+        article ul li{
+            position:absolute;
+        }
+        article ul li:nth-of-type(1){
+            z-index: 8;
+        }
+        article ul li:nth-of-type(2){
+            z-index: 7;
+        }
+        article ul li:nth-of-type(3){
+            z-index: 6;
+        }
+        article ul li:nth-of-type(4){
+            z-index: 5;
+        }
+        article ul li:nth-of-type(5){
+            z-index: 4;
+        }
+        article ul li:nth-of-type(6){
+            z-index: 3;
+        }
+        article ul li:nth-of-type(7){
+            z-index: 2;
+        }
+        article ul li:nth-of-type(8){
+            z-index: 1;
+        }
+        /* 设置切换图片的点 */
+        .pointer{
+            position: relative;
+            z-index: 9;
+            top:445px;
+            left:5px;
+        }
+        .pointer a{
+            float: left;
+            font-size: 20px;
+            color: rgba(255,255,255,.3);
+            
+        }
+        .pointer a:hover{
+            color: white;
+        }
+
+
+        /* 给main右边的图片设置宽和高，向左浮动 */
+        .aside1{
+            margin-top: 10px;
+            width: 190px;
+            height: 471px;
+            float: left;
+            /* background-color: teal; */
+        }
+        .pic{
+            margin-bottom: 7.5px;
+        }
+        .pic a img{
+            width: 100%;
+        }
+
+        /* 给main最右边的新闻栏设置宽和高，向左浮动 */
+        .aside2{
+            margin-top: 10px;
+            width: 210px;
+            height: 471px;
+            margin-left: 10px;
+            box-sizing: border-box;
+            background-color:snow;
+            float: left;
+            /* background-color: teal; */
+        }
+        /* 以下是对新闻栏Part1的设置 */
+        .part1{
+            width: 210px;
+            height: 104px;
+        }
+        /* 设置新闻栏图片的大小及向左浮动 */
+        .part1_content li img{
+            width: 55px;
+            height: 45px;
+            /* margin-top: -20px;
+            margin-left: -18px; */
+            float: left;
+        }
+        /* 设置新闻栏打招呼部分 */
+        #part1_id1{
+            padding-left: 10px;
+            float: left;
+            /* background-color: teal; */
+        }
+        /* 设置新闻栏登录注册部分 */
+        #part1_id2{
+            padding-left: 10px;
+            padding-top: 2px;;
+            float: left;
+            /* background-color: teal; */
+        }
+        /* 设置新闻栏按钮部分的宽，内间距等 */
+        .part1_button{
+            width: 210px;
+            padding: 12px 25px;
+            float: left;
+            box-sizing: border-box;
+            /* background-color: darkcyan; */
+        }
+        /* 设置两个按钮的大小和样式 */
+        #button1,#button2{
+            width: 70px;
+            height: 25px;
+            font-size: 12px;
+            border-radius:10px;
+            border-style: none;
+            
+        }
+        /* 设置按钮1的独特样式 */
+        #button1{
+            background-color: red;
+            color:white;
+        }
+        /* 设置按钮2的独特样式 */
+        #button2{
+            background-color:black;
+            color:yellow;
+        }
+        /* 设置鼠标经过2个按钮时的样式 */
+        #button1:hover,#button2:hover{
+            background-color: crimson;
+        }
+
+
+        /* 以下是对新闻栏part2的设置 */
+        .part2{
+            width: 100%;
+            height: 128px;
+            float: left;
+            border-top:1px #EEE solid;
+        }
+        .part2 h2{
+            margin: 8px 0px 0px 3px;
+            font-weight: bold;
+        }
+        .part2 ul{
+            width: 210px;
+            margin-top: 8px;
+            /* padding-left: -10px; */
+            /* background-color: darkgreen; */
+            float: left;
+        }
+        .part2 span{
+            font-size: 13px;
+            background-color: pink;
+            color: red;
+            margin: 0px 10px 0px -15px;
+            float: left;
+        }
+        
+        .part2 ul li a{
+            display: block;
+            color: #888;
+            width: 130px;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .part2 ul li a:hover{
+            color: red;
+        }
+
+        /* 设置新闻栏的第三部分 */
+        .part3{
+            width: 210px;
+            height: 223px;
+            float: left;
+            margin-top: 3px;
+            border-top:1px #EEE solid;
+            /* background-color: tomato; */
+        }
+        .part3 ul{
+            background-color: lightseagreen;
+            margin-left: -10px;
+        }
+        .part3 img{
+            width: 30px;
+            height: 33px;
+        }
+        .part3 li{
+            width: 50px;
+            float: left;
+        }
+        .part3 li p{
+            font-size: 12px;
+            padding-left: 3px;
+        }
+        .part3 li p:hover{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav1">
+            <div class="nav1_bar">
+                <div class="nav_location">
+                    <div class="current_city">
+                        <span id="map_marker" class="fa fa-map-marker"></span>
+                        <span id="map_position"><a href="javascript:;">海外</a></span>
+                    </div>
+                    <div class="city_list">
+                        <ul class="name_list">
+                            <li><a href="javascript:;">北京</a></li>
+                            <li><a href="javascript:;">上海</a></li>
+                            <li><a href="javascript:;">天津</a></li>
+                            <li><a href="javascript:;">重庆</a></li>
+                            <li><a href="javascript:;">河北</a></li>
+                            <li><a href="javascript:;">山西</a></li>
+                            <li><a href="javascript:;">河南</a></li>
+                            <li><a href="javascript:;">辽宁</a></li>
+                            <li><a href="javascript:;">吉林</a></li>
+                            <li><a href="javascript:;">黑龙江</a></li>
+                            <li><a href="javascript:;">内蒙古</a></li>
+                            <li><a href="javascript:;">江苏</a></li>
+                            <li><a href="javascript:;">山东</a></li>
+                            <li><a href="javascript:;">安徽</a></li>
+                            <li><a href="javascript:;">浙江</a></li>
+                            <li><a href="javascript:;">福建</a></li>
+                            <li><a href="javascript:;">湖北</a></li>
+                            <li><a href="javascript:;">湖南</a></li>
+                            <li><a href="javascript:;">广东</a></li>
+                            <li><a href="javascript:;">广西</a></li>
+                            <li><a href="javascript:;">江西</a></li>
+                            <li><a href="javascript:;">四川</a></li>
+                            <li><a href="javascript:;">海南</a></li>
+                            <li><a href="javascript:;">贵州</a></li>
+                            <li><a href="javascript:;">云南</a></li>
+                            <li><a href="javascript:;">西藏</a></li>
+                            <li><a href="javascript:;">陕西</a></li>
+                            <li><a href="javascript:;">甘肃</a></li>
+                            <li><a href="javascript:;">青海</a></li>
+                            <li><a href="javascript:;">宁夏</a></li>
+                            <li><a href="javascript:;">新疆</a></li>
+                            <li><a href="javascript:;">港澳</a></li>
+                            <li><a href="javascript:;">台湾</a></li>
+                            <li><a href="javascript:;">钓鱼岛</a></li>
+                            <li><a href="javascript:;">海外</a></li>
+                        </ul>
+                        <div class="location_vip">
+                            <h3>地区专享版本</h3>
+                            <ul>
+                                <li><a href="javascript:;">中国港澳</a></li>
+                                <li><a href="javascript:;">中国台湾</a></li>
+                                <li><a href="javascript:;">京东全球</a></li>
+                            </ul>
+                        </div>
+                        <div class="sites">
+                            <h3>Available Sites</h3>
+                            <ul>
+                                <li><a href="javascript:;">Clobal Site</a></li>
+                                <li><a href="javascript:;">Situs Indonesia</a></li>
+                                <li><a href="javascript:;">Sitio de Espana</a></li>
+                            </ul>
+                        </div>
+                    </div>   
+                </div>
+                <ul>
+                    <li><a href="javascript:;">你好，请登录</a><span>|</span></li>
+                    <li><a href="javascript:;" style="color: #f10215;">免费注册</a><span>|</span></li>
+                    <li><a href="javascript:;">我的订单</a><span>|</span></li>
+                    <li><a href="javascript:;">我的京东</a><i class="fa fa-angle-down" style="font-size: 3px;"></i><span>|</span></li>
+                    <li><a href="javascript:;">京东会员</a><span>|</span></li>
+                    <li><a href="javascript:;" style="color: #f10215;">企业采购</a><i class="fa fa-angle-down" style="font-size: 3px;"></i><span>|</span></li>
+                    <li><a href="javascript:;">客户服务</a><i class="fa fa-angle-down" style="font-size: 3px;"></i><span>|</span></li>
+                    <li><a href="javascript:;">网站导航</a><i class="fa fa-angle-down" style="font-size: 3px;"></i><span>|</span></li>
+                    <li><a href="javascript:;">手机京东</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="nav2">
+            <div class="nav2_pic">
+                <a href="javascript:;"><img src="pic/05/JD.png" alt=""></a>
+            </div>
+            <div class="nav2_content">
+                <form>
+                    <input id="search" type="search" placeholder="洗衣机" name="search1"/>
+                    <input id="submit" type="submit" value="🔍"/>
+                </form>
+                <div class=nav2_memu0>
+                    <ul>
+                        <li><a href="javascript:;">华硕路由器</a></li>
+                        <li><a href="javascript:;">园艺工具</a></li>
+                        <li><a href="javascript:;">oled电视</a></li>
+                        <li><a href="javascript:;">珀莱雅</a></li>
+                        <li><a href="javascript:;">电脑数码</a></li>
+                        <li><a href="javascript:;">百亿补贴</a></li>
+                        <li><a href="javascript:;">苹果优惠</a></li>
+                        <li><a href="javascript:;">图书钜惠</a></li>
+                        <li><a href="javascript:;">运动鞋服</a></li>
+                    </ul>
+                </div>
+                <div class="nav2_menu">
+                    <ul>
+                        <li><a href="javascript:;">秒杀</a></li>
+                        <li><a href="javascript:;">优惠券</a></li>
+                        <li><a href="javascript:;">PLUS会员</a></li>
+                        <li><a href="javascript:;">品牌闪购</a></li>
+                        <li><a href="javascript:;">拍卖</a></li>
+                        <li><a href="javascript:;">京东家电</a></li>
+                        <li><a href="javascript:;">京东超市</a></li>
+                        <li><a href="javascript:;">京东生鲜</a></li>
+                        <li><a href="javascript:;">京东国际</a></li>
+                        <li><a href="javascript:;">京东金融</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="container">
+            <ul class="menu">
+                <li><a href="https://jiadian.jd.com/" target="_blank">家用电器</a></li>
+                <li><a href="https://shouji.jd.com/" target="_blank">手机</a><span>/</span><a href="https://wt.jd.com/" target="_blank">运营商</a><span>/</span><a href="https://shuma.jd.com/" target="_blank">数码</a></li>
+                <li><a href="https://shouji.jd.com/" target="_blank">电脑</a><span>/</span><a href="https://wt.jd.com/" target="_blank">办公</a></li>
+                <li><a href="javascript:;" alt="">家居</a><span>/</span><a href="javascript:;" alt="">家具</a><span>/</span><a href="javascript:;" alt="">家装</a><span>/</span><a href="javascript:;" alt="">厨具</a></li>
+                <li><a href="javascript:;" alt="">男装</a><span>/</span><a href="javascript:;" alt="">女装</a><span>/</span><a href="javascript:;" alt="">童衣</a><span>/</span><a href="javascript:;" alt="">内衣</a></li>
+                <li><a href="javascript:;" alt="">美妆</a><span>/</span><a href="javascript:;" alt="">个人清洁</a><span>/</span><a href="javascript:;" alt="">宠物</a></li>
+                <li><a href="javascript:;" alt="">女鞋</a><span>/</span><a href="javascript:;" alt="">箱包</a><span>/</span><a href="javascript:;" alt="">钟表</a><span>/</span><a href="javascript:;" alt="">珠宝</a></li>
+                <li><a href="javascript:;" alt="">男鞋</a><span>/</span><a href="javascript:;" alt="">运动</a><span>/</span><a href="javascript:;" alt="">户外</a></li>
+                <li><a href="javascript:;" alt="">房产</a><span>/</span><a href="javascript:;" alt="">汽车</a><span>/</span><a href="javascript:;" alt="">汽车用品</a></li>
+                <li><a href="javascript:;" alt="">母婴</a><span>/</span><a href="javascript:;" alt="">玩具乐器</a></li>
+                <li><a href="javascript:;" alt="">食品</a><span>/</span><a href="javascript:;" alt="">酒类</a><span>/</span><a href="javascript:;" alt="">生鲜</a><span>/</span><a href="javascript:;" alt="">特产</a></li>
+                <li><a href="javascript:;" alt="">艺术</a><span>/</span><a href="javascript:;" alt="">礼品鲜花</a><span>/</span><a href="javascript:;" alt="">农资绿植</a></li>
+                <li><a href="javascript:;" alt="">医药保健</a><span>/</span><a href="javascript:;" alt="">计生情趣</a></li>
+                <li><a href="javascript:;" alt="">图书</a><span>/</span><a href="javascript:;" alt="">文娱</a><span>/</span><a href="javascript:;" alt="">教育</a><span>/</span><a href="javascript:;" alt="">电子书</a></li>
+                <li><a href="javascript:;" alt="">机票</a><span>/</span><a href="javascript:;" alt="">酒店</a><span>/</span><a href="javascript:;" alt="">旅游</a><span>/</span><a href="javascript:;" alt="">生活</a></li>
+                <li><a href="javascript:;" alt="">理财</a><span>/</span><a href="javascript:;" alt="">众筹</a><span>/</span><a href="javascript:;" alt="">白条</a><span>/</span><a href="javascript:;" alt="">保险</a></li>
+                <li><a href="javascript:;" alt="">安装</a><span>/</span><a href="javascript:;" alt="">维修</a><span>/</span><a href="javascript:;" alt="">清洗</a><span>/</span><a href="javascript:;" alt="">二手</a></li>
+                <li><a href="javascript:;" alt="">工业品</a></li>
+            </ul>
+        </div>
+        <article class="article">
+            <ul>
+                <li><a href="javascript:;"><img src="pic/05/pic1.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic2.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic2.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic3.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic4.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic5.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic6.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic7.jpg" alt=""></a></li>
+                <li><a href="javascript:;"><img src="pic/05/pic8.jpg" alt=""></a></li> 
+            </ul>
+        
+            <div class="pointer">
+                <a class="active" href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+                <a href="javascript:;">●</a>
+            </div>
+        </article>
+        <aside class="aside1">
+            <div class="pic">
+                <a href="https://pro.jd.com/mall/active/2JQiRqedodJY6WdpkUzhobhNcj8/index.html" target="_blank"><img src="pic/01/1.png"></a>
+            </div>
+            <div class="pic">
+                <a href="https://pro.jd.com/mall/active/4P9a2T9osR9JvtzHVaYTPvsecRtg/index.html?babelChannel=ttt27" target="_blank"><img src="pic/01/2.png"></a>
+            </div>
+            <div class="pic">
+                <a href="https://pro.jd.com/mall/active/3zBvk9rJV48HQZpBVCwguyWNmZgw/index.html" target="_blank"><img src="pic/01/3.png"></a>
+            </div>
+        </aside>
+        <aside class="aside2">
+            <div class="part1">
+                <div class="part1_content">
+                    <ul>
+                        <li><a href="javascript:;"><img src="pic/05/dog.png" alt=""></a></li>
+                        <li id="part1_id1"><a href="javascript:;">Hi~欢迎逛京东！</a></li>
+                        <li id="part1_id2"><a href="javascript:;">登录</a><span>|</span><a href="javascript:;">注册</a></li>
+                    </ul>
+                </div>    
+            
+                <div class="part1_button">
+                    <input id="button1" type="button" value="新人福利">
+                    <input id="button2" type="button" value="PLUS会员">
+                </div>
+            </div>
+
+            <div class="part2">
+                <h2>京东快报</h2>
+                <ul>
+                    <li><span>热评</span><a href="javascript:;">巧克力冰淇淋组CP，神仙打架硬核有“料”</a></li>
+                    <li><span>热门</span><a href="javascript:;">冲奶粉不做这个动作，奶粉最贵都放浪费</a></li>
+                    <li><span>推荐</span><a href="javascript:;">票友圈装优雅不叫真优雅，想要表里如一得这样</a></li>
+                    <li><span>HOT</span><a href="javascript:;">传承百年的高度家电，看德国的美诺如何撩动你不爱洗衣的心</a></li>
+                </ul>
+            </div>
+
+            <div class="part3">
+                <ul>
+                    <li><a href="javascript:;"><img src="pic/05/part3_1.png" alt=""><p>话费</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_2.png" alt=""><p>机票</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_4.png" alt=""><p>酒店</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_3.png" alt=""><p>游戏</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_5.png" alt=""><p>加油卡</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_6.png" alt=""><p>火车票</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_7.png" alt=""><p>众筹</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_8.png" alt=""><p>理财</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_9.png" alt=""><p>白条</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_10.png" alt=""><p>电影票</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_11.png" alt=""><p>企业购</p></a></li>
+                    <li><a href="javascript:;"><img src="pic/05/part3_12.png" alt=""><p>礼品卡</p></a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

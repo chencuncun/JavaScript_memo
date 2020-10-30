@@ -2,9 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>网易新闻栏</title>
+    <link rel="stylesheet" type="text/css" href="../Memo/reset.css">
+    <style>
+        .news_menu{
+            width: 310px;
+            height: 350px;
+            background-color: snow;
+            border-top: 1px #ddd solid;
+            margin-top: 180px;
+            margin-left: 100px;
+            /*
+            overflow: auto;
+             */
+        }
+        a{
+            text-decoration: none;
+        }
+        .title{
+            display: inline-block;
+            margin-top: -1px;
+            padding-top: 15px;
+            border-top: 1px red solid;
+        }
+        .title a{
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .img{
+            padding: 10px 0px;
+        }
+        .img img{
+            width: 300px;
+            height: 150px;
+        }
+        h2{
+            margin-top: -25px;
+            margin-left: 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+        ul > li{
+            padding-top: 15px;
+        }
+        ul li{
+            list-style-type: square;
+            color: #999;
+            margin-left: 18px;
+        }
+        ul li a{
+            font-size: 14px;
+            color: #777;
+        }
+        a:hover{
+            color: red;
+        }
+    </style>
 </head>
 <body>
-
+<div class="news_menu">
+    <div class="title"><a href="#">体育</a></div>
+    <div class="img">
+        <a href="#">
+            <img src="pic/03/1.jpg">
+            <h2>西雅图风暴WNBA总冠军</h2>
+        </a>
+    </div>
+    <ul>
+        <li><a href="#">他被国际排联授予"20世纪最佳教练"称号</a></li>
+        <li><a href="#">拿197万工资干1500万的话 湖人球迷：别给他</a></li>
+        <li><a href="#">利兹联vs曼城：一场6千万和6亿之间的对爆局</a></li>
+        <li><a href="#">第一个爆料特朗普感染的，怎么是他？</a></li>
+    </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奔跑的特朗普</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background-image: url('pic/10/trump_run.png');
+            animation: run1 1s steps(6),run2 1s 1s steps(6),run3 1s 2s steps(6),run4 1s 3s steps(6) infinite;
+         }
+         @keyframes run1{
+            from{
+                 background-position: 0 0px;
+             }
+             to{
+                 background-position: -600px 0px;
+             }
+             
+         }
+         @keyframes run2{
+            from{
+                 background-position: 0 -100px;
+             }
+             to{
+                 background-position: -600px -100px;
+             }
+        }
+        @keyframes run3{
+            from{
+                 background-position: 0 -200px;
+             }
+             to{
+                 background-position: -600px -200px;
+             }
+        }
+        @keyframes run4{
+            from{
+                 background-position: 0 -300px;
+             }
+             to{
+                 background-position: -600px -300px;
+             }
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+</body>
+</html>
