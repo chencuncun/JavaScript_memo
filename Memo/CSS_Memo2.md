@@ -1141,7 +1141,7 @@ div{
  `font`：字体大小/行高 字体族 （行高可省略）<br/>
  ```
  /* 行高可省略 */
-`font: 50px/2 'Times New Roman',Times,serif;`
+font: 50px/2 'Times New Roman',Times,serif;
 ```
 - `font-weight` 字重，字体的加粗 <br/>
 可选值：<br/>
@@ -1503,7 +1503,8 @@ z轴平移属于立体效果（近大远小），默认情况下网页是不支�
 - `rotateX()`
 - `rotateY()`
 - `rotateZ()`
-- `transform: rotateZ(90deg);`,`transform: rotateZ(1turn);`
+- `transform: rotateZ(90deg);`
+- `transform: rotateZ(1turn);`
 ### 10.4 缩放
 对元素进行缩放的函数
 - `scaleX()`：水平方向缩放
@@ -1536,8 +1537,7 @@ z轴平移属于立体效果（近大远小），默认情况下网页是不支�
     </div>
 </body>
 ```
-### 10.5 变形的原点
-`transform-origin`
+### 10.5 变形的原点：`transform-origin`
   - `transform-origin: center;`：默认值
   - `transform-origin: 0 0;`：起始点为(0,0)
 ## 11. less
@@ -1579,7 +1579,8 @@ less的语法大体上和css语法一致，但是less中增添了很多对css的
     <div class="box3">aaa</div>
 </body>
 ```
-- `calc`：计算 `width: calc(200px*2);`
+- `calc`
+  - 计算 `width: calc(200px*2);`
 ### 11.2 语法
 #### 11.2.1 基本概念
 在变量中可以存储一个任意的值，并且可以任意修改变量中的值 <br/>
@@ -1601,7 +1602,7 @@ less的语法大体上和css语法一致，但是less中增添了很多对css的
  .@{c}{
    width: @a;
    background-image: url("@{c}/i.png");
-   //使用属性时的语法：`$属性名`
+   //使用属性时的语法：$属性名
    height: $width;
  }
  ``` 
@@ -1796,7 +1797,7 @@ align-items: center;
 弹性容器的直接子元素是弹性元素（弹性项），一个元素可以同时是弹性容器和弹性元素。<br/>
 - 属性：
   - `flex-grow` 指定弹性元素的伸展系数
-    - 当父元素右多余空间的时候，子元素如何伸展
+    - 当父元素有多余空间的时候，子元素如何伸展
     - 父元素的剩余空间，会按照比例进行分配 
 ```
 <head>
@@ -2162,6 +2163,6 @@ html{
 </style>
 ```
 ### 14.2.3 响应式设计的网页
-原则：移动端优先 ➡ 渐进增强
+原则：移动端优先 到 渐进增强
 
 
