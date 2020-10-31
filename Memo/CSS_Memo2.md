@@ -1432,7 +1432,7 @@ background-image: linear-gradient(to left,red,yellow);
   position: absolute;
   left: 50%;
   right: 50%;
-  transform: translateX(-50%) tanslateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 <div class="box1">aaa</div>
 ```
@@ -1502,7 +1502,8 @@ z轴平移属于立体效果（近大远小），默认情况下网页是不支�
 通过旋转可以使元素沿着x轴y轴或z轴旋转指定的角度。<br/>
 - `rotateX()`
 - `rotateY()`
-- `rotateZ()`：`transform: rotateZ(90deg);`,`transform: rotateZ(1turn);`
+- `rotateZ()`
+- `transform: rotateZ(90deg);`,`transform: rotateZ(1turn);`
 ### 10.4 缩放
 对元素进行缩放的函数
 - `scaleX()`：水平方向缩放
@@ -1541,7 +1542,7 @@ z轴平移属于立体效果（近大远小），默认情况下网页是不支�
   - `transform-origin: 0 0;`：起始点为(0,0)
 ## 11. less
 ### 11.1 简介
-less是一门css的预处理语言，less是一个css的增强版通过less剋编写更少的代码实现强大的样式 <br/>
+less是一门css的预处理语言，less是一个css的增强版通过less可编写更少的代码实现强大的样式 <br/>
 css原生支持变量的设置，但是less的兼容性并不好，在IE中无法显示。<br/>
 在less中添加了很多的新特性，像对变量的支持，对mixin的支持。。。<br/>
 less的语法大体上和css语法一致，但是less中增添了很多对css的扩展，所有浏览器无法直接执行less代码，要执行必须将less转换为css，然后再由浏览器执行。
@@ -1748,9 +1749,9 @@ background-color: darken(#bfa,20%);
       - 主轴：自左向右
     - `row-reverse`：弹性元素在容器中反向水平排列（右向左）
       - 主轴：自右向左
-    - `culumn`：弹性元素纵向排列（上向下）
+    - `column`：弹性元素纵向排列（上向下）
       - 主轴：自上向下
-    - `culumn-reverse`：弹性元素纵向排列（下向上）
+    - `column-reverse`：弹性元素纵向排列（下向上）
       - 主轴：自下向上
   - 主轴：弹性元素的排列方向称为主轴
   - 辅轴：与主轴垂直方向的称为辅轴
@@ -1948,7 +1949,7 @@ align-items: center;
     - 可选值： <br/>
       - `initial`：表示`flex: 0 1 auto;`
       - `auto`：表示`flex: 1 1 auto;`
-      - `none`：表示`flex: 0 0 auto;`：没有弹性
+      - `none`：表示`flex: 0 0 auto;`(没有弹性)
       
 ```
 flex: 1 1 auto;
@@ -2122,7 +2123,7 @@ html{
 - `max-width` 视口的最大宽度(视口小于指定宽度时生效)
 ```
 <style>
-    /* 视口的宽度为500px时，背景颜色变为#bfa */
+    /* 视口的最小宽度为500px时，背景颜色变为#bfa */
     @media(min-width:500px){
         body{
           background-color: #bfa;
@@ -2161,7 +2162,7 @@ html{
 </style>
 ```
 ### 14.2.3 响应式设计的网页
-原则：移动端优先 ➡️ 渐进增强
+原则：移动端优先 ➡ 渐进增强
 
 
 
