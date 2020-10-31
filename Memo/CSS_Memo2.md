@@ -1159,7 +1159,7 @@ div{
   - `right`：右对齐
   - `center`：居中对齐
   - `justify`：两端对齐
-- `vertical-align`：设置元素垂直对齐的方式
+- `vertical-align`：设置元素垂直对齐的方式 <br/>
 可选值：<br/>
   - `baseline`：默认值，基线对齐
   - `top`：顶部对齐
@@ -1204,13 +1204,13 @@ div{
   - 如果背景图片大于元素，将会有一部分背景无法完全显示
   - 如果背景图片和元素一样大，则会直接正常显示
   - 例子：`background-image:url("./img/i.png")`
-- `background-repeat`：用来设置背景的重复方式
+- `background-repeat`：用来设置背景的重复方式 <br/>
 可选值：<br/>
   - `repeat`：默认值，背景会沿着x轴和y轴双方向重复
   - `repeat-x`：沿着x轴方向重复
   - `repeat-y`：沿着y轴方向重复
   - `no-repeat`：背景图片不重复
-- `background-position`：用来设置图片的位置
+- `background-position`：用来设置图片的位置 <br/>
 设置方式：<br/>
   - 通过`top`，`left`，`right`，`bottom`，`center`几个表示方位的词来设置背景图片的位置
   - 例子：`background-position: top left;` `background-position: center center;`
