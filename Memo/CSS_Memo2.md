@@ -556,8 +556,9 @@ margin: 0 auto;
   - 三个值：左上 右上/左下 右下
   - 两个值：左上/右下 右上/左下
   - 一个值：左上/右上/右下/左下
-  `border-radius: 20px / 40px;` 左上/左下：20px 右上/右下：40px 
-  `border-radius: 50%;` 将元素设置为一个圆形
+  - 例子：
+    - `border-radius: 20px/40px;` 左上/左下：20px 右上/右下：40px 
+    - `border-radius: 50%;` 将元素设置为一个圆形
   - `border-top-left-radius`
   - `border-top-right-radius`
   - `border-bottom-left-radius`
@@ -567,7 +568,7 @@ margin: 0 auto;
 border-top-left-radius:50px 100px;
 ```  
 ## 4. 浮动 `float`
-设置元素的浮动通过浮动可以使一个元素向其父元素的左侧或右侧移动。<br/>
+设置元素的浮动，通过浮动可以使一个元素向其父元素的左侧或右侧移动。<br/>
 ### 4.1 简介
 - 可选值
   - `none`：默认值，元素不浮动
@@ -621,7 +622,7 @@ BFC(Block Formatting Context)：块级格式化环境 <br/>
     .box2{
         width: 200px;
         height: 200px;
-        <!-- 开启BFC -->
+        /* 开启BFC */
         overflow: hidden;
         background-color: royalblue;
     }
@@ -1150,7 +1151,7 @@ div{
 - `font-style`：字体的风格
   - `normal`：正常的
   - `italic`：斜体
-`font: bold italic 50px/2 'Times New Roman',Times,serif;`
+- `font: bold italic 50px/2 'Times New Roman',Times,serif;`
 ### 6.7 文本的水平和垂直对齐
 - `text-align`：文本的水平对齐 <br/>
 可选值：<br/>
@@ -1212,16 +1213,16 @@ div{
 - `background-position`：用来设置图片的位置
 设置方式：<br/>
   - 通过`top`，`left`，`right`，`bottom`，`center`几个表示方位的词来设置背景图片的位置
-  - 例子：`background-position: top left;``background-position: center center;`
+  - 例子：`background-position: top left;` `background-position: center center;`
   - 使用方位词时必须要同时指定两个值，如果只写一个则第二个默认就是`center`
   - 通过偏移量来指定背景图片的位置：水平方向的偏移量，垂直方向的偏移量
   - 例子：`background-position: -50px 100px;`
-- `background-clip`：设置背景的范围
+- `background-clip`：设置背景的范围 <br/>
 可选值：<br/>
   - `border-box`：默认值，背景出现在边框的下边
   - `padding-box`：背景不会出现在边框里，只出现在内容区和内边距
   - `content-box`：背景只会出现在内容区
-- `background-origin`：背景图片的偏移量计算的原点
+- `background-origin`：背景图片的偏移量计算的原点 <br/>
 可选值：<br/>
   - `padding-box`：默认值，`background-position`从内边距处开始计算
   - `content-box`：背景图片的偏移量从内容区处计算
@@ -1230,11 +1231,11 @@ div{
   - 第一个值表示宽度，第二个值表示高度（如果只写一个，则第二个值默认是`auto`）
   - `cover`：图片的比例不变，将元素铺满
   - `contain`：图片比例不变，将图片在元素中完整显示
-- `background-attachment`：背景图片是否跟随元素移动
+- `background-attachment`：背景图片是否跟随元素移动 <br/>
 可选值：<br/>
   - `scroll`：默认值，背景图片会跟随元素移动
   - `fixed`：背景图片会固定在页面中，不会随元素移动
-- `background`：背景相关的简写属性，所有背景相关的样式都可以通过该样式来设置，并且该样式没有顺序要求，也没有哪个属性是必须写的
+- `background`：背景相关的简写属性，所有背景相关的样式都可以通过该样式来设置，并且该样式没有顺序要求，也没有哪个属性是必须写的 <br/>
 注意点：<br/>
   - `background-size`必须写在`background-position`之后，并且用`/`隔开：`background-position/background-size`
   - 例子：`background：url('./img/1.jpg') #bfa center center/contain no-repeat`
@@ -1261,7 +1262,7 @@ div{
     <div class="box1"></div>
 </body>
 ```
-- 雪碧图：解决图片闪烁的问题
+- 雪碧图：解决图片闪烁的问题 <br/>
 可以将多个小图片统一保存到一个大图片中，然后通过调整`background-position`来显示相应的图片 <br/>
 这样图片会同时加载到网页中，就可以有效的避免出现闪烁的问题。<br/>
 这个技术在网页中应用十分广泛，被称为`CSS-Sprite`，这种图被称为雪碧图。<br/>
