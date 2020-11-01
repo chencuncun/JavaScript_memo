@@ -1,5 +1,5 @@
 # 2020年Web开发学习日程
-## 9月
+## 9月：HTML/CSS/Javascript基础学习
 ### 1. 学习网站
 视频网站(极客学院) <br/>
 <https://www.bilibili.com/video/BV1Mx411m7fd?p=1>
@@ -7,7 +7,7 @@
 - HTML基础
 - CSS基础
 - JavaScript基础
-## 10月
+## 10月：CSS学习
 ### 1. 学习网站
 视频网站(尚硅谷:李立超老师) <br/>
 <https://www.bilibili.com/video/BV1XJ411X7Ud?p=1>
@@ -173,15 +173,88 @@
   - 美图手机完成
 - 10月31号 <br/>
   - HTML/CSS复习
-
-Javascript学习网站
+## 11月：Javascript学习
+### 1. 学习网站
+视频网站(尚硅谷:李立超老师) <br/>
 <https://www.bilibili.com/video/bv1YW411T7GX/?spm_id_from=333.788.b_636f6d6d656e74.12>
+### 2. 学习内容
+- 11月1号
+  - web前端学习路线
+  - js简介
+  - js基础
+    - js编写位置
+    - 基本语法
+    - 字面量和变量
+    - 标识符
+    - 字符串
+    - Number
+    - 布尔值
+    - Null和Undefined
+    - 强制性类型转换-String
+    - 强制性类型转换-Number
+- 11月2号
+- 11月3号
+- 11月4号
+- 11月5号
+- 11月6号
+- 11月7号
+- 11月8号
+- 11月9号
+- 11月10号
+- 11月11号
+- 11月12号
+- 11月13号
+- 11月14号
+- 11月15号
+- 11月16号
+- 11月17号
+- 11月18号
+- 11月19号
+- 11月20号
+- 11月21号
+- 11月22号
+- 11月23号
+- 11月24号
+- 11月25号
+- 11月26号
+- 11月27号
+- 11月28号
+- 11月29号
+- 11月30号
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+js高级课程
+<https://www.bilibili.com/video/BV14s411E7qf?spm_id_from=333.788.b_765f64657363.1>
+
+mongoDB
+<https://www.bilibili.com/video/bv18s411E78K/?spm_id_from=333.788.b_636f6d6d656e74.8>
+
+NODE.JS
+<https://www.bilibili.com/video/bv1bs411E7pD/?spm_id_from=333.788.b_636f6d6d656e74.7>
 
 VUE,Vuejs教程视频网站
 <https://www.bilibili.com/video/BV15741177Eh?from=search&seid=8595406102900200968>
 
-NODE.JS
-
 科颜氏日本官网
 <https://www.kiehls.jp/>
 
+web前端开发课件笔记
+<https://pan.baidu.com/s/1BM_OKMXXAGxMNqaBN_7tRg>
+提取码：afyt
+
+web前端学习路线图，前端开发
+<https://www.bilibili.com/video/BV1DE411c7HJ?from=search&seid=8622371737401068047>
