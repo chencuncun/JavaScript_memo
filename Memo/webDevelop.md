@@ -1,14 +1,14 @@
 # web前端学习路线
 ## 1. 多页面架构(MPA)
 ### 1.1 网页开发路线
-- html ➡️ css ➡️ JS ➡️ Web API(DOM)
+- html -> css -> JS -> Web API(DOM)
 - 框架：让网页开发更快，更流畅，更便捷
   - jQuery：javascript的框架（了解）
   - Bootstrap：css的框架：做响应式页面（了解）
   - 移动端的开发（重点）
 ### 1.2 服务器的知识
-- mongoDB：存储数据 ➡️ mongoose：将独立的mongoDB和node.js连接起来
-- node.js：让javascript在服务器上运行 ➡️ koa(比较常用)或Express：服务器的框架
+- mongoDB：存储数据 -> mongoose：将独立的mongoDB和node.js连接起来
+- node.js：让javascript在服务器上运行 -> koa(比较常用)或Express：服务器的框架
   - 学习网站：<https://www.bilibili.com/video/BV1Wb411H7oF?from=search&seid=8622371737401068047>
 ### 1.3 webpack：打包工具
 - 将html，css，js，框架等打包到一起
