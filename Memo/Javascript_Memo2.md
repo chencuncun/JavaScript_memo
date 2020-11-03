@@ -173,6 +173,7 @@ number
 - 转换方式(1)
   - 调用被转换数据类型的`toString()`方法，该方法不会影响到原变量，它会将转换的结果返回
   - 注意：`null`和`undefined`这两个值没有`toString()`方法，所以如果调用他们的方法，会报错 <br/>
+
 例子1：
 ```  
 var a = 123;
@@ -211,6 +212,7 @@ string
   - 使用`String()`函数做强制类型转换时：
     - 对于`Number`和`Boolean`实际上就是调用的`toString()`方法
     - 但是对于`null`和`undefined`，就不会调用`toString()`方法，它会将`null`直接转换为`“null”`，将`undefined`直接转换为`”undefined“` <br/>
+
 例子1：
 ```
 a = 123;
@@ -242,6 +244,7 @@ string
     - `false` 转成 `0`
   - `null` --> 数字：`0`
   - `undefined`--> 数字：`NaN` <br/>
+
 例子1：
 ```
 a = "123";
@@ -297,7 +300,8 @@ number
 - 转换方式(2)：这种方式专门用来对付字符串 <br/>
   - `parseInt()`函数：把一个字符串转换为一个整数
   - `parseFloat()`函数：把一个字符串转换为一个浮点数
-  - 注意：如果对非`String`使用`parseInt()`或`parseFloat()`，它会先将其转换为`String`，然后再操作
+  - 注意：如果对非`String`使用`parseInt()`或`parseFloat()`，它会先将其转换为`String`，然后再操作 <br/>
+
 例子1：
 ```
 a = "123px";
@@ -436,6 +440,7 @@ number
   - 它会将其先转换为`Number`，然后再运算
   - 可以对一个其他的数据类型使用`+`，来将其转换为`number`
   - 它的原理和`Number()`函数一样
+
 例子1：
 ```
 a = "18";
@@ -516,6 +521,7 @@ console.log('n2 = ' + n2); // 18
   - 所以我们可以利用该特点，来将一个其他的数据类型转换为布尔值
   - 可以为一个任意数据类型取两次反，来将其转换为布尔值
   - 原理和`Boolean()`函数一样 <br/>
+
 例子1：
 ```
 var b = 10;
