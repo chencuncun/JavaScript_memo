@@ -1022,10 +1022,20 @@ for(①初始化表达式;②条件表达式;④更新表达式){
     var num = prompt("请输入一个数字：");
         
     if (num > 1 && !isNaN(num)) {
+      //创建一个布尔值，用来保存结果，默认i是质数
       var flag = true;
+
+      //判断i是否是质数
+      //获取2-i之间的所有的数
       for (var i = 2;i < num;i++) {
+        //判断i是否能被j整除
         if (num % i == 0) {
+          //如果进入判断则证明i不是质数，修改flag值为false
           flag = false;   
+
+          //一旦进入判断，则证明i不可能是质数了，此时循环再执行已经没有任何意义了
+          //可以使用break来结束循环
+          break;
         }
       }
       if(flag){
@@ -1038,4 +1048,628 @@ for(①初始化表达式;②条件表达式;④更新表达式){
     }
 </script>
 ```
+### 22.3.4 嵌套的for循环
+```
+<title>打印1-100之间所有的质数</title>
+<script>
+  var flag;
+  for (var i = 2; i <= 100; i++) {
+    flag = true;    
+    for (var j = 2; j < i; j++) {
+      if (i % j == 0) {
+        flag = false;
+        break;
+      }
+    }
+    if (flag) { 
+      document.write(i + " ");
+    }
+  }
+</script>
+```
+### 22.3.5 break和continue
+- `break`关键字可以用来退出`switch`或循环语句。`break`关键字会立即终止离它最近的那个循环语句。<br/>
+```
+//break结束的是内层循环
+for(var i = 0; i < 5; i++){
+  console.log("外层循环" + i);
+  for(var j = 0; j < 5; j++){
+    break;
+    console.log("内层循环" + j);
+  }
+}
+```
+- 可以为循环语句创建一个`label`，来识别当前的循环。
+  - `label`: 循环语句
+  - 使用`break`语句时，可以在`break`后跟着一个`label`
+  - 这样`break`将会结束指定的循环，而不是最近的
+```
+outer:
+for(var i = 0; i < 5; i++){
+  console.log("外层循环" + i);
+  for(var j = 0; j < 5; j++){
+    break outer;
+    console.log("内层循环" + j);
+  }
+}
+```
+- `continue`关键字可以用来跳过当此循环
+  - 同样continue也是默认只会对离它最近的循环起作用
+  - 也可以使用`label`: 循环语句，这样将会跳出指定的循环，而不是最近的
+- `console.time("计时器的名字")`：测试程序的性能
+  - 可以用来开启一个计时器
+  - 它需要一个字符串作为参数，这个字符串将会作为计时器的标识
+- `console.timeEnd("计时器的名字")`
+  - 用来停止一个计时器
+  - 需要一个计时器的名字作为参数
+```
+//开启一个计时器
+console.time("test");
+
+被执行的代码
+
+//停止一个计时器
+console.timeEnd("test");
+```
+```
+//提升练习"打印1-100之间所有的质数"的性能
+<script>
+    var flag;
+    onsole.time("test");
+    for (var i = 2; i <= 100; i++) {
+      flag = true;    
+      //Math.sqt():平方根
+      for (var j = 2; j < Math.sqrt(i); j++) {
+        if (i % j == 0) {
+          flag = false;
+          break;
+        }
+      }
+      if (flag) { 
+        document.write(i + " ");
+      }
+    }
+    console.timeEnd("test");
+</script>
+```
+## 23. 对象：Object
+### 23.1 简介
+#### 23.1.1 定义
+- 基本数据类型
+  - `String`：字符串
+  - `Number`：数值
+  - `Boolean`：布尔值
+  - `Null`：空值
+  - `Undefined`：未定义
+- 引用数据类型
+  - `Object`：对象 <br/>
+使用基本数据类型的数据，我们所创建的变量都是独立的，不能成为一个整体。 <br/>
+对象属于一个复合的数据类型，在对象中可以保存多个不同数据类型的属性。<br/>
+#### 23.1.2 对象的分类
+- 内建对象
+  - 由ES标准中定义的对象，在任何的ES的实现中都可以使用
+  - 比如：`Math` `String` `Number` `Boolean` `Function` `Object`...
+- 宿主对象
+  - 由JS的运行环境提供的对象，目前来将主要指由浏览器提供的对象
+  - 比如：`BOM`(浏览器对象模型) `DOM`(文档对象模型)
+- 自定义对象
+  - 由开发人员自己创建的对象
+### 23.2 对象的基本操作
+- 创建对象
+  - 使用`new`关键字调用的函数，是构造函数`constructor`
+  - 构造函数是专门来创建对象的函数
+  - 使用`typeof`检查一个对象时，会返回`object`
+```
+var obj = new Object();
+```
+- 添加属性
+  - 在对象中保存的值称为属性
+  - 向对象添加属性
+    - 语法：`对象.属性名 = 属性值;`
+  - 如果读取对象中没有的属性，不会报错而是会返回`undefined`
+```
+//向obj中添加一个name属性
+
+obj.name = "齐天大圣";
+```
+- 修改对象的属性值
+  - 语法：`对象.属性名 = 新值;`
+```
+//将对象的名字改为孙悟空
+obj.name = "孙悟空";
+```
+- 删除对象的属性
+  - 语法：`delete 对象.属性名;`
+```
+//将obj的name属性删除
+delete obj.name;
+```
+- 属性名
+  - 对象的属性名不强制要求遵守标识符的规范。 比如：`obj.var = "hello";`，但是使用时尽量按照标识符的规范。
+  - 如果要使用特殊的属性名，不能采用`.`的方式来操作，需要使用另一种方式：
+    - 语法：`对象["属性名"] = 属性值;`
+```
+//使用123这个属性名
+obj["123"] = 789;
+
+//读取时也需要采用这种方式
+console.log(obj["123"]);
+```
+  - 使用`[]`这种形式取操作属性，更加的灵活
+    - 在`[]`中可以直接传递一个变量，这样变量值是多少就会读取哪个属性
+```
+obj["123"] = 789;
+obj["nihao"] = "你好";
+
+var n = "nihao";
+console.log(obj[n]);
+
+实行结果：
+你好
+```
+- 属性值
+  - js对象的属性值，可以是任意的数据类型，甚至也可以是一个对象，或函数
+```
+var obj1 = new Object();
+var obj2 = n;
+```
+例子：对象的属性值可以是一个对象
+```
+//创建一个对象obj2
+var obj1 = new Object();
+    obj1.name = "孙悟空";
+
+//创建一个对象obj2
+var obj2 = new Object();
+    obj2.name = "猪八戒";
+
+//将obj2设置为obj1的属性
+obj1.test = obj2; 
+        
+console.log(obj1.test);
+```
+例子：对象的属性值可以是一个函数
+```
+var obj = new Object();
+    obj.name = "孙悟空";
+    obj.age = 18;
+    //对象的属性值可以是一个函数
+    obj.sayName = function () {
+      console.log(this.name);
+    }
+
+//调用obj的sayName()方法
+obj.sayName();
+
+实行结果：
+孙悟空
+```
+```
+var obj = {
+    name: "孙悟空",
+    age: 18,
+    //对象的属性值可以是一个函数
+    sayName: function(){
+      alert(this.name);
+    }
+}
+
+//调用obj的sayName()方法
+obj.sayName();
+
+实行结果：
+孙悟空
+```
+- 枚举对象中的属性
+  - 使用`for...in`语句
+  - `for...in`语句 对象中有几个属性，循环体就会执行几次
+    - 每次执行时，会将对象中的一个属性的名字赋值给变量
+  - 语法：
+```
+for(var 变量 in 对象){
+
+}
+```
+例子1：打印一个对象的每个属性名
+```
+//定义一个person对象
+var person = {
+    name: "孙悟空",
+    age: 18,
+    gender: "男",
+    address: "花果山"
+}
+//枚举对象中的属性
+//将对象中的一个属性的名字赋值给变量n
+for(var n in person){
+    //打印n的属性名
+    console.log("属性名：" + n);
+}
+
+实行结果：
+name
+age
+gender
+address
+```
+例子2：打印一个对象的每个属性名
+```
+//定义一个person对象
+var person = {
+    name: "孙悟空",
+    age: 18,
+    gender: "男",
+    address: "花果山"
+}
+//枚举对象中的属性
+//将对象中的一个属性的名字赋值给变量n
+for(var n in person){
+    //打印n的属性值
+    console.log("属性值：" + person[n]);
+}
+
+实行结果：
+孙悟空
+18
+男
+花果山
+```
+- `in` 运算符
+  - 通过该运算符可以检查一个对象中是否含有指定的属性
+  - 如果有则返回`true`，没有则返回`false`
+  - 语法：`"属性名" in 对象`
+```
+//检查obj1中是否含有test2属性
+console.log("test2" in obj);
+
+实行结果：
+false
+```
+### 23.3 基本数据类型和引用数据类型的区别
+- 基本数据类型
+  - `String`
+  - `Number`
+  - `Boolean`
+  - `Null`
+  - `Undefined`
+- 引用数据类型
+  - `Object`
+- 区别1:
+  - js中的变量都是保存到栈内存中的
+    - 基本数据类型的值直接在栈内存中存储
+    - 值与值之间是独立存在的，修改一个变量不会影响其他的变量
+```
+var a = 123;
+var b = a;
+a++;
+
+console.log("a = " + a + ", b = " + b);
+
+实行结果：
+a = 124;
+b = 123;
+```
+- 区别2:
+  - 对象是保存到堆内存中的，每创建一个新的对象，就会在堆内存中开辟出一个新的空间
+  - 而变量保存的是对象的内存地址(对象的引用)，如果两个变量保存的是同一个对象引用，
+  - 当一个变量通过一个变量修改属性时，另一个也会受到影响
+```
+var obj = new Object();
+obj.name = "孙悟空";
+var obj2 = obj;
+obj.name = "猪八戒";
+
+console.log(obj2.name);
+
+实行结果：
+猪八戒  
+```
+```
+var obj = new Object();
+obj.name = "孙悟空";
+var obj2 = obj;
+obj2 = null;
+
+console.log(obj2.name);
+
+实行结果：
+猪八戒  
+``` 
+- 区别3:
+  - 当比较两个基本数据类型的值时，就是比较值。
+    - 而比较两个引用数据类型时，它比较的是对象的内存地址
+    - 如果两个对象是一模一样的，但是地址不同，它会返回`false`
+```
+<script>
+  var a = 10;
+  var b = 10;
+  console.log(a == b); //true
+
+  var obj1 = new Object();
+  var obj2 = new Object();
+  console.log(obj1 == obj2); //false
+</script>
+```
+### 23.4 对象字面量
+使用对象字面量来创建一个对象。<br/>
+```
+var obj = {};
+obj.name = "孙悟空";
+
+console.log(obj.name);
+
+实行结果：
+孙悟空
+```
+- 可以使用对象字面量，可以在创建对象时，直接指定对象中的属性
+- 语法：`{属性名:属性值,属性名:属性值....}`
+  - 对象字面量的属性名可以加引号也可以不加，建议不加
+  - 如果要使用一些特殊的名字，则必须加引号
+```
+<script>
+  var obj = { 
+      name: "猪八戒", 
+      age: 18, 
+      gender: "男",
+      test:{
+        name: "沙和尚"
+      }
+  };
+  console.log(obj);
+</script>
+```
+## 24. 函数 
+### 24.1 简介
+- 函数也是一个对象
+- 函数中可以封装一些功能(代码)，在需要时可以执行这些功能(代码)
+- 函数中可以保存一些代码在需要的时候调用
+- 创建一个函数对象
+```
+var fun = new Function();
+console.log(typeof fun); //function
+```
+- 可以将要封装的代码以字符串的形式传递给构造函数
+- 封装到函数中的代码不会立即执行
+```
+var fun = new Function("console.lo('Hello这是我的第一个函数');");
+
+实行结果：
+无结果
+```
+- 函数中的代码会在函数调用的时候执行
+- 调用函数语法：函数对象()
+- 当调用函数时，函数中封装的代码会按照顺序执行
+```
+var fun = new Function("console.log('Hello这是我的第一个函数');");
+fun();
+
+实行结果：
+Hello这是我的第一个函数
+```
+- 在开发中很少使用构造函数来创建一个函数对象
+### 24.2 函数声明
+#### 24.2.1 使用函数声明来创建函数
+- 语法：
+```
+function 函数名([形参1,形参2...形参N]){
+  语句...
+} 
+```
+例子：
+```
+function fun2(){
+  console.log("这是我的第二个函数");
+}
+fun2();
+
+实行结果：
+这是我的第二个函数
+```
+#### 24.2.2 使用函数表达式来创建函数
+- 语法：
+```
+var 函数名 = function([形参1,形参2...形参N]){
+  语句...
+} 
+```
+例子：
+```
+var fun3 = function(){
+    console.log("我是匿名函数中封装的代码");
+}
+fun3();
+
+实行结果：
+我是匿名函数中封装的代码
+```
+### 24.3 函数的参数
+定义一个用来求两个数和的函数 <br/>
+- 可以在函数`()`中来指定一个或多个形参(形式函数)
+- 多个形参之间使用`,`隔开，声明形参就相当于在函数内部声明了对应的变量
+- 但是并不赋值
+```
+function sum(a, b) {
+  console.log(a + b);
+}
+//在调用函数时，可以在`()`中指定实参(实际参数)
+//实参将会赋值给函数中对应的形参
+  sum(1, 2);
+```
+- 调用函数时，解析器不会检查实参的类型
+  - 所以要注意，是否有可能会接收到非法的参数，如果有可能则需要对参数进行类型的检查
+- 调用函数时，解析器也不会检查实参的数量
+  - 多余的实参不会被赋值
+  - 如果实参的数量少于形参的数量，则没有对应实参的形参将是`undefined`
+  - 函数的实参可以是任意的数据类型
+### 24.4 函数的返回值
+创建一个函数，用来计算三个数的和。<br/>
+- 可以使用`return`来设置函数的返回值
+- 语法：`return 值`
+```
+function sum(a, b, c){
+  var d = a + b + c
+  return d;
+}
+```
+- `return`后的值将会作为函数的执行结果返回
+- 可以定义一个变量来接收该结果
+```
+function sum(a, b, c){
+  var d = a + b + c
+  return d;
+}
+
+//调用函数
+//变量result的值就是函数的执行结果
+//函数返回什么result的值就是什么
+var result = sum(1, 2, 3);
+
+console.log("result = " + result);
+
+实行结果：
+result = 6
+```
+- 如果`return`语句后不跟任何值就相当于返回一个`undefined`
+- 如果函数中不写`return`，则也会返回`undefined`
+```
+function sum(a, b, c){
+  var d = a + b + c;
+}
+
+var result = sum(1, 2, 3);
+console.log("result = " + result);
+
+实行结果：
+result = undefined
+```
+- `return`后可以跟任意类型的值，包括对象，函数
+```
+function fun(){
+  var obj = {
+      name: "沙和尚"
+  }
+  return obj;
+}
+var a = fun();
+console.log("a = " + a.name);
+
+实行结果：
+a = 沙和尚
+```
+- `return`可以结束整个函数
+```
+function fun() {
+  console.log("函数要执行了");
+  for (var i = 0; i < 5; i++) {
+    if (i == 2) {
+      //使用break可以退出当前的循环
+      // break;
+
+      // continue用于跳过当次循环
+      // continue;
+
+      //return可以结束整个函数
+      return;
+    }
+    console.log("i = " + i);
+  }
+  console.log("函数执行完了");
+}
+
+//调用fun()函数
+fun();
+```
+### 24.5 立即执行函数
+- 函数定义完，立即被调用，这种函数就叫做立即执行函数
+- 立即执行函数往往只会执行一次  <br/>
+例子1：
+```
+(function(){
+  alert("我是一个匿名函数");
+})();
+```
+例子2：
+```
+(function(a,b){
+  console.log("a = " + a);
+  console.log("b = " + b);
+  console.log("a + b = " + (a + b));
+})(123,456);
+
+实行结果：
+a = 123
+b = 456
+a + b = 579
+```
+### 24.6 练习
+- 练习1：定义一个函数，判断一个数字是否是偶数，如果是返回`ture`，否则返回`false`
+```
+function isOu(num){
+  return num % 2 == 0;
+}
+var result = isOu(12);
+console.log("result = " + result);
+
+实行结果：
+result = true
+```
+- 练习2：定义一个函数，可以根据半径计算一个圆的面积，并返回结果
+```
+function area(radius) {
+  return Math.PI * Math.pow(radius, 2);
+}
+
+var result = area(3);
+console.log("result = " + result);
+
+实行结果：
+result = 28.274333882308138
+```
+- 练习3：创建一个函数，可以在控制台中输出一个人的信息 <br/>
+  - 知识点1：实参可以是一个对象 
+```
+//实参可以是任意的数据类型，也可以是一个对象
+//当我们的参数过多时，可以将参数封装到一个对象中，然后通过对象传递
+//创建一个person对象
+var person = {
+    name: "孙悟空",
+    age: 800,
+    gender: "男",
+    address: "花果山"
+}
+
+//接收person对象，并打印处person的信息
+function personInfo(person) {
+    console.log("我叫: " + person.name + "," + "我" + person.age + "岁了," + "我是" + person.gender + "的," + "我住在" + person.address);
+}
+
+//向personInfo里面传递一个person对象
+personInfo(person);
+```
+  - 知识点2：实参也可以是一个函数
+```
+//创建一个对象
+var person = {
+    name: "孙悟空",
+    age: 800,
+    gender: "男",
+    address: "花果山"
+}
+
+//personInfo函数
+function personInfo(person) {
+  //打印person的具体信息
+  console.log("我叫: " + person.name + "," + "我" + person.age + "岁了," + "我是" + person.gender + "的," + "我住在" + person.address);
+}
+
+//形参info接收personInfo函数这个实参
+function fun(info){
+  //给personInfo函数传递一个person的对象
+  info(person);
+}
+
+//调用personInfo函数
+fun(personInfo);
+```
+
 
