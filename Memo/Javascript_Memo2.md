@@ -1672,5 +1672,811 @@ function fun(info){
 //调用personInfo函数
 fun(personInfo);
 ```
+## 25. 作用域：Scope
+作用域指一个变量的作用的范围 <br/>
+在js中一共有两种作用域： 全局作用域，函数作用域
+### 25.1 全局作用域
+- 直接编写在`script`标签中的js代码，都在全局作用域
+- 全局作用域在页面打开时创建，在页面关闭时销毁
+- 在全局作用域中，有一个全局对象`window`，可以直接使用。
+  - 它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用
+- 在全局作用域中：
+  - 创建的变量都会作为`window`对象的属性保存
+  - 创建的函数都会作为`window`对象的方法保存
+```
+//创建的变量都会作为window对象的属性保存 
+<script>
 
+  var a = 10;
+  var b = 20;
 
+  console.log(window.b); //和console.log(b);一样
+</script>
+
+实行结果：
+20
+```
+```
+//创建的变量都会作为window对象的属性保存 
+<script>
+
+  function fun(){
+    console.log("我是fun函数");
+  }
+
+  window.fun(); //和fun();一样
+
+</script>
+
+实行结果：
+我是fun函数
+```
+- 变量的声明提前
+  - 使用`var`关键字声明的变量，会在所有的代码执行之前被声明(但是不会赋值)
+  - 但是如果声明变量时不使用`var`关键字，则变量不会被声明提前
+```
+console.log("a = " + a);
+
+var a = 123;
+
+实行结果：
+a = undefined
+```
+以上代码相当于以下代码
+```
+var a;
+console.log("a = " + a);
+
+a = 123;
+
+实行结果：
+a = undefined
+```
+```
+console.log("a = " + a);
+
+a = 123;
+
+实行结果：报错
+Uncaught ReferenceError: a is not defined
+```
+- 函数的声明提前
+  - 使用函数声明形式创建的函数`function 函数名(){}`
+    - 它会在所有的代码执行之前就被创建，所以我们可以在函数声明前来调用函数
+  - 使用函数表达式创建的函数`var fun = function(){}`
+    - 不会被声明提前，所以不能在声明前调用
+```
+//函数声明会被提前创建
+fun1();
+function fun1(){
+  console.log("我是一个fun1函数");
+}
+
+实行结果：
+我是一个fun1函数
+```
+```
+//函数表达式不会被提前创建
+fun2();
+var fun2 = function(){
+  console.log("我是一个fun2函数");
+}
+
+实行结果：报错
+Uncaught TypeError: fun2 is not a function
+```
+- 全局作用域中的变量都是全局变量，在页面的任意部分都可以访问的到
+### 25.2 函数作用域
+- 调用函数时创建函数作用域，函数执行完毕之后，函数作用域销毁。
+- 每调用一次函数就会创建一个新的函数作用域，他们之间是相互独立的。
+- 在函数作用域中可以访问到全局作用域的变量。
+- 在全局作用域中无法访问到函数作用域的变量。
+- 当在函数作用域中操作一个变量时，它会先在自身的作用域中寻找
+  - 如果有，就直接使用
+  - 如果没有，则向上一级作用域中寻找，直到找到全局作用域
+  - 如果全局作用域中依然没有找到，则会报错`ReferenceError`
+- 在函数中要访问全局变量可以使用`window`对象
+```
+function fun() {
+  //函数作用域的变量
+  var a = 20;
+}
+fun();
+console.log("a = " + a);
+
+实行结果：报错
+Uncaught ReferenceError: a is not defined
+```
+- 在函数作用域中也有声明提前的特性
+  - 使用`var`关键字声明的变量，会在函数中所有的代码执行之前被声明
+  - 函数声明也会在函数中所有的代码执行之前执行 <br/>
+
+例子1: 
+```
+function fun(){
+  console.log(a);
+  var a = 35;
+}
+fun();
+
+实行结果：
+undefined
+```
+例子2:
+```
+function fun1(){
+  
+  fun2();
+
+  function fun2(){
+    alert("I'm fun2");
+  }
+
+}
+fun1();
+
+实行结果： 
+I'm fun2
+```
+例子3:
+```
+var a = 33;
+
+function fun(){
+  console.log("a = " + a);
+  var a = 10;
+}
+
+fun();
+
+实行结果：
+a = undefined
+```
+例子4:
+```
+var a = 33;
+
+function fun(){
+  console.log("a = " + a);
+  a = 10;
+}
+
+fun();
+
+实行结果：
+a = 33
+```
+- 在函数中，不使用`var`声明的变量都会成为全局变量
+```
+var a = 33;
+function fun(){
+  a = 10;
+}
+fun();
+        
+//在全局中输出a
+console.log("a = " + a);
+
+实行结果：
+a = 10
+```
+- 定义形参就相当于在函数作用域中声明了变量
+```
+var a = 33;
+
+//定义形参就相当于在函数作用域中声明了变量
+function fun(a){ //相当于在fun()函数中声明了 var a;
+  alert(a);
+}
+fun();
+
+实行结果：
+undefined
+```
+### 25.3 练习
+练习1:
+```
+var a = 123;
+function fun(){
+  alert(a);
+}
+fun();
+
+实行结果：
+123
+```
+练习2:
+```
+var a = 123;
+function fun(){
+  alert(a);
+  var a = 456;
+}
+fun();
+alert(a);
+
+实行结果：
+undefined
+123
+```
+练习4:
+```
+var a = 123;
+function fun(a){
+  alert(a);
+  a = 456;
+}
+fun();
+alert(a);
+
+实行结果：
+undefined
+123 
+```
+练习5:
+```
+var a = 123;
+function fun(a){
+  alert(a);
+  a = 456;
+}
+fun(123);
+alert(a);
+
+实行结果：
+123
+123 
+```
+### 25.4 this
+解析器在调用函数时，每次都会向函数内部传递进一个隐含的参数。这个隐含的参数就是`this`。<br/>
+- `this`指向的是一个对象，这个对象我们称为函数执行的上下文对象。
+- 根据函数的调用方式的不同，`this`会指向不同的对象
+  - 以函数的形式调用时，`this`永远都是`window`
+  - 以方法的形式调用时，`this`就是调用方法的那个对象
+
+例子1:
+```
+function fun(){
+  console.log(this);
+}
+//创建一个对象
+var obj = {
+    name: "孙悟空",
+    sayName:fun
+}
+//以函数的形式调用时，this永远都是window
+fun();
+
+实行结果：
+object Window
+```
+例子2:
+```
+function fun(){
+  console.log(this);
+}
+//创建一个对象
+var obj = {
+    name: "孙悟空",
+    sayName:fun
+}
+
+//以方法的形式调用时，this就是调用方法的那个对象
+obj.sayName();
+
+实行结果：
+//object Object
+name: 孙悟空
+sayName: fun()
+```
+例子3:
+```
+var name = "全局的name属性";
+
+function fun(){
+  console.log(this.name);
+}
+
+//创建一个对象
+var obj = {
+    name: "孙悟空",
+    sayName:fun
+}
+
+fun();
+
+实行结果：
+全局的name属性
+```
+例子4:
+```
+var name = "全局的name属性";
+
+function fun(){
+  console.log(this.name);
+}
+
+//创建一个对象
+var obj = {
+    name: "孙悟空",
+    sayName:fun
+}
+
+obj.sayName();
+
+实行结果：
+孙悟空
+```
+## 26. 使用工厂方法创建对象
+通过该方法可以大批量的创建对象。
+```
+function createPerson(name,age,gender){
+  //创建一个新的对象 
+  var obj = new Object();
+
+  //向对象中添加属性
+  obj.name = name;
+  obj.age = age;
+  obj.gender = gender;
+  obj.sayName = function(){
+      console.log(this.name);
+  }
+
+  //将新的对象返回
+  return obj;
+}
+        
+var obj1 = createPerson("孙悟空",18,"男");
+var obj2 = createPerson("猪八戒",28,"男");
+var obj3 = createPerson("沙和尚",38,"男");
+
+console.log(obj1);
+console.log(obj2);
+console.log(obj3);
+        
+obj1.sayName();
+obj2.sayName();
+obj3.sayName();
+
+实行结果：
+{name: "孙悟空", age: 18, gender: "男", sayName: ƒ}
+{name: "猪八戒", age: 28, gender: "男", sayName: ƒ}
+{name: "沙和尚", age: 38, gender: "男", sayName: ƒ}
+孙悟空
+猪八戒
+沙和尚
+```
+## 27. 构造函数
+### 27.1 定义
+构造函数就是一个普通的函数，创建方式和普通函数没有区别，<br/>
+不同的是构造函数习惯上首字母大写。<br/>
+- 构造函数和普通函数的区别就是调用方式的不同
+  - 普通函数是直接调用，而构造函数需要使用`new`关键字来调用
+```
+function Person(){
+
+}  
+var per = new Person();
+```
+### 27.2 执行流程
+- 立刻创建一个新的对象
+- 将新建的对象设置为函数中的`this`，在构造函数中可以使用`this`来引用新建的对象
+- 逐行执行函数中的代码
+- 将新建的对象作为返回值返回
+### 27.3 类
+使用一个构造函数创建的对象，我们称为一类对象，也将一个构造函数称为一个类 <br/>
+我们将通过一个构造函数创建的对象，称为是该类的实例
+```
+//创建一个构造函数，也称为创建一个Person类
+function Person(name,age,gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.sayName = function(){
+        alert(this.name);
+    }
+}
+//Person类的实例    
+var per1 = new Person("孙悟空",18,"男");
+var per2 = new Person("猪八戒",28,"男");
+var per3 = new Person("沙和尚",38,"男");
+
+//在控制台输出三个Person类的实例
+console.log(per1);
+console.log(per2);
+console.log(per3);
+
+实行结果：
+Person {name: "孙悟空", age: 18, gender: "男", sayName: ƒ}
+Person {name: "猪八戒", age: 28, gender: "男", sayName: ƒ}
+Person {name: "沙和尚", age: 38, gender: "男", sayName: ƒ}
+```
+### 27.4 `instanceof`
+- `instanceof`可以检查一个对象是否是一个类的实例
+  - 语法：`对象 instanceof 构造函数`
+  - 如果是，则返回`true`，否则返回`false`
+```
+console.log(per instanceof Person);
+
+实行结果：
+true
+```
+- 所有的对象都是`Object`的后代
+  - 所有任何对象和`Object`做`instanceof`检查时都会返回`true`
+### 27.4 `this`总结：
+  - 当以函数的形式调用时，`this`是`window`
+  - 当以方法的形式调用时，谁调用方法`this`就是谁
+  - 当以构造函数的形式调用时，`this`就是新创建的那个对象
+### 27.4 构造函数修改
+在`Person`构造函数中，为每一个对象都添加了一个`sayName`方法，<br/>
+之前我们的方法是在构造函数内部创建的，也就是构造函数每执行一次就会创建一个新的`sayName`方法，<br/>
+也就是所有实例的`sayName`都是唯一的，这样就导致了构造函数执行一次就会创建一个新的方法，<br/>
+执行10000次就会创建10000个新的方法，而10000个方法都是一模一样的，<br/>
+这是完全没有必要，完全可以使所有的对象共享同一个方法。<br/>
+可以将`sayName`方法在全局作用域中定义。<br/>
+
+修改前：
+```
+//创建一个构造函数，也称为创建一个Person类
+function Person(name,age,gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.sayName = function(){
+        alert("大家好，我是" + this.name);
+    }
+}
+//Person类的实例    
+var per1 = new Person("孙悟空",18,"男");
+var per2 = new Person("猪八戒",28,"男");
+var per3 = new Person("沙和尚",38,"男");
+
+per1.sayName();
+console.log(per1.sayName == per2.sayName);
+
+//在控制台输出三个Person类的实例
+console.log(per1);
+console.log(per2);
+console.log(per3);
+
+实行结果：
+大家好，我是孙悟空
+false
+Person {name: "孙悟空", age: 18, gender: "男", sayName: ƒ}
+Person {name: "猪八戒", age: 28, gender: "男", sayName: ƒ}
+Person {name: "沙和尚", age: 38, gender: "男", sayName: ƒ}
+```
+修改后：
+```
+//创建一个构造函数，也称为创建一个Person类
+function Person(name,age,gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.sayName = sayName; 
+}
+
+//将sayName方法在全局作用域中定义
+function sayName(){
+    alert("大家好，我是" + this.name);
+}
+
+//Person类的实例    
+var per1 = new Person("孙悟空",18,"男");
+var per2 = new Person("猪八戒",28,"男");
+var per3 = new Person("沙和尚",38,"男");
+
+per1.sayName();
+console.log(per1.sayName == per2.sayName);
+
+//在控制台输出三个Person类的实例
+console.log(per1);
+console.log(per2);
+console.log(per3);
+
+实行结果：
+大家好，我是孙悟空
+true
+Person {name: "孙悟空", age: 18, gender: "男", sayName: ƒ}
+Person {name: "猪八戒", age: 28, gender: "男", sayName: ƒ}
+Person {name: "沙和尚", age: 38, gender: "男", sayName: ƒ}
+```
+## 28. 原型对象: prototype
+问题：以下代码，将函数定义在全局作用域，污染了全局作用域的命名空间。<br/>
+而且定义在全局作用域中也很不安全。
+```
+//将sayName方法在全局作用域中定义
+function sayName(){
+    alert("大家好，我是" + this.name);
+}
+```
+- 我们所创建的每一个函数，解析器都会向函数中添加一个属性`prototype`。
+  - 这个属性对应着一个对象，这个对象就是我们所谓的原型对象。
+- 如果函数作为普通函数调用`prototype`没有任何作用
+- 当函数以构造函数的形式调用时，它所创建的对象中都有一个隐含的属性，
+  - 指向该构造函数的原型对象，我们可以通过`__proto__`来访问属性
+```
+function Myclass() {
+
+}
+var mc1 = new Myclass();
+var mc2 = new Myclass();
+        
+console.log(mc1.__proto__ == Myclass.prototype);
+
+实行结果：
+true
+```
+- 原型对象就相当于一个公共区域，它会先在对象自身中寻找，如果有则直接使用。
+- 如果没有则会去原型对象中寻找，如果找到则直接使用。
+```
+function Myclass() {
+
+}
+
+Myclass.prototype.a = 123;
+
+var mc1 = new Myclass();
+var mc2 = new Myclass();
+        
+//向mc中添加a属性
+mc1.a = "我是mc1中的a属性"
+console.log(mc1.a);
+
+实行结果：
+我是mc1中的a属性
+```
+```
+function Myclass() {
+
+}
+
+Myclass.prototype.a = 123;
+
+var mc1 = new Myclass();
+var mc2 = new Myclass();
+        
+console.log(mc1.a);
+
+实行结果：
+123
+```
+```
+function Person(name, age, gender) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+
+//向Person的原型中添加一个方法
+Person.prototype.sayName = function () {
+    alert("大家好，我是" + this.name);
+}
+
+var per1 = new Person("孙悟空", 18, "男");
+var per2 = new Person("猪八戒", 28, "男");
+var per3 = new Person("沙和尚", 38, "男");
+
+per1.sayName();
+
+实行结果：
+大家好，我是孙悟空
+```
+- 以后我们创建构造函数时，可以将这些对象共有的属性和方法，统一添加到构造函数的原型对象中
+- 这样不用分别为每一个对象添加，也不会影响到全局作用域，就可以使每个对象都具有这些属性和方法了
+- 使用`in`检查对象中是否含有某个属性时，如果对象中没有但是原型中有，也会返回`true`
+```
+function MyClass(){
+
+}
+
+//向MyClass的原型中添加一个name属性
+MyClass.prototype.name = "我是原型中的名字";
+
+var mc = new MyClass();
+
+console.log("name" in mc);
+
+实行结果：
+true
+```
+- 可以使用对象中的`hasOwnProperty()`来检查对象自身中是否含有该属性
+- 使用该方法只有当对象自身中含有属性时，才会返回`true`
+```
+console.log(mc.hasOwnProperty("name"));
+
+实行结果：
+false
+```
+- 原型对象也是对象，所以它也有原型
+  - 当我们使用一个对象的属性或方法时，就先在自身中寻找
+    - 自身中如果有，则直接使用
+    - 如果没有则去原型对象中寻找，如果原型对象中有，则使用
+    - 如果没有则去原型的原型中寻找，直到找到`Object`对象的原型
+    - `Object`对象的原型没有原型，如果在`Object`中依然没有找到，则返回`undefined`
+```
+console.log(mc.__proto__.proto__.hasOwnProperty("hasOwnProperty"));
+
+实行结果：
+true
+```
+## 29. `toString()`
+当我们直接在页面中打印一个对象时，实际上是输出的对象的`toString()`方法的返回值
+```
+function Person(name, age, gender) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+
+//创建一个Person的实例
+var per = new Person("孙悟空", 18, "男");
+
+//以下代码相当于console.log(per);
+var result = per.toString();
+console.log("result = " + result);
+
+实行结果：
+result = [object Object]
+```
+- 如果我们希望在输出对象时不输出`[object Object]`，可以为对象添加一个`toString()`方法
+```
+function Person(name, age, gender) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+
+//创建Person的实例
+var per1 = new Person("孙悟空", 18, "男");
+var per2 = new Person("猪八戒", 28, "男");
+
+//添加toString方法
+per1.toString = function(){
+    return "Person[name="+this.name+",age="+this.name+",gender="+this.gender+"]";
+}
+
+console.log(per1);
+
+实行结果：
+Person {name: "孙悟空", age: 18, gender: "男", toString: ƒ}
+```
+- 以上代码如果换成输出`per2`，则必须再次修改`toString`，将`per1.toString()`改为`per2.toString()`
+  - 为了避免以上这种情况，我们可以修改`Person`原型的`toString`
+```
+function Person(name, age, gender) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+
+//创建Person的实例
+var per1 = new Person("孙悟空", 18, "男");
+var per2 = new Person("猪八戒", 28, "男");
+
+//修改Person原型的toString
+Person.prototype.toString = function(){
+  return "Person[name="+this.name+",age="+this.name+",gender="+this.gender+"]";
+}
+console.log(per1);
+console.log(per2);
+
+实行结果：
+Person {name: "孙悟空", age: 18, gender: "男"}
+Person {name: "猪八戒", age: 28, gender: "男"}
+```
+## 30. 垃圾回收：GC
+程序运行过程中会产生垃圾，垃圾积攒过多后，会导致程序运行的速度过慢，<br/>
+所以我们需要一个垃圾回收的机制，来处理程序运行过程中产生的垃圾。<br/>
+- 当一个对象没有任何的变量或属性对它进行引用，此时我们将永远无法操作该对象，
+- 此时这样对象就是一个垃圾，这种对象过多会占用大量的内存空间，导致程序运行变慢
+- 所以这种垃圾必须清理。
+- 在js中拥有自动的垃圾回收机制，会自动将这种垃圾对象从内存中销毁
+- 我们不需要也不能进行垃圾回收操作
+- 我们需要做的只是要将不再使用的对象设置为`null`即可
+```
+var obj = new Object();
+
+//不再使用此对象
+obj = null;
+```
+## 31. 数组 `Array`
+### 31.1 简介
+#### 31.1.1 定义
+- 数组也是一个对象
+- 它和普通对象类似，也是用来存储一些值的
+- 不同的是普通对象是使用字符串作为属性名的，而数组是使用数字作为索引操作元素
+  - 索引：从0开始的整数
+- 数组的存储性能比普通对象好，在开发中我们经常使用数组来存储一些数据
+#### 31.1.2 流程
+- 创建对象
+```
+//创建数组对象
+var arr = new Array();
+
+//使用typeof检查一个数组时，会返回object
+console.log(typeof arr);
+
+实行结果：
+object 
+```
+- 向数组中添加元素
+  - 语法：`数组[索引] = 值;`
+```
+//创建数组对象
+var arr = new Array();
+
+//向数组中添加元素
+arr[0] = 10;
+arr[1] = 33;
+arr[2] = 22;
+
+console.log(arr);
+
+实行结果：
+[10, 33, 22]
+```
+- 读取数组中的元素
+  - 语法：`数组[索引]`
+  - 如果读取不存在的索引，不会报错而是会返回`undefined`
+```
+//创建数组对象
+var arr = new Array();
+
+//向数组中添加元素
+arr[0] = 10;
+arr[1] = 33;
+arr[2] = 22;
+
+//读取数组中的元素
+console.log(arr[0]);
+
+实行结果：
+10
+```
+- 获取数组的长度
+  - 可以使用`length`属性来获取数组的长度(元素的个数)
+  - 语法： `数组.length`
+  - 对于连续的数组，使用`length`可以获取到数组的长度(元素的个数)
+  - 对于非连续的数组，使用`length`会获取到`数组的最大的索引+1`
+```
+//创建数组对象
+var arr = new Array();
+
+//向数组中添加元素
+arr[0] = 10;
+arr[1] = 33;
+arr[2] = 22;
+
+//获取数组的长度
+console.log(arr.length);
+
+实行结果：
+3
+```
+- 修改数组的长度
+  - 如果修改的`length`大于原长度，则多出部分会空出来
+  - 如果修改的`length`小于原长度，则多出元素会被删除
+- 向数组的最后一个位置添加元素
+  - 语法：`数组[数组.length] = 值;`
+```
+//创建数组对象
+var arr = new Array();
+
+arr[0] = 10;
+arr[1] = 33;
+arr[2] = 22;
+
+//向数组的最后一个元素添加元素
+arr[arr.length] = 11;
+//向数组的最后一个元素添加元素
+arr[arr.length] = 55;
+//向数组的最后一个元素添加元素
+arr[arr.length] = 66;
+
+console.log(arr);
+
+实行结果：
+[10, 33, 22, 11, 55, 66]
+```
+### 31.2 数组字面量
