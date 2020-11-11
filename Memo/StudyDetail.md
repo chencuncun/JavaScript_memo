@@ -258,9 +258,9 @@
   - 数组的练习
   - forEach
   - slice和splice
+- 11月11号：周三
   - 数组去重练习
   - 数组的剩余方法
-- 11月11号：周三
   - call和apply
   - arguments
   - Date对象
