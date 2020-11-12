@@ -1418,6 +1418,157 @@ console.log(obj.name);
   console.log(obj);
 </script>
 ```
+### 23.5 `Date`对象
+在js中使用`Date`对象来表示一个时间。 <br/>
+- 创建一个`Date`对象
+- 如果直接使用构造函数创建一个`Date`对象，则会封装为当前代码执行的时间
+```     
+var day = new Date();
+console.log(day);
+
+实行结果：
+Wed Nov 11 2020 20:19:25 GMT+0900 (日本标准时间)
+```
+- 创建一个指定的时间对象
+- 需要在构造函数中传递一个表示时间的字符串作为参数
+- 日期的格式：月份/日/年 时:分:秒
+```
+var day = new Date("11/11/2020 21:01:10");
+console.log(day);
+
+实行结果：
+Wed Nov 11 2020 21:01:10 GMT+0900 (日本标准时间)
+```
+- `getDate()`：获取当前日期对象是几日
+- `getDay()`
+  - 获取当前日期对象是周几
+  - 会返回一个`0-6`的值
+    - `0` 表示周日
+    - `1` 表示周一
+- `getMonth()`
+  - 获取当前日期对象是几月
+  - 会返回一个`0-11`的值
+    - `0` 表示一月
+    - `1` 表示二月
+- `getFullYear()`：获取当前日期对象的年份
+- `getTime()`
+  - 获取当前日期对象的时间戳
+  - 时间戳，指的是从格林威治标准时间的1970年1月1日0时0分0秒到当前日期所花费的毫秒数
+  - 计算机底层在保存时间时使用的都是时间戳
+```
+var time = day.getTime();
+console.log(time/1000/60/60/24/365);
+```
+```
+//时差原因
+var day = new Date("1/1/1970 0:0:0");
+time = day.getTime();
+console.log(time);
+
+实行结果：
+-32400000
+```
+- 获取当前的时间戳
+```
+var time = Date.now();
+```
+-可以利用时间戳来测试代码执行的性能
+```
+var start = Date.now();
+
+for (var i = 0; i < 100; i++) {
+    console.log(i);
+}
+var end = Date.now();
+console.log("执行了：" + (end - start) + "毫秒");
+
+实行结果：
+执行了：3毫秒
+```
+### 23.6 `Math`对象
+`Math`和其他的对象不同，它不是一个构造函数。<br/>
+它属于一个工具类不用创建对象，它里面封装了数学运算相关的属性和方法。<br/>
+- `Math.ceil()` 
+  - 可以对一个数进行向上取整，小数位只要有值就自动进1
+```
+console.log(Math.ceil(1.4));
+
+实行结果：
+2
+```
+- `Math.floor()` 
+  - 可以对一个数进行向下取整，小数部分会被舍掉
+```
+console.log(Math.floor(1.9));
+
+实行结果：
+1
+```
+- `Math.round()` 
+  - 可以对一个数进行四舍五入取整 
+```
+console.log(Math.round(1.9));
+
+实行结果：
+2
+```
+- `Math.random()` 
+  - 可以用来生产一个`0-1`之间的随机数
+  - 也可以生成一个`0-x`之间的随机数：`Math.round(Math.random()*x)` 
+```
+console.log(Math.random());
+
+实行结果：
+0.3017309711879488
+```
+```
+//可以生成一个0-10的随机数
+for(var i = 0;i <10;i++){
+  console.log(Math.round(Math.random()*10));
+}
+```
+```
+//生成一个1-10的随机数
+console.log(Math.round(Math.random()*9)+1);
+```
+- 生成一个`x-y`之间的随机数
+```
+Math.round(Math.random()*(y-x))+x;
+```
+- `Math.max()`
+  - 可以获取多个数中的最大值
+```
+var max = Maah.max(10,8,4,6,2);
+console.log(max);
+
+实行结果：
+10
+```
+- `Math.max()`
+  - 可以获取多个数中的最小值
+```
+var min = Maah.min(10,8,4,6,2);
+console.log(min);
+
+实行结果：
+2
+```
+- `Math.pow(x,y)`
+  - 返回`x`的`y`次幂
+```
+console.log(Math.pow(12,3));
+
+实行结果：
+1728
+``` 
+- `Math.sqrt()`
+  - 用于对一个数进行开方运算
+```
+console.log(Math.sqrt(9);
+
+实行结果：
+3
+``` 
 ## 24. 函数 
 ### 24.1 简介
 - 函数也是一个对象
@@ -1671,6 +1822,144 @@ function fun(info){
 
 //调用personInfo函数
 fun(personInfo);
+```
+### 24.7 函数的方法
+#### 24.7.1 `call()`和`apply()`
+- 这两种方法都是函数对象的方法，需要通过函数对象来调用
+- 当对函数调用`call()`和`apply()`都会调用函数执行
+```
+function fun(){
+  alert("我是fun函数");
+}
+
+//以下三行代码，都可以调用fun()函数
+fun();
+fun.call();
+fun.apply();
+```
+- 不同的是：在调用`call()`和`apply()`可以将一个对象指定为第一个参数
+  - 此时，这个对象将会成为函数执行时的`this` <br/>
+
+例子1:
+```
+function fun(){
+  alert(this);
+}
+
+var obj = {};
+
+fun(); //[object Window]
+fun.call(obj); //[object Object]
+fun.apply(obj); //[object Object]
+```
+例子2：
+```
+function fun() {
+  alert(this);
+}
+
+var obj1 = { name: "孙悟空" };
+var obj2 = { name: "猪八戒" }
+
+fun(); //[object Window]
+fun.call(obj1.name); //孙悟空
+fun.apply(obj2.name); //猪八戒
+```
+例子3: 参数是谁，this就是谁
+```
+var obj1 = {
+    name: "孙悟空",
+    sayName: function () {
+      alert(this.name);
+    }
+};
+var obj2 = { name: "猪八戒" }
+obj1.sayName(); //孙悟空
+obj1.sayName.apply(obj2);//猪八戒
+```
+- `call()`方法可以将实参在对象之后依次传递
+```
+function fun(a, b) {
+  console.log("a = " + a);
+  console.log("b = " + b);
+}
+
+var obj1 = {
+  name: "孙悟空",
+  sayName: function () {
+    alert(this.name);
+  }
+};
+
+fun.call(obj1,2,3);
+
+实行函数：
+a = 2
+b = 3
+```
+- `apply()`方法需要将实参封装到一个数组中统一传递，而不能像`call()`方法那样将实参依次传递
+```
+function fun(a, b) {
+  console.log("a = " + a);
+  console.log("b = " + b);
+}
+
+var obj1 = {
+  name: "孙悟空",
+  sayName: function () {
+    alert(this.name);
+  }
+};
+
+fun.call(obj1,[2,3]);
+
+实行函数：
+a = 2
+b = 3
+```
+- 总结：`this`的情况
+  - 以函数形式调用时，`this`永远是`window`
+  - 以方法形式调用时，`this`是调用方法的对象
+  - 以构造函数的形式调用时，`this`是新创建的那个对象
+  - 使用`call()`和`apply()`调用时，`this`是指定的那个对象
+### 24.8 `arguments`
+- 在调用函数时，浏览器每次都会传递两个隐含的参数：
+  - 函数的上下文对象：`this`
+  - 封装实参的对象：`arguments`
+- `arguments`是一个类数组对象，它可以通过索引来操作数组，也可以获取长度
+- 在调用函数时，我们所传递的实参都会在`arguments`中保存
+- `arguments.length`可以用来获取实参的长度
+```
+function fun(){
+  //输出实参的长度
+  alert(arguments.length);
+  alert(arguments[0]);
+}
+
+//2个实参
+fun("Hello","World");
+
+实行结果：
+2
+Hello
+```
+- 综合以上所述，可以得出即使不定义形参，也可以通过`arguments`来使用实参
+  - `arguments[0]` 表示第一个实参
+  - `arguments[1]` 表示第二个实参
+- `arguments`里面有一个属性叫做`callee`
+- 这个属性对应一个函数对象，就是当前正在指向的函数的对象
+```
+function fun(){
+  console.log(arguments.length);
+  console.log(arguments.callee);
+}
+fun("Hello","World");
+
+实行结果：
+fun(){
+  console.log(arguments.length);
+  console.log(arguments.callee);
+}
 ```
 ## 25. 作用域：Scope
 作用域指一个变量的作用的范围 <br/>
@@ -2681,6 +2970,147 @@ var result = arr.splice(2,2,"牛魔王","铁扇公主");
 console.log(result); //["沙和尚", "白骨精"]
 console.log(arr); // ["孙悟空", "猪八戒", "牛魔王", "铁扇公主"]
 ```
+练习：
+```
+//创建一个数组
+var arr = [1, 2, 3, 2, 2, 1, 3, 4, 2, 5];
+
+//读取数组中的元素
+for (var i = 0; i < arr.length; i++) {
+    console.log(arr.length);
+    
+    //第一个元素和第二个，三个...元素比较
+    for (var j = i + 1; j < arr.length; j++) {
+        //判断第一个元素是否等于第二个元素
+        if (arr[i] == arr[j]) {
+          //如果第一个元素等于第二个元素，则将第二个元素删除
+          arr.splice(j, 1);
+          //第三个元素会变成第二个元素
+          j--;
+        }
+    }
+}
+//打印数组去重之后的数组
+console.log(arr);
+```
+#### 31.3.7 `concat()`
+- 可以连接两个或多个数组，并将新的数组返回。
+- 该方法不会对原数组产生影响。
+```
+var arr1 = ["孙悟空","猪八戒","沙和尚"];
+var arr2 = ["白骨精","蜘蛛精","玉兔精"];
+var arr3 = ["唐僧","观音","佛祖"];
+var result = arr1.concat(arr2,arr3,"牛魔王");
+
+alert(result);
+
+实行结果：
+孙悟空,猪八戒,沙和尚,白骨精,蜘蛛精,玉兔精,唐僧,观音,佛祖,牛魔王
+```
+#### 31.3.8 `join()`
+- 该方法可以将数组转换为一个字符串
+- 该方法不会对原数组产生影响
+```
+var arr = ["孙悟空","猪八戒","沙和尚"];
+result = arr.join();
+
+console.log(typeof result);
+
+实行结果：
+string
+```
+- 在`join()`中可以指定一个字符串作为参数，这个字符串将会成为数组中元素的连接符
+  - 如果不指定连接符，则默认使用`,`作为连接符
+```
+var arr = ["孙悟空","猪八戒","沙和尚"];
+
+result = arr.join("(^_^)");
+alert(result);
+
+实行结果：
+孙悟空(^_^)猪八戒(^_^)沙和尚
+```
+#### 31.3.9 `reverse()`
+- 该方法用来反转数组(前边的去后边，后边的去前边)
+- 该方法会直接修改原数组
+```
+var arr = ["孙悟空","猪八戒","沙和尚"];
+
+arr.reverse();
+alert(arr);
+
+实行结果：
+沙和尚,猪八戒,孙悟空
+```
+#### 31.3.10 `sort()`
+- 可以用来对数组中的元素进行排序
+- 该方法会直接修改原数组
+```
+var arr = ["b","e","a","g","e","c"];
+
+arr.sort();
+alert(arr);
+
+实行结果：
+a,b,c,e,e,g
+```
+- 即使对于纯数字的数组，使用`sort()`排序时，也会按照Unicode编码来排序
+- 所以对数字进行排序时，可能会得到错误的结果，比如：
+```
+var arr = [4,3,2,11,7,5];
+
+arr.sort();
+alert(arr);
+
+实行结果：
+11,2,3,4,5,7
+```
+- 我们可以自己来指定排序的规则
+- 可以在`sort()`添加一个回调函数，来指定排序规则
+  - 回调函数中需要定义两个形参
+  - 浏览器将会分别使用数组中的元素作为实参去调用回调函数
+  - 使用那个元素调用不确定，但是肯定是都是在数组中`a`一定在`b`前面
+  - 浏览器会根据回调函数的返回值来决定元素的顺序
+    - 如果返回一个大于0的值，则元素会交换位置
+    - 如果返回一个小于0的值，则元素不会交换位置
+    - 如果返回一个0，则认为两个元素相等，也不会交换位置 <br/>
+
+例子1: 升序排列
+```
+var arr = [5, 4, 3, 2, 1, 6, 2, 4];
+
+arr.sort(function (a, b) {
+  if (a > b) {
+    return 1;
+  } else if (a < b) {
+    return -1;
+  } else {
+    return 0;
+  }
+});
+
+alert(arr);
+
+实行结果：
+1,2,3,4,5,6,7,8
+```
+例子2: 升序排列
+```
+var arr = [5, 4, 3, 2, 1, 6, 8, 7];
+
+arr.sort(function (a, b) {
+  return a - b;
+});
+
+alert(arr);
+
+实行结果：
+1,2,3,4,5,6,7,8
+```
+总结：<br/>
+- 如果需要升序排列，则返回`a - b`
+- 如果需要降序排列，则返回`b - a`
+
 ### 31.4 数组的遍历
 遍历数组就是将数组中所有的元素都取出来。<br/>
 ```
@@ -2696,7 +3126,7 @@ for (var i = 0; i < arr.length; i++) {
 沙和尚
 唐僧 
 ```
-### 31.4 forEach
+### 31.5 forEach
 - 一般我们都是使用for循环去遍历数组，js中还为我们提供了一个方法`forEach`，用来遍历数组。<br/>
 - `forEach`这个方法只支持ie8以上的浏览器。
   - 像这种函数，由我们创建但是不由我们调用的，我们称为回调函数
@@ -2717,5 +3147,558 @@ arr.forEach(function (value, index, obj) {
     console.log(obj); // 5个 ["孙悟空", "猪八戒", "沙和尚", "唐僧", "白骨精"]
 });
 ```
-### 31.5 
+## 32. 包装类
+- 基本数据类型
+  - `String` `Number` `Boolean` `Null` `Undefined`
+- 引用数据类型
+  - `Object`
+在js中为我们提供了三个包装类，通过这三个包装类可以将基本数据类型的数据转换为对象。<br/>
+- `String()`
+  - 可以将基本数据类型的字符串转换为`String`对象
+- `Number()`
+  - 可以将基本数据类型的数字转换为`Number`对象
+- `Boolean()`
+  - 可以将基本数据类型的布尔值转换为`Boolean`对象
+- 注意：我们在实际应用中不会使用基本数组类型的对象
+  - 如果使用基本数据类型的对象，在做一些比较时可能会带来一些不可预期的结果
+```
+//创建一个，String，Number，Boolean类型的对象
+var str = new String("hello");
+var num = new Number(3);
+var bool = new Boolean(true);
 
+console.log(typeof str);
+console.log(typeof num);
+console.log(typeof bool);
+
+实行结果：
+object
+object
+object
+```
+- 方法和属性只能添加给对象，不能添加给基本数据类型
+  - 当我们对一些基本数据类型的值去调用属性和方法时，
+  - 浏览器会临时使用包装类将其转换为对象，然好再调用对象的属性和方法
+  - 调完之后，再将其转换为基本数据类型
+```
+var s = 123;
+//浏览器会临时使用包装类String()将基本数据类型s转换为对象，然好再调用对象的toString()方法  
+s = s.toString();
+
+console.log(s);
+console.log(typeof s);
+
+实行结果：
+123
+string
+```
+## 33. 字符串的方法
+在底层字符串是以字符数组的形式保存的。<br/>
+比如：`["H","e","l","l","o"]`
+### 33.1 字符串属性
+- `length` 获取字符串的长度
+```
+//创建一个字符串
+var str = "Hello";
+
+console.log(str.length);
+
+实行结果：
+5
+```
+### 33.2 字符串的方法
+### 33.2.1 `charAt()`
+可以返回字符串中指定位置的字符，根据索引获取指定的字符
+```
+var str = "Hello";
+var result = str.charAt(0);
+
+console.log("result = " + result);
+
+实行结果：
+result = H
+```
+### 33.2.2 `charCodeAt()`
+获取指定位置字符的字符编码(Unicode编码)
+```
+var str = "Hello";
+var result = str.charCodeAt(0);
+
+console.log("result = " + result);
+
+实行结果：
+result = 72
+```
+### 33.2.3 `fromcharCode()`
+可以根据字符编码去获取字符
+```
+var result = String.fromCharCode(72);
+alert("result = " + result);
+
+实行结果：
+result = H
+```
+### 33.2.4 `concat()`
+可以用来连接两个或多个字符串，作用和`+`一样
+```
+var str = "hello, ";
+
+var result = str.concat("Nice ", "to ", "meet ", "you！");
+alert(result);
+
+实行结果：
+hello, Nice to meet you！
+```
+### 33.2.5 `indexOf()`
+- 该方法可以检索一个字符串是否含有指定内容
+- 如果字符串中含有该内容，则会返回其第一次出现的索引
+- 如果没有找到指定的内容，则返回`-1`
+- 可以指定一个第二个参数，指定开始查找的位置
+```
+var str = "hello";
+var result = str.indexOf("o");
+alert(result); 
+
+实行结果：
+4
+```
+```
+//指定第二个参数
+var str = "hello world";
+var result = str.indexOf("l",5);
+alert(result);
+
+实行结果：
+9
+```
+### 33.2.6 `lastIndexOf()`
+- 该方法的用法和`indexOf()`一样
+- 不同的是`indexOf()`是从前往后找，而`lastIndexOf()`是从后往前找
+- 也可以指定开始查找的位置
+```
+var str = "hello world";
+var result = str.lastIndexOf("l");
+        
+alert(result);
+
+实行结果：
+9
+```
+```
+var str = "hello world";
+
+var result = str.lastIndexOf("l",3);
+alert(result);
+
+实行结果：
+3
+```
+### 33.2.7 `silce()`
+- 可以从字符串中截取指定的内容
+- 不会影响原数组，而是将截取的内容返回
+- 参数：
+  - 第一个，开始位置的索引(包括开始位置)
+  - 第二个，结束位置的索引(包括结束位置)
+    - 如果省略第二个参数，则会截取到后边所有的字符
+  - 也可以传递一个负数作为参数，负数的话，将会从后边计算
+```
+var str = "hello world";
+
+var result = str.slice(1,3);
+alert(result);
+
+实行结果：
+el
+```
+```
+var str = "hello world";
+
+var result = str.slice(1,-1);
+alert(result);
+
+实行结果：
+ello worl
+```
+### 33.2.8 `substring()`
+- 可以用来截取一个字符串，和`slice()`类似
+- 参数：
+  - 第一个，开始位置的索引(包括开始位置)
+  - 第二个，结束位置的索引(包括结束位置)
+    - 如果省略第二个参数，则会截取到后边所有的字符
+- 和`slice()`不同的是这个方法不能接收负值作为参数
+  - 如果传递了一个负值，则默认使用0
+  - 而且它还会自动调整参数的位置，如果第二个参数小于第一个，则会自动交换
+```
+var str = "hello world";
+
+var result = str.substring(1,0);
+alert(result);
+
+实行结果：
+h
+```
+### 33.2.9 `substr()`
+- 用来获取字符串
+- 参数：
+  - 第一个，用来截取开始位置的索引
+  - 第二个，截取的长度
+```
+var str = "hello world";
+
+var result = str.substr(1,4);
+alert(result);
+
+实行结果：
+ello
+```
+### 33.2.10 `split()`
+- 可以将数组串拆分为一个数组
+- 参数：
+  - 需要一个字符串作为参数，将会根据该字符串去拆分数组
+- 如果传递一个空串作为参数，则会将每个字符都拆分为数组中的一个元素
+```
+var str = "hello, js, world";
+
+var result = str.split(",");
+alert(result[0]);
+alert(typeof result);
+
+实行结果：
+hello
+object
+```
+```
+var str = "Hello js world";
+
+var result = str.split("");
+alert(result);
+
+实行结果：
+H,e,l,l,o, ,j,s, ,w,o,r,l,d
+```
+### 33.2.11 `toUpperCase()`
+- 将一个字符串转换为大写并返回
+```
+var str = "Hello js world";
+
+var result = str.toUpperCase();
+alert(result);
+
+实行结果：
+HELLO JS WORLD
+```
+### 33.2.12 `toLowerCase()`
+- 将一个字符串转换为小写写并返回
+```
+var str = "Hello js world";
+
+var result = str.toUpperCase();
+alert(result);
+
+实行结果：
+hello js world
+```
+## 34. 正则表达式
+### 34.1 简介
+正则表达式用于定义一些字符串的规则，计算机可以根据正则表达式，来检查一个字符串是否符合规则。<br/>
+获取将字符串中符合规则的内容提取出来。<br/>
+- 创建正则表达式
+  - 语法：`var 变量 = new RegExp("正则表达式","匹配模式");`
+  - 使用`typeof`检查正则对象，会返回`object`
+- 正则表达式的方法
+  - `test();`
+  - 使用这个方法可以用来检查一个字符串是否符合正则表达式的规则
+    - 如果符合则返回`true`，否则返回`false`
+- 在构造函数中可以传递一个匹配模式作为第二个参数
+  - `i` 忽略大小写 
+  - `g` 全局匹配模式
+
+例子1:
+```
+//创建正则表达式的对象
+//这个正则表达式可以来检查一个字符串中是否含有a
+var reg = new RegExp("a");
+var str = "a";
+        
+//检查字符串是否符合正则表达式的规则
+var result = reg.test(str);
+
+//如果符合正则表达式则返回true，不符合返回false
+alert(result);
+
+实行结果：
+true
+```
+例子2:
+```
+//创建正则表达式的对象
+//这个正则表达式可以来检查一个字符串中是否含有a
+var reg = new RegExp("A","i");
+var str = "a";
+        
+//检查字符串是否符合正则表达式的规则
+var result = reg.test(str);
+
+//如果符合正则表达式则返回true，不符合返回false
+alert(result);
+
+实行结果：
+true
+```
+例子3:
+```
+//创建正则表达式的对象
+var reg = new RegExp("Ac","i");
+var str = "abc";
+        
+//检查字符串是否符合正则表达式的规则
+var result = reg.test(str);
+//符合正则表达式则返回true，不符合返回false
+alert(result);
+
+实行结果：
+false
+```
+### 34.2 语法
+- 使用字面量来创建正则表达式
+- 语法：`var 变量 = /正则表达式/匹配模式;`
+- 使用字面量的方式创建更加简单，但是使用构造函数创建更加灵活
+```
+var reg = new RegExp("a","i");
+alert(reg.test("Abc"));
+
+实行结果：
+true
+```
+以上代码可以写成如下方式：
+```
+var reg = /a/i;
+alert(reg.test("Abc"))
+
+实行结果：
+true
+```
+- 使用`|`表示或者的意思
+```
+//创建一个正则表达式，检查一个字符串中是否含有a或b
+var reg = /a|b/i;
+alert(reg.test("bc"));
+
+实行结果：
+true
+```
+- `[]`里的内容也是或的关系 
+  - `[a-z]` 任意的小写字母
+  - `[A-Z]` 任意的大写字母
+  - `[A-z]` 任意字母
+  - `[0-9]` 任意数字
+```
+//检查字符串中是否含有字母
+var reg = /[A-z]/;
+alert(reg.test("a"));
+
+实行结果：
+true
+```
+```
+//检查一个字符串中是否含有 abc 或 adc 或 aec
+var reg = /a[bde]c/;
+alert(reg.test("abc"));
+
+实行结果：
+true
+```
+- `[^ ]` 除了
+```
+var reg = /[^ab]/;
+alert(reg.test("abc"));
+
+实行结果：
+true
+```
+### 34.3 字符串和正则相关的方法
+#### 34.3.1 `split()`
+- 可以将一个字符串拆分为一个数组。
+- 方法中可以传递一个正则表达式作为参数，这样方法将会根据正则表达式去拆分字符串
+- 这个方法即使不指定全局匹配，也会全都拆分
+```
+var str = "1a2b3c4d5e6f7";
+       
+//根据任意字母来将字符串拆分
+var result = str.split(/[A-z]/);
+alert(result);
+
+实行结果：
+1,2,3,4,5,6,7
+```
+#### 34.3.2 `search()`
+- 可以搜索字符串中是否含有指定内容
+- 如果搜索到指定内容，则会返回第一次出现的索引，如果没有搜索到返回-1
+- serach()只会查找第一个，即使设置全局匹配也没用
+```
+var str = "hello abc hello abc";
+var result = str.search("abc");
+
+alert(result);
+
+实行结果：
+6
+```
+- 它可以接收一个正则表达式作为参数，然后会根据正则表达式去检索字符串
+```
+//搜索字符串中是否含有abc 或aec 或afc
+var str = "hello abc hello aec hello afc";
+var result = str.search(/a[bef]c/);
+
+alert(result);
+
+实行结果：
+6
+```
+#### 34.3.3 `match()`
+- 可以根据正则表达式，从一个字符串中将符合条件的内容提取出来。
+- 默认情况下我们的`match()`只会找到第一个符合要求的内容，找到以后就停止检索
+- 我们可以设置正则表达式为全局匹配模式，这样就会匹配到所有的内容
+- 可以为一个正则表达式设置多个匹配模式，且顺序无所谓
+```
+var str = "1a2b3c4d5e6f78A9B ";
+//设置正则表达式为全局匹配模式
+var result = str.match(/[a-z]/g);
+        
+alert(result);
+
+实行结果：
+a,b,c,d,e,f
+```
+```
+var str = "1a2b3c4d5e6f78A9B";
+//设置正则表达式为全局匹配模式，并且忽略大小写
+var result = str.match(/[a-z]/ig);
+        
+alert(result);
+
+实行结果：
+a,b,c,d,e,f,A,B
+```
+- `match()`会将匹配到的内容封装到一个数组中返回，即使只查询到一个结果
+```
+var str = "1a2b3c4d5e6f78A9B";
+//设置正则表达式为全局匹配模式，并且忽略大小写
+var result = str.match(/[a-z]/ig);
+
+//判断是否是一个数组        
+alert(Array.isArray(result));
+alert(result[0]);
+
+实行结果：
+true
+a
+```
+#### 34.3.4 `replace()`
+- 可以将字符串中指定内容替换成新的内容
+- 参数
+  - 第一个，被替换的内容，可以接收一个正则表达式作为参数
+  - 第二个，新的内容
+- 默认只会替换第一个
+```
+var str = "1a2a3a4d5e6f78A9B";
+var result = str.replace("a","^_^");
+        
+alert(result);
+
+实行结果：
+1^_^2a3a4d5e6f78A9B
+```
+```
+var str = "1a2a3a4d5e6f78A9B";
+//设置正则表达式为全局匹配模式，并且忽略大小写
+var result = str.replace(/a/ig,"^_^");
+        
+alert(result);
+
+实行结果：
+1^_^2^_^3^_^4d5e6f78^_^9B
+```
+```
+//将所有的字母都替换成^_^
+var str = "1a2a3a4d5e6f78A9B";
+var result = str.replace(/[a-z]/ig,"^_^");
+        
+alert(result);
+
+实行结果：
+1^_^2^_^3^_^4^_^5^_^6^_^78^_^9^_^
+```
+```
+var str = "1a2a3a4d5e6f78A9B";
+var result = str.replace(/[a-z]/ig,"");
+        
+alert(result);
+
+实行结果 ：
+123456789
+```
+### 34.4 语法补充
+#### 34.4.1 量词
+- 通过量词可以设置一个内容出现的次数
+- 量词只对它前边的一个内容起作用
+- `{n}` 正好出现n次
+
+```
+//创建一个正则表达式检查一个字符串中是否含有`aaa`
+var reg = /a{3}/;
+alert(reg.test("aaabc"));
+
+实行结果：
+true
+```
+```
+//创建一个正则表达式检查一个字符串中是否含有`ababab`
+var reg = /(ab){3}/;
+alert(reg.test("abababc"));
+
+实行结果：
+true
+```
+- `{m,n}` 出现`m-n`次
+```
+//创建一个正则表达式检查一个字符串中是否含有`ab(出现1到3次)c`
+var reg = /ab{1,3}c/;
+alert(reg.test("abbc"));
+
+实行结果：
+true
+```
+- `{m,}` 出现`m`次以上
+- `+` 至少一个，相当于`{1,}`
+- `*` 0个或多个，相当于`{0,}`
+- `?` 0个或1个，相当于`{0,1}`
+#### 34.4.2 其他
+- `^` 表示开头 
+```
+//判断字符串的首字母是否是a
+var reg = /^a/;
+alert(reg.test("bcabc"));
+
+实行结果：
+false
+```
+- `$` 表示结尾
+```
+//判断字符串的结尾字母是否是c
+var reg = /c$/;
+alert(reg.test("abcabc"));
+
+实行结果：
+true
+```
+- 如果在正则表达式中同时使用`^``$`，则要求字符串必须完全符合正则表达式
+```
+//以下表达式只能是a自己
+var reg = /^a$/;
+
+alert(reg.test("aaa"));
+
+实行结果：
+false
+```
