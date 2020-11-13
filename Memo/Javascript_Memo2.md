@@ -3897,6 +3897,6 @@ DOM，全称是：Document Object Model，文档对象模型。js中通过DOM来
 #### 35.5.1 获取元素节点
 通过`document`对象调用。<br/>
 - `getElementById()`
-  - 通过`id`属性获取<font color=red>**一个**</font>元素节点对象
+  - 通过`id`属性获取*一个*元素节点对象
 - `getElementsByTagName()`
   - 通过
