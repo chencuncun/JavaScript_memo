@@ -17,6 +17,40 @@
         网站图片一般都存储在网站的根目录下，名字一般都叫做 favicon.ico
     -->
     <link rel="icon" href="pic/08/favicon.ico">
+    <script>
+        window.onload = function () {
+            //点击链接切换图片
+            //获取两个链接
+            var prev = document.getElementById("prev");
+            var next = document.getElementById("next");
+
+            //获取img信息
+            var imgInfo = document.getElementsByClassName("banner-img")[0];
+
+            //创建一个数组，用来保存图片的路径
+            var imgArr = ["pic/08/banner1.jpg", "pic/08/banner2.webp", "pic/08/banner3.webp", "pic/08/banner4.webp", "pic/08/banner5.webp", "pic/08/banner6.webp"];
+
+            //创建一个变量，来保存当前正在显示的图片的索引
+            var index = 0;
+
+            //分别为两个链接绑定单击响应函数
+            prev.onclick = function () {
+                //切换到上一张，索引自减
+                index--;
+                if (index < 0) {
+                    index = imgArr.length - 1;
+                }
+                imgInfo.src = imgArr[index];
+            }
+            next.onclick = function () {
+                index++;
+                if (index > imgArr.length - 1) {
+                    index = 0;
+                }
+                imgInfo.src = imgArr[index];
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -258,48 +292,48 @@
             <ul class="img-list">
                 <li>
                     <a href="javascript:;">
-                        <img src="pic/08/banner1.jpg" alt="">
+                        <img class="banner-img" src="pic/08/banner1.jpg" alt="">
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="javascript:;">
+                        <img class="banner-img" src="pic/08/banner2.webp" alt="">
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <img src="pic/08/banner2.webp" alt="">
+                        <img class="banner-img" src="pic/08/banner3.webp" alt="">
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <img src="pic/08/banner3.webp" alt="">
+                        <img class="banner-img" src="pic/08/banner4.webp" alt="">
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <img src="pic/08/banner4.webp" alt="">
+                        <img class="banner-img" src="pic/08/banner5.webp" alt="">
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <img src="pic/08/banner5.webp" alt="">
+                        <img class="banner-img" src="pic/08/banner6.webp" alt="">
                     </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <img src="pic/08/banner6.webp" alt="">
-                    </a>
-                </li>
+                </li> -->
             </ul>
             <div class="pointer">
-                <a class="active" href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
+                <a id="pointer1" class="active" href="javascript:;"></a>
+                <a id="pointer2" href="javascript:;"></a>
+                <a id="pointer3" href="javascript:;"></a>
+                <a id="pointer4" href="javascript:;"></a>
+                <a id="pointer5" href="javascript:;"></a>
+                <a id="pointer6" href="javascript:;"></a>
             </div>
             <div class="prev-next">
-                <a class="prev" href="javascript:;">
+                <a id="prev" class="prev" href="javascript:;">
                     <i class="fa fa-angle-left"></i>
                 </a>
-                <a class="next" href="javascript:;">
+                <a id="next" class="next" href="javascript:;">
                     <i class="fa fa-angle-right"></i>
                 </a>
             </div>
