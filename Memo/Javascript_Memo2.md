@@ -3901,7 +3901,7 @@ DOM，全称是：Document Object Model，文档对象模型。js中通过DOM来
 - `getElementsByTagName()`
   - 通过`标签名`获取一组元素节点对象
 - `getElementsByName()`
-  - 通过`name`属性获取一组元素 节点对象
+  - 通过`name`属性获取一组元素节点对象
 #### 35.5.2 获取元素节点的子节点
 通过具体的`元素节点`调用。<br/>
 - `getElementsByTagName()`
@@ -3921,4 +3921,160 @@ DOM，全称是：Document Object Model，文档对象模型。js中通过DOM来
   - 不支持IE8及以下的浏览器。如果要兼容尽量避免使用
 - `lastChild`
   - 属性，表示当前节点的最后一个子节点
+#### 35.5.3 获取父节点和兄弟节点
+通过具体的节点调用 <br/>
+- `parentNode`
+  - 属性，表示当前节点的父节点
+- `previousSibling`
+  - 属性，表示当前节点的前一个兄弟节点
+  - 也可能获取到空白的文本
+- 追加：`previousElementsSibling`
+  - 属性，获取前一个兄弟元素
+  - IE8及以下不支持
+- `nextSibling`
+  - 属性，表示当前节点的后一个兄弟节点
+#### 35.5.4 追加知识点
+- `innerHTML`
+  - 该属性可以获取到元素内部的文本内容
+- `innerText`
+  - 该属性可以获取到元素内部的文本内容
+  - 它和`innerHTML`类似，不同的是它会自动将`html`的标签去除
+#### 35.5.5 DOM其他查询方法
+```
+//获取body标签
+var body = document.getElementsByTagName("body")[0];
+```
+- 在`document`中有一个属性`body`，它保存的是`body`的引用
+- 所以以上代码可以改成如下代码：
+```
+var body = document.body;
+console.log(body);
 
+实行结果：
+[object HTMLBodyElement]
+```
+- `document.documentElement`保存的是`html`根标签
+```
+var html = document.documentElement;
+console.log(html);
+
+实行结果：
+[object HTMLHtmlElement]
+```
+- `document.all`代表页面中所有的元素
+```
+var all = document.all;
+
+//获取页面中所有的元素
+for (var i = 0; i < all.length; i++) {
+  console.log(all[i]);
+}
+```
+- 根据元素的`class`属性值查询一组元素节点对象
+```
+var box1 = ducument.getElementsByClassName("box1");
+```
+- `document.querySelector()`
+  - 需要一个选择器的字符串作为参数，可以根据一个CSS选择器来查询一个元素节点对象
+  - 虽然IE8中没有`getElementsByClassName()`，但是可以使用`querySelector()`代替
+  - 使用该方法总会返回唯一的一个元素，如果满足条件的元素有多个，那么它只会返回第一个
+```
+</head>
+  <script>
+    window.onload = function () {
+      var div = document.querySelector(".box1 div");
+      alert(div.innerHTML);
+    }
+  </script>
+</head>
+<body>
+  <div class="box1">
+    <div>我是box1中的div</div>
+  </div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+</body>
+
+实行结果：
+我是box1中的div
+```
+- `document.querySelectorAll()`
+  - 该方法和`querySelector()`用法类似，不同的是它会将符合条件的元素封装到一个数组中返回
+  - 即使符合条件的元素只有一个，它也会返回数组
+```
+<head>
+  <script>
+    window.onload = function () {
+      var box1 = document.querySelectorAll(".box1");
+      alert(box1.length);
+    }
+  </script>
+</head>
+<body>
+  <div class="box1">
+    <div>我是box1中的div</div>
+  </div>
+  <div class="box1">
+    <div>我是box1中的div</div>
+  </div>
+  <div class="box1">
+    <div>我是box1中的div</div>
+  </div>
+</body>
+
+实行结果：
+3
+```
+### 35.6 DOM增删改
+- `document.createElement()`
+  - 可以用于创建一个元素节点对象
+  - 它需要一个标签名作为参数，将会根据该标签名创建元素节点对象
+  - 并将创建好的对象作为返回值返回
+- `document.createTextNode()`
+  - 可以用来创建一个文本节点对象
+  - 需要一个文本内容作为参数，将会根据内容创建文本节点，并将新的节点返回
+- `appendChild()`
+  - 向一个父节点中添加一个新的子节点
+  - 语法：`父节点.appenChild(子节点);`
+  - 常用语法：`子节点.parentNode.appenChild(子节点);`
+- `insertBefore()` 
+  - 可以在指定的子节点前插入新的子节点
+  - 语法：`父节点.insertBefore(新节点,旧节点);`
+- `replaceChild()`
+  - 可以使用指定的子节点替换已有的子节点
+  - 语法：`父节点.replace(新节点,旧节点);`
+- `removeChild()`
+  - 可以删除一个子节点
+  - 语法：`父节点.removeChild(子节点);` (属于它杀)
+  - 常用语法：`子节点.parentNode.removeChild(子节点);` (属于自杀)
+- 使用`innerHTML`也可以完成DOM的增删改的相关操作
+  - 一般我们会两种方法结合使用
+  - 所以可以将以下代码改为：
+```
+//创建一个“广州”节点: <li>广州</li>
+
+//1. 创建li元素节点
+var gzli = document.createElement("li");
+
+//2. 创建广州文本节点
+var gzText = document.createTextNode("广州");
+
+//3. 将gzText设置为li的子节点
+gzli.append(gzText);
+```
+```
+//1. 创建li元素节点
+var gzli = document.createElement("li");
+
+//2. 将文本插入到li标签中
+gzli.innerHTML = "广州";
+```
+- 追加：`confirm()`：用于弹出一个带有确认和取消按钮的提示框
+  - 需要一个字符串作为参数，该字符串将会作为提示文字显示出来
+  - 如果用户点击确认则会返回`true`，如果点击取消则返回`false`
+
+
+
+
+
+ 

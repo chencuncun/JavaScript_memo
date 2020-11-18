@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM增删改</title>
+    <style>
+        .container,
+        .info {
+            border: 1px solid black;
+            width: 400px;
+            margin-top: 20px;
+            margin-left: 30px;
+            float: left;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            /* background-color: blueviolet; */
+        }
+
+        li {
+            background-color: chartreuse;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+
+        .btnList {
+            margin-top: 20px;
+            float: left;
+            margin-left: 40px;
+        }
+
+        button {
+            width: 250px;
+            display: block;
+            margin-bottom: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //创建一个“广州”节点，添加到#city下 
+            myClick("btn1", function () {
+                //创建一个“广州”节点: <li>广州</li>
+                //1. 创建li元素节点
+                var gzli = document.createElement("li");
+                //2. 创建广州文本节点
+                var gzText = document.createTextNode("广州");
+                //3. 将gzText设置为li的子节点
+                gzli.append(gzText);
+
+                //获取id为city的节点
+                var city = document.getElementById("city");
+                //将广州添加到#city下 
+                city.append(gzli);
+            });
+
+            //将“广州”节点插入到#bj前面
+            myClick("btn2", function () {
+                //创建一个“广州”节点: <li>广州</li>
+                //1. 创建li元素节点
+                var gzli = document.createElement("li");
+                //2. 创建广州文本节点
+                var gzText = document.createTextNode("广州");
+                //3. 将gzText设置为li的子节点
+                gzli.append(gzText);
+
+                //将广州节点插入到bj前面
+                //1.获取父节点
+                var city = document.getElementById("city");
+                //2.获取bj的节点
+                var bj = document.getElementById("bj");
+                //3.将广州节点插入到bj前
+                city.insertBefore(gzli, bj);
+            });
+
+            //使用“广州”节点替换#bj节点
+            myClick("btn3", function () {
+                //创建一个“广州”节点: <li>广州</li>
+                //1. 创建li元素节点
+                var gzli = document.createElement("li");
+                //2. 创建广州文本节点
+                var gzText = document.createTextNode("广州");
+                //3. 将gzText设置为li的子节点
+                gzli.append(gzText);
+
+                //使用“广州”节点替换#bj节点
+                //1.获取父节点
+                var city = document.getElementById("city");
+                //2.获取bj的节点
+                var bj = document.getElementById("bj");
+                city.replaceChild(gzli, bj);
+            });
+
+            //删除#bj节点
+            myClick("btn4", function () {
+                //获取bj的节点
+                var bj = document.getElementById("bj");
+                //删除bj节点
+                bj.parentNode.removeChild(bj);
+            });
+
+            //读取#city内的HTML代码
+            myClick("btn5", function () {
+                //获取id为city的元素
+                var city = document.getElementById("city");
+                alert(city.innerHTML);
+            });
+
+            //设置#bj内的HTML代码  
+            myClick("btn6", function () {
+                //获取id为city的元素
+                var city = document.getElementById("city");
+                bj.innerHTML = "青岛";
+            });
+
+            myClick("btn7", function () {
+                //获取id为city的元素
+                var city = document.getElementById("city");
+                city.innerHTML += "<li>广州</li>"
+            });
+        };
+
+
+
+        //定义一个函数，专门用来为指定元素绑定单击响应函数
+        function myClick(idStr, fun) {
+            var btn = document.getElementById(idStr);
+            btn.onclick = fun;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>你喜欢哪个城市？</h2>
+        <ul id="city">
+            <li id="bj">北京</li>
+            <li>上海</li>
+            <li>东京</li>
+            <li>首尔</li>
+        </ul>
+    </div>
+    <div class="btnList">
+        <button id="btn1">创建一个“广州”节点，添加到#city下</button>
+        <button id="btn2">将“广州”节点插入到#bj前面</button>
+        <button id="btn3">使用“广州”节点替换#bj节点</button>
+        <button id="btn4">删除#bj节点</button>
+        <button id="btn5">读取#city内的HTML代码</button>
+        <button id="btn6">设置#bj内的HTML代码</button>
+        <button id="btn7">向#city中添加广州</button>
+    </div>
+</body>
+</html>

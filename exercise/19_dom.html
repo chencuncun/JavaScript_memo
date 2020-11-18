@@ -59,6 +59,17 @@
         }
     </style>
     <script>
+        //定义一个函数，专门用来为指定元素绑定单击响应函数
+        /* 参数
+          idStr：要绑定单击响应函数的对象的id属性值
+          fun：事件的回调函数，当单击元素时，该函数将会被触发
+        */
+        function myClick(idStr, fun) {
+            var btn = document.getElementById(idStr);
+            btn.onclick = fun;
+        }
+
+
         window.onload = function () {
             //为id为btn1的按钮绑定一个单击响应函数
             var btn1 = document.getElementById("btn1");
@@ -92,7 +103,7 @@
                 for (var i = 0; i < gender.length; i++) {
                     //innerHTML用于获取元素内部的HTML代码的
                     //对于自结束标签，innerHTML没有意义
-                    //如果需要读取元素节点属性，直接使用： 元素.属性名
+                    //如果需要读取元素节点属性，直接使用： 元素. 属性名
                     //例子：元素.id 元素.name 元素.value
                     //注意：class属性不能采用这种方式
                     //读取class属性时需要使用元素.className
@@ -129,21 +140,70 @@
 
             //为id为btn6的按钮绑定一个单击响应函数
             var btn6 = document.getElementById("btn6");
-            btn6.onclick = function(){
+            btn6.onclick = function () {
                 //获取id为phone的元素
                 var phone = document.getElementById("phone");
                 //获取phone的第一个子节点
                 // var first = phone.firstChild;
                 //获取phone的第一个子元素
                 var first = phone.firstElementChild;
-                alert(first.innerHTML); 
+                alert(first.innerHTML);
             }
 
+            //为id为btn7的按钮绑定一个单击响应函数
+            // var btn7 = document.getElementById("btn7");
+            // btn7.onclick = function () {
+            //     //获取id为bj的元素
+            //     var bj = document.getElementById("bj");
+            //     //返回#bj的父节点
+            //     var bjFather = bj.parentNode;
+            //     alert(bjFather.innerHTML);
+            // }
+
             //返回#bj的父节点
+            myClick("btn7", function fun() {
+                var bj = document.getElementById("bj");
+                var bjFather = bj.parentNode;
+                alert(bjFather.innerHTML);
+            })
+
+
             //返回#android的前一个兄弟节点
+            myClick("btn8", function fun() {
+                //获取id为android的元素
+                var android = document.getElementById("android");
+                //获取android的前一个兄弟元素
+                var androidSibling = android.previousSibling;
+                alert(androidSibling);
+            })
+
             //返回#username的value属性值
+            myClick("btn9", function fun() {
+                //获取id为username的元素
+                var username = document.getElementById("username");
+                //读取username的vaule属性值
+                //文本框的value属性值，就是文本框中填写的内容
+                alert(username.value);
+            })
+
             //设置#username的value属性值
+            myClick("btn10", function fun() {
+                //获取id为username的元素
+                var username = document.getElementById("username");
+                username.value = "setValue";
+            })
+
             //返回#bj的文本值
+            myClick("btn11", function fun() {
+                //获取id为bj的元素
+                var bj = document.getElementById("bj");
+                //1. alert(bj.innerHTML);
+                //2. 获取bj中的文本节点
+                // var bjText = bj.firstChild;
+                // alert(bjText.nodeValue);
+                //3.获取bj中的文本节点
+                alert(bj.firstChild.nodeValue);
+            })
         }
     </script>
 </head>
@@ -172,7 +232,7 @@
                 <h2>你手机的操作系统是？</h2>
                 <ul id="phone">
                     <li>IOS</li>
-                    <li>Android</li>
+                    <li id="android">Android</li>
                     <li>Windows Phone</li>
                 </ul>
             </div>
@@ -186,7 +246,7 @@
             </div>
             <div class="admin">
                 <span>name:</span>
-                <input type="text" name="username">
+                <input id="username" type="text" name="name" value="chen">
             </div>
         </div>
     </div>
