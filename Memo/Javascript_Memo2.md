@@ -4072,6 +4072,588 @@ gzli.innerHTML = "广州";
 - 追加：`confirm()`：用于弹出一个带有确认和取消按钮的提示框
   - 需要一个字符串作为参数，该字符串将会作为提示文字显示出来
   - 如果用户点击确认则会返回`true`，如果点击取消则返回`false`
+- 练习`19_dom3.html`注意点
+  - `for`循环会在页面加载完成之后立即执行
+  - 而响应函数会在超链接被点击时才执行
+  - 当响应函数执行时，`for`循环早已执行完毕
+```
+for(var i = 0; i < allA.length; i++){
+  alert("for循环正在执行" + i);
+
+  allA[i].onclick = function(){
+  
+    alert("响应函数正在执行" + i);
+  
+    return false;
+  }
+}
+
+实行结果：
+
+for循环正在执行0
+for循环正在执行1
+for循环正在执行2
+响应函数正在执行3
+```
+## 36. DOM操作CSS
+### 36.1 通过js修改元素的样式
+- 语法：`元素.style.样式名 = 样式值;`
+- 注意：如果CSS样式中含有`-`，这种名称在js中是不合法的
+  - 比如：`background-color`
+  - 需要将这种样式名修改为驼峰命名法
+  - 去掉`-`，然后将`-`后的字母大写
+- 我们通过`style`属性设置的样式都是内联样式，而内联样式有较高的优先级，所以通过js修改的样式往往会立即显示
+- 但是如果在样式中写了`!important`，则此时样式会有最高的优先级，即使通过js也不能覆盖该样式，此时将会导致js修改样式失效
+- 所以尽量不要为样式添加`!important`。
+```
+</head>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: brown;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      //获取按钮
+      var btn = document.getElementById("btn");
+      //绑定单击响应函数
+      btn.onclick = function(){
+        box1.style.width = "200px";
+        box1.style.height = "200px";
+        box1.style.backgroundColor = "blue";
+      }
+    }
+  </script>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <div id=box1></div>
+</body>
+```
+### 36.2 通过js读取元素的样式
+#### 36.2.1 读取内联样式
+- 语法：`元素.style.样式名`
+- 注意：通过`style`属性设置和读取的都是内联样式，无法读取样式表中的样式
+```
+<head>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: brown;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      //获取按钮1
+      var btn1 = document.getElementById("btn1");
+      //绑定单击响应函数
+      btn1.onclick = function(){
+        box1.style.width = "200px";
+        box1.style.height = "200px";
+        box1.style.backgroundColor = "blue";
+      }
+      //点击按钮2，读取元素的样式
+      var btn2 = document.getElementById("btn2");
+      btn2.onclick = function(){
+        alert(box1.style.width);
+        }
+      }
+  </script>
+</head>
+<body>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+    <div id=box1></div>
+</body>
+
+实行流程：
+只有点击按钮1之后点击按钮2才能显示box1的宽度
+因为"元素.style.样式名"读取的都是内联样式，
+点击按钮1之后，样式被写入内联样式，所以可以读取
+```
+#### 36.2.2 读取元素当前显示的样式(仅IE支持)
+- 语法：`元素.currentStyle.样式名`
+- 它可以用来读取当前元素正在显示的样式
+- 如果当前元素没有设置该样式，则获取它的默认值
+- `currentStyle`只有IE浏览器支持，其他的浏览器都不支持
+```
+<head>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: brown;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      //获取id为box1的元素
+      var box1 = document.getElementById("box1");
+      //获取按钮1
+      var btn1 = document.getElementById("btn1");
+      //绑定单击响应函数
+      btn1.onclick = function () {
+        alert(box1.currentStyle.width);
+      }
+    }
+  </script>
+</head>
+<body>
+  <button id="btn1">按钮1</button>
+  <div id="box1"></div>
+</body>
+```
+#### 36.2.3 读取元素当前显示的样式(其它浏览器支持(包括IE9以上))
+- 可以使用`getComputedStyle()`这个方法来获取当前的样式
+- 这个方法是`window`的方法，可以直接使用
+- 需要两个参数
+  - 要获取样式的元素
+  - 可以传递一个伪元素，一般都传`null`
+- 该方法会返回一个对象，对象中封装了当前元素对应的样式
+```
+<head>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: brown;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      //获取id为box1的元素
+      // var box1 = document.getElementById("box1");
+      //获取按钮1
+      var btn1 = document.getElementById("btn1");
+      //绑定单击响应函数
+      btn1.onclick = function () {
+        var obj = getComputedStyle(box1,null);
+        alert(obj.width);
+      }
+    }
+  </script>
+</head>
+<body>
+  <button id="btn1">按钮1</button>
+  <div id="box1"></div>
+</body>
+```
+- 可以通过`对象.样式名`来读取样式
+- 如果获取的样式没有设置，则会获取到真实的值，而不是默认值
+- 比如：没有设置`width`，它不会获取到`auto`，而是一个长度
+```
+//获取一个没有设置width的box1，输出它的长度
+alert(getComputeStyle(box1,null).width);
+
+实行结果：
+获取整个页面的宽度
+```
+- 注意：通过`currentStyle`和`getComputedStyle()`读取到的样式都是只读的，不能修改
+- 如果要修改必须通过`style`属性
+#### 36.2.4 读取元素当前显示的样式(既支持IE8以下浏览器也支持其它浏览器)
+- 定义一个函数，用来获取指定元素的当前的样式
+- 参数：
+  - `obj`：要获取样式的元素
+  - `name`：要获取的样式名
+```
+<head>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: brown;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      //获取按钮1
+      var btn1 = document.getElementById("btn1");
+      //绑定单击响应函数
+      btn1.onclick = function () {
+        alert(getStyle(box1,"width"));
+      }
+    }
+    function getStyle(obj,name){
+      if(window.getComputedStyle){
+        //正常浏览器的方式，具有getComputedStyle()方法
+        return getComputedStyle(obj,null)[name];
+      }else{
+        //IE8的方式，没有getComputedStyle()方法
+        return obj.currentStyle[name];
+      }
+    }
+  </script>
+</head>
+<body>
+  <button id="btn1">按钮1</button>
+  <div id="box1"></div>
+</body>
+
+实行结果：
+100px
+```
+### 36.3 其他样式操作的属性
+#### 36.3.1 `clientWidth`和`clientHeight`
+- 这两个属性可以获取元素的可见宽度和高度
+- 这些属性都是不带`px`的，返回的都是一个数字，可以直接进行计算
+- 会获取元素宽度和高度，包括内容区和内边距
+- 这些属性都是只读的不能修改
+```
+<head>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      padding:10px;
+      border: 10px solid yellow;
+      background-color: red;
+    }
+  </style>
+  <script>
+    window.onload = function(){
+      var box1 = document.getElementById("box1");
+      var btn1 = document.getElementById("btn1");
+      btn1.onclick = function(){
+        alert(box1.clientWidth);
+        alert(box1.clientHeight);
+      }
+    }
+  </script>
+</head>
+<body>
+  <button id="btn1">点我一下</button>
+  <br /><br />
+  <div id="box1"></div>
+</body>
+
+实行结果：120
+```
+#### 36.3.2 `offsetWidth`和`offsetHeight`
+- 可以获取元素的整个宽度和高度，包括内容区，内边距和边框
+```
+alert(box1.offsetWidth);
+alert(box1.offsetHeight);
+```
+#### 36.3.3 `offsetParent`,`offsetLeft`,`offsetTop`
+- `offsetParent`
+  - 可以用来获取当前元素的定位父元素
+  - 会获取到离当前元素最近的开启了定位的祖先元素
+    - 如果所有的祖先元素都没有开启定位，则返回`body`
+```
+var op = box1.offsetParent;
+```
+- `offsetLeft`
+  - 当前元素相对与其定位元素的水平偏移量
+- `offsetTop`
+  - 当前元素相对与其定位元素的垂直偏移量
+```
+<head>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            border: 10px solid yellow;
+            background-color: red;
+        }
+        #box2{
+            padding:100px;
+            background-color: #bfa;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var box1 = document.getElementById("box1");
+            var btn1 = document.getElementById("btn1");
+            btn1.onclick = function () {
+                alert(box1.offsetLeft);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点我一下</button>
+    <br /><br />
+    <div id="box3">
+        <div id="box2" style="position: relative;">
+            <div id="box1">
+            </div>
+        </div>
+    </div>
+</body>
+
+实行结果：
+100
+```
+#### 36.3.4 `scrollWidth`和`scrollHeight`
+- 可以获取元素整个滚动区域的宽度和高度
+```
+<head>
+    <style>
+        #box4 {
+            width: 200px;
+            height: 300px;
+            background-color: #bfa;
+            overflow: auto;
+        }
+        #box5 {
+            width: 450px;
+            height: 600px;
+            background-color: #fba;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var box1 = document.getElementById("box1");
+            var btn1 = document.getElementById("btn1");
+            btn1.onclick = function () {
+                alert(box4.scrollWidth);
+                alert(box4.scrollHeight);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点我一下</button>
+    <br /><br />
+    <div id="box4">
+        <div id="box5"></div>
+    </div>
+</body>
+
+实行结果：
+450
+600
+```
+#### 36.3.5 `scrollLeft`和`scrollTop`
+- `scrollLeft`：可以获取水平滚动条滚动的距离
+```
+alert(box4.scrollLeft);
+```
+-　`scrollTop`：可以获取垂直滚动条滚动的距离
+```
+alert(box4.scrollTop);
+```
+```
+<head>
+    <style>
+        #box4 {
+            width: 200px;
+            height: 300px;
+            background-color: #bfa;
+            overflow: auto;
+        }
+        #box5 {
+            width: 300px;
+            height: 600px;
+            background-color: #fba;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var box1 = document.getElementById("box1");
+            var btn1 = document.getElementById("btn1");
+            btn1.onclick = function () {
+                // alert(box4.scrollWidth); //300
+                // alert(box4.scrollHeight); //600
+                // alert(box4.clientWidth); //200
+                // alert(box4.clientHeight); //300
+
+                //当满足scrollHeight-scrollTop == clientHeight
+                //说明垂直滚动条滚动到底了
+                alert(box4.scrollHeight - box4.scrollTop); //300
+
+                //当满足scrollWidth-scrollLeft == clientWidth
+                //说明水平滚动条滚动到底了
+                alert(box4.scrollWidth - box4.scrollLeft); //200
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点我一下</button>
+    <br /><br />
+    <div id="box4">
+        <div id="box5"></div>
+    </div>
+</body>
+
+实行结果：
+300
+200
+```
+- `onsrcoll`：该事件会在元素的滚动条滚动时触发
+```
+<head>
+    <style>
+        #info {
+            width: 500px;
+            height: 500px;
+            background-color: #fba;
+            overflow: auto;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            /*
+                当垂直滚动条滚动到底时，使表单项可用
+            */
+            //获取info
+            var info = document.getElementById("info");
+            //为info绑定一个滚动条滚动事件
+            info.onscroll = function () {
+                //获取表单
+                var checkbox = document.getElementById("checkbox");
+                var submit = document.getElementById("submit");
+                // var input1 = document.getElementsByTagName("input")[0];
+                // var input2 = document.getElementsByTagName("input")[1];
+                //当垂直滚动条滚动到底时，表单可用
+                if (this.scrollHeight - this.scrollTop == this.clientHeight) {
+                    /*
+                        disabled属性可以设置一个元素是否禁用
+                            如果设置为true，则元素禁用
+                            如果设置为false，则元素可用
+                    */
+                    checkbox.disabled = false;
+                    submit.disabled = false;
+                    // input1.disabled = false;
+                    // input2.disabled = false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>网站用户注册协议书</h3>
+    <p id="info">
+        亲爱的用户，欢迎注册此网站！<br />
+        注册此网站前需要阅读以下条款：<br />
+        1. 本站运用自己的操作系统，禁止转载或非法使用不正当手段编撰此网站的内容。<br />
+        2. 本站对注册用户的电子邮件，手机号等隐私材料进行保护，承诺不会在为获得注册用户许可的情况下将用户的个人资料信息出租或出售给第三方。<br />
+        3. 关于注册用户隐私的具体协议以本站的隐私声明为准。如果注册用户提供的资料包含不正确的信息，本站将结束注册用户使用网络服务资格的权利。<br />
+        4. 注册用户一旦注册成功，成本本站的合法的注册用户。您可随时根据需要修改用户密码。<br />
+        5. 每个注册用户都要以其注册用户名进行的所有活动和事件负全责。<br />
+        6. 基于本站提供的网络服务的重要性，注册用户应同意：提供详尽，准确的个人资料。若个人信息有所改变，请即使更新内容。<br />
+        7. 本站运用自己的操作系统通过国际互联网为注册用户提供网络服务。<br />
+        8. 本站的各项电子服务的所有权和运作权归本站所有。<br />
+        9. 本协议条款是处理双方权利义务的当然约定一句，除非违反国家强制性法律，否则始终有效。<br />
+        10. 由于注册用户协议变更后因未熟悉规定而引起的损失，本站将不会承担任何责任。<br />
+        11. 本站运用自己的操作系统，禁止转载或非法使用不正当手段编撰此网站的内容。<br />
+        12. 本站对注册用户的电子邮件，手机号等隐私材料进行保护，承诺不会在为获得注册用户许可的情况下将用户的个人资料信息出租或出售给第三方。<br />
+        13. 关于注册用户隐私的具体协议以本站的隐私声明为准。如果注册用户提供的资料包含不正确的信息，本站将结束注册用户使用网络服务资格的权利。<br />
+        14. 注册用户一旦注册成功，成本本站的合法的注册用户。您可随时根据需要修改用户密码。<br />
+        15. 每个注册用户都要以其注册用户名进行的所有活动和事件负全责。<br />
+        16. 基于本站提供的网络服务的重要性，注册用户应同意：提供详尽，准确的个人资料。若个人信息有所改变，请即使更新内容。<br />
+        17. 本站运用自己的操作系统通过国际互联网为注册用户提供网络服务。<br />
+        18. 本站的各项电子服务的所有权和运作权归本站所有。<br />
+        19. 本协议条款是处理双方权利义务的当然约定一句，除非违反国家强制性法律，否则始终有效。<br />
+        20. 由于注册用户协议变更后因未熟悉规定而引起的损失，本站将不会承担任何责任。<br />
+    </p>
+    <input id="checkbox" type="checkbox" disabled="disabled" />我已阅读并遵守此协议
+    <input id="submit" type="submit" value="注册" disabled="disabled" />
+</body>
+```
+### 36.4 事件对象
+- 当事件的响应函数被触发时，浏览器每次都会将一个事件对象作为实参传递进响应函数。
+- 在事件对象中封装了当前事件相关的一切信息
+- 比如：鼠标的坐标，键盘哪个按键被按下，鼠标滚轮滚动的方向
+- `onmousemove`：该事件将会在鼠标在元素中移动时被触发
+- `clientX`：可以获取鼠标指针的水平坐标
+- `clientY`：可以获取鼠标指针的垂直坐标
+```
+//鼠标滑过areaDiv，将在showMsg中显示鼠标指针的坐标
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件对象</title>
+    <style>
+        #areaDiv{
+            width: 300px;
+            height: 80px;
+            border: 1px solid black;
+        }
+        #showMsg{
+            margin-top: 20px;
+            width: 300px;
+            height: 30px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var areaDiv = document.getElementById("areaDiv");
+            var showMsg = document.getElementById("showMsg");
+
+            areaDiv.onmousemove = function(event){
+                var x = event.clientX;
+                var y = event.clientY;
+
+                //在showMsg中显示鼠标的坐标
+                showMsg.innerHTML = "x = " + x + ", y = " + y;
+            }
+        }
+    </script>
+</head>
+```
+- 在IE8中，响应函数被触发时，浏览器不会传递事件对象
+- 在IE8及以下的浏览器中，是将事件对象作为`window`对象的属性保存的
+```
+//鼠标滑过areaDiv，将在showMsg中显示鼠标指针的坐标
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件对象</title>
+    <style>
+        #areaDiv{
+            width: 300px;
+            height: 80px;
+            border: 1px solid black;
+        }
+        #showMsg{
+            margin-top: 20px;
+            width: 300px;
+            height: 30px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var areaDiv = document.getElementById("areaDiv");
+            var showMsg = document.getElementById("showMsg");
+
+            //解决事件对象的兼容性问题 
+            //如果浏览器是IE8以下
+            /*
+            if(!event){
+              event = window.event;
+            }
+            */
+
+            event = event || window.event;
+
+            areaDiv.onmousemove = function(event){
+                var x = event.clientX;
+                var y = event.clientY;
+
+                //在showMsg中显示鼠标的坐标
+                showMsg.innerHTML = "x = " + x + ", y = " + y;
+            }
+        }
+    </script>
+</head>
+```
+ 
+
+ 
 
 
 
