@@ -4562,7 +4562,8 @@ alert(box4.scrollTop);
     <input id="submit" type="submit" value="注册" disabled="disabled" />
 </body>
 ```
-### 36.4 事件对象
+### 36.4 事件
+#### 36.4.1 事件对象
 - 当事件的响应函数被触发时，浏览器每次都会将一个事件对象作为实参传递进响应函数。
 - 在事件对象中封装了当前事件相关的一切信息
 - 比如：鼠标的坐标，键盘哪个按键被按下，鼠标滚轮滚动的方向
@@ -4651,7 +4652,282 @@ alert(box4.scrollTop);
     </script>
 </head>
 ```
- 
+#### 36.4.2 `div`跟随鼠标移动
+- `clientX`和`clientY`：用于获取鼠标在当前的可见窗口的坐标
+- `div`的偏移量，是相对于整个页面的。
+- `pageX`和`pageY`可以获取鼠标相对于当前页面的坐标。
+  - 这两个属性在IE8中不支持，所以如果需要兼容IE8，则不要使用
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒子随着鼠标的移动而移动</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+
+            /*
+                开启box1的绝对定位
+            */
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            /*
+               使div可以跟随鼠标移动
+            */
+
+            //获取box1
+            var box1 = document.getElementById("box1");
+            //绑定鼠标移动事件
+            document.onmousemove = function (event) {
+                //解决兼容问题
+                event = event || window.event;
+                /*
+                    chrome认为浏览器的滚动条是body的，可以通过body.srollTop来获取
+                    火狐等浏览器认为浏览器的滚动条是html的
+                */
+
+                var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+                var sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+
+                //获取鼠标坐标
+                var left = event.clientX;
+                var top = event.clientY; 
+
+                //设置div的偏移量
+                box1.style.left = left + sLeft + "px";
+                box1.style.top = top + sTop + "px";
+            }
+        }
+    </script>
+</head>
+<body style="height: 1000px; width:2000px">
+    <div id="box1"></div>
+</body>
+```
+#### 36.4.2 事件的冒泡：Bubble
+- 所谓的冒泡指的就是事件的向上传导，当后代元素上的事件被触发时，其祖先元素的相同事件也会被触发
+- 在开发中大部分情况冒泡都是有用的，如果不希望发生事件冒泡可以通过事件对象来取消冒泡
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的冒泡</title>
+    <style>
+        #box1{
+            width: 200px;
+            height: 200px;
+            background-color: yellowgreen;
+        }
+        #s1{
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //为s1绑定一个点击响应函数
+            var s1 = document.getElementById("s1");
+            s1.onclick = function(event){
+
+                event = event || window.event;
+                alert("我是span的单击响应函数");
+
+                //取消冒泡
+                //可以将事件对象的cancelBubble设置为true，即可取消冒泡
+                event.cancelBubble = true;
+            }
+            //为box1绑定一个点击响应函数
+            var box1 = document.getElementById("box1");
+            box1.onclick = function(event){
+                event = event || window.event;
+                alert("我是div的单击响应函数");
+                event.cancelBubble = true;
+            }
+            //为body绑定一个单击响应函数
+            document.body.onclick = function(){
+                alert("我是body的单击响应函数");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1">我是box1
+        <span id="s1">我是span</span>
+    </div>
+</body>
+```
+#### 36.4.3 事件的委派
+- 指将事件统一绑定给元素的共同的祖先元素，这样当后代元素上的事件触发时，会一直冒泡到祖先元素
+- 从而通过祖先元素的响应函数来处理事件。
+- 事件委派是利用了冒泡，通过委派可以减少事件绑定的次数，提高程序的性能。
+- `target`：`event`中的`target`表示的是触发事件的对象
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的委派</title>
+    <script>
+        window.onload = function () {
+            //点击按钮添加超链接
+            var btn1 = document.getElementById("btn1");
+            var ul = document.getElementById("ul");
+            btn1.onclick = function () {
+                //创建一个超链接
+                var li = document.createElement("li");
+                li.innerHTML = "<a href='javascript:;' class='link'>新建的超链接</a>";
+
+                //将新建的li添加到ul中
+                ul.appendChild(li);
+
+            }
+            /*
+                只绑定一次事件，即可应用到多个的元素上，即使是后添加的
+                我们可以尝试将其绑定给元素的共同的祖先元素
+            */
+            //为ul绑定一个单击响应函数
+            ul.onclick = function (event) {
+                //如果触发事件的对象是我们期望的元素，则执行否则不执行
+                if (event.target.className == "link") {
+                    alert("我是ul的单击响应函数");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">添加一个超链接</button>
+    <ul id="ul" style="background-color: teal;">
+        <li><a href="javascript:;" class="link">超链接一</a></li>
+        <li><a href="javascript:;" class="link">超链接二</a></li>
+        <li><a href="javascript:;" class="link">超链接三</a></li>
+    </ul>
+</body>
+```
+#### 36.4.4 事件的绑定
+- 使用 `对象.事件 = 函数`的形式绑定响应函数，它只能同时为一个元素的一个事件绑定一个响应函数。
+- 不能绑定多个，如果绑定了多个，则后边会覆盖前边的
+- 参数：
+  1. 事件的字符串，不要`on`
+  2. 回调函数，当事件触发时，该函数会被调用
+  3. 是否在捕获阶段触发事件，需要一个布尔值，一般都传`false`
+- 使用`addEventListener()`可以同时为一个元素的相同事件同时绑定多个响应函数
+- 这样当事件被触发时，响应函数将会按照函数的绑定顺序执行
+- 这个方法不支持IE8及一下的浏览器 
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的绑定</title>
+    <script>
+        window.onclick = function(){
+            var btn01 = document.getElementById("btn01");
+            btn01.addEventListener("click",function(){
+                alert(1);
+            },false );
+            btn01.addEventListener("click",function(){
+                alert(2);
+            },false );
+            btn01.addEventListener("click",function(){
+                alert(3);
+            },false );
+        }
+    </script>
+</head>
+<body>
+    <button id="btn01">点我一下</button>
+</body>
+```
+- `attachEvent()`：在IE8中可以使用`attachEvent()`来绑定事件
+- 参数
+  1. 事件的字符串，要on
+  2. 回调函数
+- 这个方法也可以同时为一个事件绑定多个处理函数
+- 不同的是它是后绑定先执行，执行顺序和`addEventListener()`相反 
+```
+btn01.attachEvent("onclick",function(){
+  alert(1);
+});
+btn01.attachEvent("onclick",function(){
+  alert(2);
+});
+btn01.attachEvent("onclick",function(){
+  alert(3);
+});
+```
+练习：事件绑定，兼容所有版本。
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的绑定</title>
+    <script>
+        window.onclick = function () {
+            var btn01 = document.getElementById("btn01");
+            //定义一个函数，用来为指定元素绑定响应函数
+            /*
+            addEventListener()中的this，是绑定事件的对象
+            attachEvent()中的this，是window
+            需要统一两个方法this
+            */
+
+            /*
+            参数：
+            obj：要绑定事件的对象
+            eventStr：事件的字符串
+            callback：回调函数
+            */
+            bind(btn01,"click",function(){
+                alert(1);
+            });
+            bind(btn01,"click",function(){
+                alert(2);
+            });
+
+        }
+        function bind(obj, eventStr, callback) {
+            if (obj.addEventListener) {
+                //大部分浏览器兼容的方式
+                obj.addEventListener(eventStr, callback, false);
+            } else {
+                /*
+                 this是谁由调用方式决定
+                */
+                //IE8及以下版本
+                obj.attachEvent("on" + eventStr, function(){
+                    //在匿名函数中调用回调函数
+                    callback.call(obj);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn01">点我一下</button>
+</body>
+```
+#### 36.4.5 事件传播
+关于事件的传播网景公司和微软公司有不同的理解 <br/>
+- 微软公司：事件的冒泡 
+  - 事件应该是由内向外传播，也就是当前事件触发时，应该先触发当前元素上的事件
+  - 然后再向当前元素的祖先元素上传播，也就是说事件应该在冒泡阶段执行
+-　网景公司：捕获阶段
+  - 事件应该是由外向内传播，也就是当前事件触发时，应该先触发当前元素的最外层的祖先元素的事件
+  - 然后再向内传播给后代元素 
+- W3C综合了两个公司的方案，将事件传播分成了三个阶段
+  1. 捕获阶段
+    - 在捕获阶段时从最外层的祖先元素，向目标元素进行事件的捕获，但是默认此时不会触发事件 
+  2. 目标阶段
+    - 事件捕获到目标元素，捕获结束开始在目标元素上触发事件
+  3. 冒泡阶段
+    - 事件从目标元素向它的祖先元素传递，依次触发祖先上的事件 
+- 如果希望在捕获阶段就触发事件，可以将`addEventListener()`的第三个参数设置为`true`
+- 一般情况下我们不会在捕获阶段触发事件，所以这个参数一般都是`false`
+- IE8及以下的浏览器中没有捕获阶段
+
 
  
 
