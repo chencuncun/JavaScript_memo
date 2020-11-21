@@ -4927,10 +4927,179 @@ btn01.attachEvent("onclick",function(){
 - 如果希望在捕获阶段就触发事件，可以将`addEventListener()`的第三个参数设置为`true`
 - 一般情况下我们不会在捕获阶段触发事件，所以这个参数一般都是`false`
 - IE8及以下的浏览器中没有捕获阶段
+#### 36.4.6 拖拽
+点击鼠标可以将指定的内容随意拖拽到指定的位置。
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            /*
+             拖拽box1元素
+             1. 当鼠标在被拖拽元素上按下时，开始拖拽：onmousedown
+             2. 当鼠标移动时被拖拽元素跟随鼠标移动：onmousemove
+             3. 当鼠标松开时，被拖拽元素固定在当前位置：onmouseup
+            */
+            //获取box1元素
+            var box1 = document.getElementById("box1");
+            //1. 当鼠标在被拖拽元素上按下时，开始拖拽
+            box1.onmousedown = function (event) {
+                event = event || window.event;
+                //div的水平偏移量 = 鼠标.clientX - 元素.offsetLeft
+                //div的垂直偏移量 = 鼠标.clientY - 元素.offsetTop
+                var ol = event.clientX - box1.offsetLeft;
+                var ot = event.clientY - box1.offsetTop;
+
+                //为document绑定一个onmousemove事件
+                document.onmousemove = function (event) {
+                    //2. 当鼠标移动时被拖拽元素跟随鼠标移动 
+                    //解决兼容问题
+                    event = event || window.event;
+
+                    //获取鼠标坐标
+                    var left = event.clientX - ol;
+                    var top = event.clientY - ot;
+
+                    //设置div的偏移量
+                    box1.style.left = left + "px";
+                    box1.style.top = top + "px";
+                }
+                //为元素绑定一个鼠标松开事件
+                document.onmouseup = function () {
+                    //3. 当鼠标松开时，被拖拽元素固定在当前位置：onmouseup
+                    //取消document.onmousemove事件
+                    document.onmousemove = null;
+                    //取消document.onmouseup事件
+                    document.onmouseup = null;
+                    // alert("鼠标松开了");
+                }
+                /*
+                    当我们拖拽一个网页中的内容时，浏览器会默认去搜索引擎中搜索内容，
+                    此时会导致拖拽功能的异常，这个是浏览器提供的默认行为
+                    如果不希望发生这个行为，则可以通过return false来取消默认行为
+                    但是这招对IE8不起作用
+                */
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    我是一段文字
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+</html>
+```
+#### 36.4.7 滚轮的事件
+- `onmousewheel`
+  - 鼠标滚轮滚动的事件，会在滚轮滚动时触发，但是火狐不支持该属性
+  - 在火狐中需要使用`DOMMouseScroll`来绑定滚动事件，该事件需要通过`addEventListener()`函数来绑定 
+- `event.wheelDelta`
+  - 可以获取鼠标滚轮滚动的方向
+  - 向上滚正值，向下滚负值
+  - `wheelDelta`这个值我们不看大小，只看正负
+  - `wheelDelta`属性火狐中不支持，在火狐中使用`event.detail`来获取滚动的方向，向上滚是负值，向下滚是正值
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚轮事件</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 20px auto;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            /*
+             当鼠标滚轮向下滚动时，box1变长
+             当鼠标滚轮向上滚动时，box1变短
+            */
+            var box1 = document.getElementById("box1");
+            //为box1绑定一个鼠标滚轮滚动的事件
+            box1.onmousewheel = function (event) {
+                /*
+                当鼠标滚轮向下滚动时，box1变长
+                当鼠标滚轮向上滚动时，box1变短
+               */
+                event = event || window.event;
+                //判断鼠标滚轮滚动的方向
+                //event.wheelDelta:可以获取鼠标滚轮滚动的方向，但是火狐不支持
+                //向上滚正值，向下滚负值
+                //在火狐中用event.detail来获取鼠标滚轮滚动的方向：向上滚负值，向下滚正值
+                if (event.wheelDelta > 0 || event.detail < 0) {
+                    //向上滚，box1变短
+                    box1.style.height = box1.clientHeight - 10 + "px";
+                } else {
+                    //向下滚，box1变长
+                    box1.style.height = box1.clientHeight + 10 + "px";
+                }
+                /*
+                 使用addEventListener()方法绑定响应函数，取消默认行为时不能使用return false
+                 需要使用event来取消默认行为
+                 但是IE8不支持event.preventDefault();如果直接调用会报错
+                */
+                event.preventDefault() && event.preventDefault() ;
+
+                /*
+                 当滚轮滚动时，如果浏览器有滚动条，滚动条会随之滚动
+                 这是浏览器的默认行为，如果不希望发生，则可以取消默认行为，直接return false
+                */
+                return false;
+            }
+            bind(box1, "DOMMouseScroll", box1.onmousewheel);
+        }
+        function bind(obj, eventStr, callback) {
+            if (obj.addEventListener) {
+                //大部分浏览器兼容的方式
+                obj.addEventListener(eventStr, callback, false);
+            } else {
+                /*
+                 this是谁由调用方式决定
+                */
+                //IE8及以下版本
+                obj.attachEvent("on" + eventStr, function () {
+                    //在匿名函数中调用回调函数
+                    callback.call(obj);
+                });
+            }
+        }
+    </script>
+</head>
+<body style="height: 2000px;">
+    <div id="box1"></div>
+</body>
+```
+#### 36.4.8 键盘事件
+
+
 
 
  
-
 
 
 
