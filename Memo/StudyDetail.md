@@ -318,15 +318,15 @@
 - 11月22号：周日
   - 键盘事件
   - 键盘移动div
+- 11月23号：周一 休息♨️
+- 11月24号：周二
   - Navigator
   - History
   - Location
-- 11月23号：周一
   - 定时器简介
   - 切换图片练习
   - 修改div移动练习
   - 延时调用
-- 11月24号：周二
   - 定时器的应用(一)
   - 定时器的应用(二)
   - 定时器的应用(三)
@@ -380,3 +380,5 @@ web前端开发课件笔记
 
 web前端学习路线图，前端开发
 <https://www.bilibili.com/video/BV1DE411c7HJ?from=search&seid=8622371737401068047>
+
+ajax jQuery vue react angular 

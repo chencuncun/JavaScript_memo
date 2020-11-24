@@ -5095,13 +5095,512 @@ btn01.attachEvent("onclick",function(){
 </body>
 ```
 #### 36.4.8 键盘事件
+键盘事件一般都会绑定给一些可以获取到焦点的对象或者是`document`。<br/>
+- ` `：按键被按下
+  - 对`onkeydown`来说如果一直按着某个按键不松手，则事件会一直触发
+  - 当`onkeydown`连续触发时，第一次和第二次之间会间隔稍微长一点，其他的会非常的快
+  - 这种设计是为了防止误操作的发生。
+- `onkeyup`：按键被松开
+- `keyCode`：可以获取按键的编码，通过它可以判断哪个按键被按下
+```
+//判断一个y是否被按下
+document.onkeydown = function(event){
+    event = event || window.event;
+    //查看按键的编码
+    //console.log(event.keyCode);
+    //判断一个y是否被按下
+    if (event.keyCode == 89) {
+        alert("y键被按下了");
+    }
+}
 
+实行结果：
+按y键会显示y键被按下了
+```
+除了`keyCode`，事件对象中还提供了几个属性 <br/>
+以下三个用来判断`alt`，`ctrl` 和`shift`是否被按下，如果按下则返回`true`，否则返回`false`
+- `altKey`
+- `ctrlKey`
+- `shiftKey`
+```
+//判断y和ctrl是否同时被按下
+window.onload = function () {
+  document.onkeydown = function (event) {
+    event = event || window.event;
+                
+    //判断y和ctrl是否同时被按下
+    if (event.keyCode === 89 && event.ctrlKey) {
+      alert("ctrl+y键被按下了");
+    }
+  }
+}
 
+实行结果：
+同时按下ctrl和y键时，会弹出ctrl+y键被按下了的提示
+```
+- 在文本框中输入内容，属于onkeydown的默认行为
+- 如果在`onkeydown`中取消了默认行为，即`return flase;`，则输入的内容，不会出现在文本框中 <br/>
+练习：使文本框中不能输入数字
+```
+<head>
+    <script>
+        window.onload = function () {
+            //获取input
+            var input = document.getElementsByTagName("input")[0];
+            input.onkeydown = function (event) {
+                event = event || window.event;
+                //数字48-57(注意：小键盘数字编码是96-105)
+                //使文本框中不能输入数字
+                if (event.keyCode >= 48 && event.keyCode <= 57) {
+                    //在文本框中输入内容，属于onkeydown的默认行为
+                    //如果在onkeydown中取消了默认行为，则输入的内容，不会出现在文本框中
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text"></div>
+</body>
+```
+练习：使div可以根据不同的方向键向不同的方向移动
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使div可以根据不同的方向键向不同的方向移动</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        //使div可以根据不同的方向键向不同的方向移动
+        /*
+         按左键，div向左移动 37
+         按右键，div向右移动 39
+         按上键，div向上移动 38 
+         按下键，div向下移动 40
+        */
+        window.onload = function () {
+            //获取div
+            var box1 = document.getElementById("box1");
 
+            document.onkeydown = function (event) {
+                event = event || window.event;
 
- 
+                //定义一个变量，来表示移动的速度
+                var speed = 10;
 
+                //当用户按了ctrl键以后，速度加快
+                if (event.ctrlKey) {
+                    speed = 50;
+                }
+                switch (event.keyCode) {
+                    case 37:
+                        //向左移，left值减小
+                        box1.style.left = box1.offsetLeft - speed + "px";
+                        break;
+                    case 39:
+                        //向右移，left值增大
+                        box1.style.left = box1.offsetLeft + speed + "px";
+                        break;
+                    case 38:
+                        //向上移，top值减小
+                        box1.style.top = box1.offsetTop - speed + "px";
+                        break;
+                    case 40:
+                        //向下移，top值增大                       
+                        box1.style.top = box1.offsetTop + speed + "px";
+                        break;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+</body>
+</html>
+```
+## 37. BOM：浏览器对象模型
+- BOM可以使我们通过js来操作浏览器
+- 在BOM中为我们提供了一组对象，用来完成对浏览器的操作
+- BOM对象
+  - `Window`：代表的是整个浏览器的窗口，同时`window`也是网页中的全局对象
+  - `Navigator`：代表的是当前浏览器的信息，通过该对象可以来识别不同的浏览器
+  - `Location`：代表的是当前浏览器的地址栏信息，通过`Location`可以获取地址栏信息，或者操作浏览器跳转页面
+  - `History`：代表的是浏览器的历史记录，可以通过该对象来操作浏览器的历史记录。
+    - 由于隐私原因，该对象不能获取到具体的历史记录，只能操作浏览器向前或向后翻页
+    - 而且该操作只在当次访问时有效
+  - `Screen`：代表的是用户的屏幕的信息，通过该对象可以获取到用户的显示器的相关信息
+- 这些BOM对象在浏览器中都是作为`window`对象的属性保存的
+- 可以通过`window`对象来使用，也可以直接使用
+## 37.1 `Navigator`  
+- 现在`Navigator`对象中的大部分属性都已经不能帮助我们识别浏览器了
+- 一般我们只会使用`userAgent`来判断浏览器的信息
+  - `userAgent`是一个字符串，这个字符串中包含有用来描述浏览器信息的内容
+  - 不同的浏览器会有不同的`userAgent`
+  - 弹出浏览器的信息：`alert(navigator.userAgent);`
+    - 火狐： Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0
+    - chrome：Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36
+    - IE8/9/10：识别浏览器的关键字是`msie`
+    - IE11：在IE11中已经将微软和IE相关的标识都已经去除了，所以我们基本已经不能通过`UserAgent`来识别一个浏览器是否是IE了
+      - 如果通过`UserAgent`不能判断，还可以通过一些浏览器中特有的对象，来判断浏览器的信息
+      - 比如：`ActiveXObject`
+```
+//判断浏览器是火狐，还是chrome，还是IE或是IE11
+var ua = navigator.userAgent;
+if (/firefox/i.test(ua)) {
+  alert("你是火狐");
+}else if(/chrome/i.test(ua)){
+  alert("你是chrome");
+}else if(/msie/i.test(ua)){
+  alert("你是IE浏览器");
+}else if("ActiveXObject" in window){
+  alert("你是IE11浏览器");
+}
+```
+## 37.2 `History`
+对象可以用来操作浏览器向前或向后翻页。<br/>
+- 属性
+  - `length`：可以获取当次访问的链接的数量
+- 方法
+  - `back()`：可以用来回退到上一个页面，作用和浏览器的回退按钮一样
+  - `forward()`：可以用来前往到下一个页面，作用和浏览器的前进按钮一样
+  - `go()`：可以用来跳转到指定的页面，它需要一个整数作为参数
+    - `1` 表示向前跳转一个页面，相当于`forward()`
+    - `2` 表示向前跳转两个页面
+    - `-1` 表示向后跳转一个页面，相当于`back()`
+    - `-2` 表示向后跳转两个页面
+## 37.3 `Location`
+该对象中封装了浏览器的地址栏的信息。<br/>
+- 如果直接打印`location`，则可以获取到地址栏的信息(当前页面的完整路径)
+```
+alert(location);
+```
+- 如果直接将`location`属性修改为一个完整的路径，或相对路径，则页面会自动跳转到该路径，并且会生成相应的历史记录
+```
+location = "http://www.baidu.com"; //完整路径
+location = "test.html"; //相对路径
+```
+- 方法
+  - `assign()`：用来跳转到其他的页面，作用和直接修改`location`一样
+  - `location.assign("http://www.baidu.com");`
+  - `reload()`：用于重新加载当前页面，作用和刷新按钮一样
+    - 如果在方法中传递一个`true`，作为参数，则会强制清空缓存刷新页面
+    - `location.reload(true);` 
+  - `replace()`：可以使用一个新的页面替换当前页面，调用完毕也会跳转页面
+    - 不会生成历史记录，不能使用回退按钮回退
+    - `location.replace("test.html");`
+## 38. 定时器
+### 38.1 简介
+如果希望一段程序，可以每间隔一段事件执行一次，乐园使用定时调用。<br/>
+`setInterval()`：定时调用 <br/>
+- 可以将一个函数，每隔一段时间执行一次
+- 参数：
+  - 回调函数，该函数会每隔一段时间被调用一次
+  - 每次调用间隔的时间，单位是毫秒
+- 返回值：
+  - 返回一个`Number`类型的数据
+  - 这个数字用来作为定时器的唯一标识
+- `clearInterval()`：可以用来关闭一个定时器
+  - 可以接收任意的参数
+  - 如果参数是一个有效的定时器的标识，则停止对应的定时器
+  - 如果参数不是一个有效的标识，则什么也不做
+```
+//每隔1秒调用一次function函数，当执行到11秒的时候关闭定时器
+<head>
+    <title>定时器</title>
+    <script>
+        window.onload = function () {
+            //获取count
+            var count = document.getElementById("count");
 
+            //使count中的内容，自动切换
+            var num = 1;
+            var timer = setInterval(function () {
+                count.innerHTML = num++;
 
+                if(num == 11){
+                    clearInterval(timer);
+                }
+            }, 1000)
+        }
+    </script>
+</head>
+<body>
+    <h1 id="count"></h1>
+</body>
 
- 
+实行结果：
+定时器执行到第10秒的时候关闭
+```
+### 38.2 图片切换练习
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切换图片</title>
+    <script>
+        window.onload = function () {
+            /*
+             使图片可以自动切换
+            */
+            //获取img标签
+            var img1 = document.getElementById("img1");
+
+            //创建一个数组来保存图片的路径
+            var imgArr = ["pic/25/1.png", "pic/25/2.png", "pic/25/3.png", "pic/25/4.png", "pic/25/5.png", "pic/25/6.png"];
+
+            //创建一个变量，用来保存当前图片的索引
+            var index = 0;
+            //定义一个变量，用来保存定时器的标识
+            var timer;
+
+            var btn1 = document.getElementById("btn1");
+            var btn2 = document.getElementById("btn2");
+            btn1.onclick = function () {
+                /*
+                 开启一个定时器，来自动切换图片
+                 */
+                timer = setInterval(function () {
+                    //使索引自增
+                    index++;
+
+                    //判断索引是否超过最大索引
+                    if (index >= imgArr.length) {
+                        index = 0;
+                    }
+
+                    //和上面的if文一个效果
+                    //index %= imgArr.length;
+
+                    //修改img1的src属性
+                    img1.src = imgArr[index];
+                }, 1000);
+            }
+            btn2.onclick = function () {
+                //点击按钮以后，停止图片的自动切换，关闭定时器
+                clearInterval(timer);
+            }
+        }
+    </script>
+</head>
+<body>
+    <img id="img1" src="pic/25/1.png" alt="">
+    <button id="btn1">开始</button>
+    <button id="btn2">结束</button>
+</body>
+</html>
+```
+- 以上练习代码的不足之处：
+  - 目前我们每点击一次按钮，就会开启一个定时器
+  - 点击多次就会开启多个定时器，这就导致图片的切换速度过快
+  - 并且我们只能关闭最后一次开启的定时器
+  - 所以我们可以在开启定时器之前，将上一个定时器关闭
+```
+clearInterval(timer);
+/*
+  开启一个定时器，来自动切换图片
+*/
+timer = setInterval(function () {},1000);
+```
+### 38.3 修改div移动练习
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使div可以根据不同的方向键向不同的方向移动</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        //使div可以根据不同的方向键向不同的方向移动
+        /*
+         按左键，div向左移动 37
+         按右键，div向右移动 39
+         按上键，div向上移动 38 
+         按下键，div向下移动 40
+        */
+        //在练习24的基础上修改，使移动没有卡顿，效果更加流程
+        //把方向和速度分开管理
+        window.onload = function () {
+            //获取div
+            var box1 = document.getElementById("box1");
+            //定义移动方向
+            var dir;
+            //定义一个变量，来表示移动的速度
+            var speed = 10;
+
+            var timer;
+
+            timer = setInterval(function () {
+                switch (dir) {
+                    case 37:
+                        //向左移，left值减小
+                        box1.style.left = box1.offsetLeft - speed + "px";
+                        break;
+                    case 39:
+                        //向右移，left值增大
+                        box1.style.left = box1.offsetLeft + speed + "px";
+                        break;
+                    case 38:
+                        //向上移，top值减小
+                        box1.style.top = box1.offsetTop - speed + "px";
+                        break;
+                    case 40:
+                        //向下移，top值增大                       
+                        box1.style.top = box1.offsetTop + speed + "px";
+                        break;
+                }
+            }, 100);
+
+            //为document绑定一个按键按下的事件
+            document.onkeydown = function (event) {
+                event = event || window.event;
+                //当用户按了ctrl键以后，速度加快
+                if (event.ctrlKey) {
+                    speed = 50;
+                } else{
+                    speed = 10;
+                }
+                //使dir等于按键的值
+                dir = event.keyCode;
+            }
+
+            //为document绑定一个按键松开的事件
+            document.onkeyup = function (event) {
+                //div不再移动
+                dir = 0;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+</body>
+</html>
+```
+### 38.4 延时调用
+指的是一个函数不马上执行，而是隔一段时间以后再执行，而且只会执行一次。<br/>
+延时调用和定时调用的区别：定时调用会执行多次，而延时调用只会执行一次。<br/>
+延时调用和定时调用实际上是可以互相代替的，在开发中可以根据自己的需要去选择。<br/>
+- `setTimeout()` <br/>
+```
+var timer = setTimeout(function(){
+  console.log(num++);
+},3000);
+```
+- `clearTimeout()`：关闭一个延时调用
+```
+clearTimeout(timer);
+```
+### 38.5 定时器的应用
+#### 38.5.1 应用一 
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的应用一：点击按钮，box1向右移动，移动到500像素时停止</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+        }
+
+        #box2 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 500px;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //获取box1
+            var box1 = document.getElementById("box1");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //设置速度
+            var speed = 10;
+            //定义一个变量，用来保存定时器的标识
+            var timer;
+            //为btn1绑定一个单击响应函数
+            btn1.onclick = function () {
+                clearInterval(timer);
+                //开启一个定时器，用来执行动画效果
+                timer = setInterval(function () {
+                    //每隔0.1s中，box1向右移动
+                    // box1.style.left = box1.offsetLeft + speed + "px";
+                    // newValue = box1.style.left - "px";
+
+                    //获取box1的原来的left的值
+                    var oldValue = parseInt(getStyle(box1, "left"));
+
+                    //在旧值的基础上增加
+                    var newValue = oldValue + 1;
+
+                    //判断newValue是否大于500
+                    if (newValue > 500) {
+                        newValue = 500;
+                    }
+
+                    //将新值设置给box1
+                    box1.style.left = newValue + "px";
+
+                    //当元素移动到500px时，使其停止执行动画
+                    if (newValue === 500) {
+                        clearInterval(timer);
+                    }
+                }, 100);
+            }
+        }
+        function getStyle(obj, name) {
+            if (window.getComputedStyle) {
+                //正常浏览器的方式，具有getComputedStyle()方法
+                return getComputedStyle(obj, null)[name];
+            } else {
+                //IE8的方式，没有getComputedStyle()方法
+                return obj.currentStyle[name];
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后box1向右移动</button>
+    <br /><br />
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+</html>
+```
+#### 38.5.2 应用二 
+#### 38.5.3 应用三  

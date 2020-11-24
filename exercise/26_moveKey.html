@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使div可以根据不同的方向键向不同的方向移动</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        //使div可以根据不同的方向键向不同的方向移动
+        /*
+         按左键，div向左移动 37
+         按右键，div向右移动 39
+         按上键，div向上移动 38 
+         按下键，div向下移动 40
+        */
+        //在练习24的基础上修改，使移动没有卡顿，效果更加流程
+        //把方向和速度分开管理
+        window.onload = function () {
+            //获取div
+            var box1 = document.getElementById("box1");
+            //定义移动方向
+            var dir;
+            //定义一个变量，来表示移动的速度
+            var speed = 10;
+
+            var timer;
+
+            timer = setInterval(function () {
+                switch (dir) {
+                    case 37:
+                        //向左移，left值减小
+                        box1.style.left = box1.offsetLeft - speed + "px";
+                        break;
+                    case 39:
+                        //向右移，left值增大
+                        box1.style.left = box1.offsetLeft + speed + "px";
+                        break;
+                    case 38:
+                        //向上移，top值减小
+                        box1.style.top = box1.offsetTop - speed + "px";
+                        break;
+                    case 40:
+                        //向下移，top值增大                       
+                        box1.style.top = box1.offsetTop + speed + "px";
+                        break;
+                }
+            }, 100);
+
+            //为document绑定一个按键按下的事件
+            document.onkeydown = function (event) {
+                event = event || window.event;
+                //当用户按了ctrl键以后，速度加快
+                if (event.ctrlKey) {
+                    speed = 50;
+                } else{
+                    speed = 10;
+                }
+                //使dir等于按键的值
+                dir = event.keyCode;
+            }
+
+            //为document绑定一个按键松开的事件
+            document.onkeyup = function (event) {
+                //div不再移动
+                dir = 0;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+</body>
+</html>
