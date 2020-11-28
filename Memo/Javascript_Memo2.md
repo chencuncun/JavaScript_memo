@@ -5513,6 +5513,7 @@ clearTimeout(timer);
 ```
 ### 38.5 定时器的应用
 #### 38.5.1 应用一 
+点击按钮btn1，box1向右移动，移动到500像素时停止
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -5603,4 +5604,605 @@ clearTimeout(timer);
 </html>
 ```
 #### 38.5.2 应用二 
+- 点击按钮btn1，box1向右移动，移动到500像素时停止。
+- 点击按钮btn2，box1向左移动，移动到0像素时停止。
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的应用一：点击按钮，box1向右移动，移动到500像素时停止</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            /* right: 0; */
+        }
+
+        /* 右边界线 */
+        #box2 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 500px;
+            top: 0;
+        }
+
+        /* 左边界线 */
+        #box3 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        #btn1 {
+            margin-left: 130px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //获取box1
+            var box1 = document.getElementById("box1");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //获取btn2
+            var btn2 = document.getElementById("btn2");
+
+            //为btn1绑定一个单击响应函数
+            btn1.onclick = function () {
+                moveBox(box1, 500, 10);
+            }
+            btn2.onclick = function () {
+                moveBox(box1, 0, 10);
+            }
+        }
+        //定义一个变量，用来保存定时器的标识
+        var timer;
+
+        //创建一个可以执行简单动画的函数
+        /*
+         参数：
+         obj：要执行动画的对象
+         target：执行动画的目标位置
+         speed：移动的速度(正数向右移动，度数向左移动)
+         direction：移动的方向
+        */
+        function moveBox(obj, target, speed) {
+            clearInterval(timer);
+            // 获取元素目前的位置
+            var current = parseInt(getStyle(obj, "left"));
+
+            //判断速度的正负值
+            //如果从0到target，则speed为正
+            //如果从target到0移动，则speed为负
+            if(current > target){
+                //此时速度应为负值
+                speed = -speed;
+            }
+
+            //开启一个定时器，用来执行动画效果
+            timer = setInterval(function () {
+                //获取box1的原来的left的值
+                var oldValue = parseInt(getStyle(obj, "left"));
+
+                //在旧值基础上增加
+                var newValue = oldValue + speed;
+                
+                //判断newValue是否大于500
+                //从800向0移动
+                //向左移动时，需要判断newValue是否小于target
+                //向右移动时，需要判断newValue是否大于target
+                if ((speed < 0 && newValue < target) || (speed > 0 && newValue > target)) {
+                    newValue = target;
+                }
+
+                //将新值设置给box1
+                obj.style.left = newValue + "px";
+
+                if (newValue == target) {
+                    //达到目标，关闭定时器
+                    clearInterval(timer);
+                }
+            }, 100);
+        }
+
+        function getStyle(obj, name) {
+            if (window.getComputedStyle) {
+                //正常浏览器的方式，具有getComputedStyle()方法
+                return getComputedStyle(obj, null)[name];
+            } else {
+                //IE8的方式，没有getComputedStyle()方法
+                return obj.currentStyle[name];
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后box1向右移动</button>
+    <button id="btn2">点击按钮以后box2向左移动</button>
+    <br /><br />
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+</body>
+</html>
+```
 #### 38.5.3 应用三  
+```
+//点击测试按钮，box4可以根据需要向左右上下移动或是使宽度或高度延伸
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的应用三：点击测试按钮，box4可以根据需要向左右上下移动或是使宽度或高度延伸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            /* right: 0; */
+        }
+
+        /* 右边界线 */
+        #box2 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 700px;
+            top: 0;
+        }
+
+        /* 左边界线 */
+        #box3 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        #box4 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            left: 0;
+            top: 200px;
+        }
+
+        #btn1 {
+            margin-left: 115px;
+        }
+    </style>
+    <script type="text/javascript" src="28_timer3Tools.js"></script>
+    <script>
+        window.onload = function () {
+            //获取box1
+            var box1 = document.getElementById("box1");
+            //获取box4
+            var box4 = document.getElementById("box4");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //获取btn2
+            var btn2 = document.getElementById("btn2");
+            //获取btn3
+            var btn3 = document.getElementById("btn3");
+            //获取btn4
+            var btn4 = document.getElementById("btn4");
+            //为btn1绑定一个单击响应函数
+            btn1.onclick = function () {
+                moveBox(box1, "left", 700, 20);
+            }
+            btn2.onclick = function () {
+                moveBox(box1, "left", 0, 10);
+            }
+            btn3.onclick = function () {
+                moveBox(box4, "left", 700, 10);
+            }
+            //测试按钮
+            btn4.onclick = function () {
+                // moveBox(box4, "top", 700, 10);
+                // moveBox(box4, "width", 700, 10);
+                // moveBox(box4, "height", 700, 10);
+                moveBox(box4, "width", 700, 10, function () {
+                    moveBox(box4, "height", 500, 10, function () {
+
+                    });
+                });
+            }
+        }
+        //定义一个变量，用来保存定时器的标识
+        /*
+         目前我们的定时器的标识都是由全局变量timer保存，
+         所有的正在执行的定时器都在这个变量中保存
+        */
+        //var timer;
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后box1向右移动</button>
+    <button id="btn2">点击按钮以后box1向左移动</button>
+    <button id="btn3">点击按钮以后box4向右移动</button>
+    <button id="btn4">测试按钮</button>
+    <br /><br />
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <div id="box4"></div>
+</body>
+</html>
+```
+```
+//28_timer3Tools.js
+//创建一个可以执行简单动画的函数
+/*
+ 参数：
+ obj：要执行动画的对象
+ attr：要执行动画的样式，比如：left top width height
+ target：执行动画的目标位置
+ speed：移动的速度(正数向右移动，度数向左移动)
+ direction：移动的方向
+ callback：回调函数，这个函数将会在动画执行完毕以后执行
+*/
+function moveBox(obj, attr, target, speed, callback) {
+    clearInterval(obj.timer);
+    // 获取元素目前的位置
+    var current = parseInt(getStyle(obj, attr));
+
+    //判断速度的正负值
+    //如果从0到target，则speed为正
+    //如果从target到0移动，则speed为负
+    if (current > target) {
+        //此时速度应为负值
+        speed = -speed;
+    }
+
+    //开启一个定时器，用来执行动画效果
+    //向执行动画的对象中添加一个timer属性，用来保存它自己的定时器的标识
+    obj.timer = setInterval(function () {
+        //获取box1的原来的left的值
+        var oldValue = parseInt(getStyle(obj, attr));
+
+        //在旧值基础上增加
+        var newValue = oldValue + speed;
+
+        //判断newValue是否大于500
+        //从800向0移动
+        //向左移动时，需要判断newValue是否小于target
+        //向右移动时，需要判断newValue是否大于target
+        if ((speed < 0 && newValue < target) || (speed > 0 && newValue > target)) {
+            newValue = target;
+        }
+
+        //将新值设置给box1
+        obj.style[attr] = newValue + "px";
+
+        if (newValue == target) {
+            //达到目标，关闭定时器
+            clearInterval(obj.timer);
+            //动画执行完毕，调用回调函数
+            callback && callback();
+        }
+    }, 100);
+}
+
+function getStyle(obj, name) {
+    if (window.getComputedStyle) {
+        //正常浏览器的方式，具有getComputedStyle()方法
+        return getComputedStyle(obj, null)[name];
+    } else {
+        //IE8的方式，没有getComputedStyle()方法
+        return obj.currentStyle[name];
+    }
+}
+```
+## 39. 类的操作
+可以通过修改元素的`class`属性来间接的修改样式，我们只需要修改一次，即可同时修改多个样式 <br/>
+浏览器只需要重新渲染页面一次，性能比较高，并且这种方式，可以使表现和行为进一步的分离
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类的操作</title>
+    <style>
+        .b1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .b2{
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //获取box
+            var box = document.getElementById("box");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //为btn1绑定单击响应函数
+            btn1.onclick = function(){
+                //修改box的样式
+                /*
+                 通过style属性来修改元素的样式，没修改一个样式，浏览器就需要重新渲染一次页面
+                 这样的执行的性能是比较差的，而且这种形式当我们要修改多个样式时，也不太方便
+                */
+                // box.style.width = "200px";
+                // box.style.height = "200px";
+                // box.style.backgroundColor = "yellow";
+
+                /*
+                 修改box的class属性
+                 可以通过修改元素的class属性来间接的修改样式
+                 这样一来，我们只需要修改一次，即可同时修改多个样式
+                 浏览器只需要重新渲染页面一次，性能比较高
+                 并且这种方式，可以使表现和行为进一步的分离
+                */
+               box.className += " b2";
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后修改box的样式</button>
+    <br/><br/>
+    <div id="box" class="b1"></div>
+</body>
+</html>
+```
+- 定义一个函数，用来向一个元素中添加指定的`class`属性值
+- 参数
+  - obj 要添加class属性的元素
+  - cn 要添加的class值
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类的操作</title>
+    <style>
+        .b1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .b2 {
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //获取box
+            var box = document.getElementById("box");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //为btn1绑定单击响应函数
+            btn1.onclick = function () {
+                addClass(box, "b2");
+            }
+        }
+        /*
+         定义一个函数，用来向一个元素中添加指定的`class`属性值
+            - 参数
+              - obj 要添加class属性的元素
+              - cn 要添加的class值
+        */
+        function addClass(obj, cn) {
+            //检查obj中是否含有cn
+            if (!hasClass(obj, cn)) {
+                obj.className += " " + cn;
+            }
+        }
+        /*
+         判断一个元素中是否含有指定的class属性值
+            - 参数
+              - obj 要添加class属性的元素
+              - cn 要添加的class值
+        如果有该class，则返回true，没有则返回false
+        */
+        function hasClass(obj, cn) {
+            //判断obj中有没有cn  class
+            //创建一个正则表达式
+            var reg = new RegExp("\\b" + cn + "\\b");
+
+            return reg.test(obj.className);
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后修改box的样式</button>
+    <br /><br />
+    <div id="box" class="b1"></div>
+</body>
+</html>
+```
+```
+//类的操作：添加，判断，删除，切换
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类的操作</title>
+    <style>
+        .b1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .b2 {
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //获取box
+            var box = document.getElementById("box");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //为btn1绑定单击响应函数
+            btn1.onclick = function () {
+                // addClass(box, "b2");
+                removeClass(box, "b2");
+            }
+        }
+        /*
+         定义一个函数，用来向一个元素中添加指定的`class`属性值
+            - 参数
+              - obj 要添加class属性的元素
+              - cn 要添加的class值
+        */
+        function addClass(obj, cn) {
+            //检查obj中是否含有cn
+            if (!hasClass(obj, cn)) {
+                obj.className += " " + cn;
+            }
+        }
+        /*
+         判断一个元素中是否含有指定的class属性值
+            - 参数
+              - obj 要添加class属性的元素
+              - cn 要添加的class值
+        如果有该class，则返回true，没有则返回false
+        */
+        function hasClass(obj, cn) {
+            //判断obj中有没有cn  class
+            //创建一个正则表达式
+            var reg = new RegExp("\\b" + cn + "\\b");
+
+            return reg.test(obj.className);
+        }
+
+        /*
+         删除一个元素中的指定的class属性
+        */
+        function removeClass(obj, cn) {
+            //创建一个正则表达式
+            var reg = new RegExp("\\b" + cn + "\\b");
+
+            //删除class
+            obj.className = obj.className.replace(reg, "");
+        }
+        /*
+         toggleClass可以用来切换一个类
+           如果元素中具有该类，则删除
+           如果元素中没有该类，则添加
+        */
+        function toggleClass(obj, cn) {
+            //判断obj中是否含有cn
+            if (hasClass(obj, cn)) {
+                //有，则删除
+                removeClass(obj, cn);
+            } else {
+                //没有，则添加
+                addClass(obj, cn);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后修改box的样式</button>
+    <br /><br />
+    <div id="box" class="b1 b2"></div>
+</body>
+</html>
+```
+## 40. JSON
+### 40.1 简介
+- js中的对象只有js自己认识，其他的语言都不认识
+- JSON就是一个特殊格式的字符串，这个字符串可以被任意的语言所识别，并且可以转换为任意语言中的对象
+- JSON在开发中主要用来做数据的交互
+- JSON
+  - 全称：JavaScript Object Notation JS对象表示法
+  - JSON和JS对象的格式一样，只不过JSON字符串的属性名必须加双引号，其他的语法和JS语法一致
+- JSON分类
+  - 对象：{}
+  - 数组：[]
+```
+//对象
+var obj = '{"name":"孙悟空","age":18,"gender":"男"}';
+
+//数组
+arr = '[1,2,3,"hello",true]';
+```
+- JSON中允许的值
+  - 字符串
+  - 数值
+  - 布尔值
+  - null
+  - 对象
+  - 数组
+ ```
+ var obj2 = '{"arr":[1,2,3]}';
+ var arr2 = '[{"name":"孙悟空","age":18,"gender":"男"},{"name":"孙悟空","age":18,"gender":"男"}]';
+ ```
+### 40.2 将JSON字符串转换为JS中的对象
+在JS中，为我们提供了一个工具类，就叫JSON。<br/>
+这个对象可以帮助我们将一个JSON转换为JS对象，也可以将一个JS对象转换为JSON。<br/>
+```
+var json = '{"name":"孙悟空","age":18,"gender":"男"}';
+```
+- 将json --> js对象
+  - `JSON.parse()`：可以将一个JSON字符串转换为JS对象
+  - 它需要一个JSON字符串作为参数，会将该字符串转换为JS对象并返回
+```
+var json = '{"name":"孙悟空","age":18,"gender":"男"}';
+
+var o = JSON.parse(json);
+alert(o.name);
+
+实行结果：
+孙悟空
+```
+```
+arr = '[1,2,3,"hello",true]';
+var o2 = JSON.parse(arr); 
+alert(o2);
+
+实行结果：
+1,2,3,hello,true
+```
+- 将js对象 --> json
+  - `JSON.stringify()`：可以将一个JS对象转换为JSON字符串
+  - 它需要一个js对象作为参数，会返回一个JSON字符串
+```
+//创建一个对象
+var obj = { name: "猪八戒", age: 28, gender: "男" };
+var str = JSON.stringify(obj);
+alert(str);
+
+实行结果：
+{"name":"猪八戒","age":28,"gender":"男"}
+```
+

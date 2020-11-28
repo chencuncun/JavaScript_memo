@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的应用一：点击按钮，box1向右移动，移动到500像素时停止</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            /* right: 0; */
+        }
+
+        /* 右边界线 */
+        #box2 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 500px;
+            top: 0;
+        }
+
+        /* 左边界线 */
+        #box3 {
+            width: 0;
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        #btn1 {
+            margin-left: 130px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //获取box1
+            var box1 = document.getElementById("box1");
+            //获取btn1
+            var btn1 = document.getElementById("btn1");
+            //获取btn2
+            var btn2 = document.getElementById("btn2");
+            //设置速度
+            var speed = 10;
+            //定义一个变量，用来保存定时器的标识
+            var timer;
+            //为btn1绑定一个单击响应函数
+            btn1.onclick = function () {
+                clearInterval(timer);
+                //开启一个定时器，用来执行动画效果
+                timer = setInterval(function () {
+                    //获取box1的原来的left的值
+                    var oldValue = parseInt(getStyle(box1, "left"));
+                    
+                    //在旧值的基础上增加
+                    var newValue = oldValue + 10;
+                    
+                    //判断newValue是否大于500
+                    if (newValue > 500) {
+                        newValue = 500;
+                    }
+
+                    //将新值设置给box1
+                    box1.style.left = newValue + "px";
+
+                    //当元素移动到500px时，使其停止执行动画
+                    if (newValue === 500) {
+                        clearInterval(timer);
+                    }
+                }, 100);
+            }
+
+            btn2.onclick = function () {
+                clearInterval(timer);
+                //开启一个定时器，用来执行一个动画效果
+                timer = setInterval(function () {
+                    //获取box1的原来的left的值
+                    // var oldValue = parseInt(getStyle(box1, "left"));
+
+                    // alert(oldValue);
+                    //获取box1的原来的right值
+                    var oldValue = parseInt(getStyle(box1, "left"));
+
+                    //在旧值的基础上增加
+                    var newValue = oldValue - 8;
+
+                    if (newValue < 0) {
+                        newValue = 0;
+                    }
+                    //将新值设置给box1
+                    box1.style.left = newValue + "px";
+
+                    //当元素移动到左边缘时，使其停止执行动画
+                    if (newValue === 0) {
+                        clearInterval(timer);
+                    }
+                }, 100);
+            }
+        }
+        function getStyle(obj, name) {
+            if (window.getComputedStyle) {
+                //正常浏览器的方式，具有getComputedStyle()方法
+                return getComputedStyle(obj, null)[name];
+            } else {
+                //IE8的方式，没有getComputedStyle()方法
+                return obj.currentStyle[name];
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后box1向右移动</button>
+    <button id="btn2">点击按钮以后box2向左移动</button>
+    <br /><br />
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+</body>
+</html>
